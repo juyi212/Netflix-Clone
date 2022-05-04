@@ -1,33 +1,23 @@
 import styled from '@emotion/styled';
 
 
-export const LoginBody = styled.div `
+export const Body = styled.div `
     margin: 0 auto -236px;
     min-height: 100vh;
     background-color: transparent;
     max-width: 450px;
+    &:before {
+        content: "";
+        height: 91px;
+        display: block;
+    }
 `
 
 export const Container = styled.div`
-    opacity: 0.8;
     background-color: rgba(0,0,0,.75);
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
     border-radius: 4px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -moz-box-orient: vertical;
-    -moz-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
     margin: 0;
     min-height: 515px;
@@ -36,7 +26,7 @@ export const Container = styled.div`
 
 `
 
-export const Header = styled.h1`
+export const Label = styled.h1`
   text-align: center;
   font-family: Slack-Larsseit, Helvetica Neue, Helvetica, Segoe UI, Tahoma, Arial, sans-serif;
   font-size: 32px;
@@ -54,7 +44,7 @@ export const Input = styled.input `
     height: 48px;
     border: none; 
     font-size: 16px;
-    margin : 0 0 20px 0;
+    margin : 18px 0 0 0;
     padding: 0 10px;
     border-radius: 4px;
     &:focus {
@@ -81,7 +71,7 @@ export const Button = styled.button `
 export const LinkContainer = styled.p`
   font-size: 15px;
   color: #616061;
-  margin: 0 auto 8px;
+  margin: 60px 8px;
   width: 400px;
   max-width: 400px;
   & a {
@@ -92,4 +82,22 @@ export const LinkContainer = styled.p`
       text-decoration: underline;
     }
   }
+`;
+
+
+export const Header = styled.div`
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 90px;
+    color: red;
+    
+`
+
+export const Error = styled.div`
+  color: #e01e5a;
+  margin-top : 5px;
+  font-weight: bold;
+  font-size: 15px;
 `;

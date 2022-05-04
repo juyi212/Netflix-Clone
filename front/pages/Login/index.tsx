@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import {LoginBody, Container, Header, Form, Input, Button, LinkContainer } from '@pages/Login/styles';
+import {Body, Container, Header,Label, Form, Input, Button, LinkContainer } from '@pages/Login/styles';
 import {Link} from 'react-router-dom'
 
 const LogIn = () => {
     return (
-            <LoginBody>
+            <Body>
+                <Header>NETFLIX</Header>
                 <Container>
-                    <Header>로그인</Header>
+                    <Label>로그인</Label>
                     <Form>
                         <form>
                             <Input type="email" id="email" placeholder='이메일 주소'/>
@@ -15,11 +16,11 @@ const LogIn = () => {
                         </form>
                         <LinkContainer>
                             Netflix 회원이 아닌가요? &nbsp;
-                            <Link to="/login">지금 가입하세요.</Link>
+                            <Link to="/signup">회원가입하러 가기</Link>
                         </LinkContainer>
                     </Form>
                 </Container>
-            </LoginBody>
+            </Body>
 
     )}
 
