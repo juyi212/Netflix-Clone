@@ -1,9 +1,12 @@
 import styled from '@emotion/styled';
 
+export const Container = styled.div`
+  background-image: url(../../images/netflix-background.jpeg);
+  min-height: 100vh;
+`
 
 export const Body = styled.div `
     margin: 0 auto -236px;
-    min-height: 100vh;
     background-color: transparent;
     max-width: 450px;
     &:before {
@@ -13,7 +16,7 @@ export const Body = styled.div `
     }
 `
 
-export const Container = styled.div`
+export const FormBody = styled.div`
     background-color: rgba(0,0,0,.75);
     border-radius: 4px;
     box-sizing: border-box;
@@ -92,7 +95,11 @@ export const Header = styled.div`
     width: 100%;
     height: 90px;
     color: red;
-    
+    & div {
+      font-size: 40px;
+      margin : 10px 0 0 30px;
+      font-weight: bold;
+    }
 `
 
 export const Error = styled.div`
