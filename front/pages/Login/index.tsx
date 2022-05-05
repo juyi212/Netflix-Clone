@@ -2,6 +2,7 @@ import React, {useState, useCallback} from 'react';
 import {FormBody, Body, Container, Header,Label, Form, Input, Button, LinkContainer } from '@pages/Login/styles';
 import {Link} from 'react-router-dom'
 import useInput from '@hooks/useInput';
+import axios from 'axios';
 
 const LogIn = () => {
     const [email, onChangeEmail] = useInput('')
@@ -9,6 +10,22 @@ const LogIn = () => {
     
     const onSubmit = useCallback((e:any) => {
         e.preventDafault()
+        if( email && password) {
+            axios
+            .post(
+              '/api/users/login',
+              { email, password },
+              {
+                withCredentials: true,
+              },
+            )
+            .then(() => {
+              //mutate()
+            })
+            .catch((error) => {
+              //setLogInError(error.response?.data?.code === 401);
+            });
+        }
     }, [])
 
     return (
