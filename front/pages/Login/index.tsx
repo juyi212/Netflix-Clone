@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import {FormBody, Body, Container, Header,Label, Form, Input, Button, LinkContainer } from '@pages/Login/styles';
+import {Footer,FormBody, Body, Container, Header,Label, Form, Input, Button, LinkContainer } from '@pages/Login/styles';
 import {Link} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
@@ -35,8 +35,8 @@ const LogIn = () => {
                     <div>NETFLIX</div>
                 </Header>
                 <FormBody>
-                    <Label>로그인</Label>
                     <Form>
+                        <Label>로그인</Label>
                         <form onSubmit = {onSubmit}>
                             <Input type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
                             <Input type="password" value ={password} onChange = {onChangePassword} placeholder='비밀번호'/>
@@ -49,6 +49,9 @@ const LogIn = () => {
                     </Form>
                 </FormBody>
             </Body>
+            <Footer>
+
+            </Footer>
         </Container>
 
     )}
