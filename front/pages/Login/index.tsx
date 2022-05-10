@@ -50,7 +50,10 @@ const LogIn = () => {
                 </FormBody>
             </Body>
             <Footer>
-
+                <div>
+                    <div>질문이 있으신가요? 문의 이메일 : dea8307@gmail.com, 깃헙 : </div> 
+                    <div>넷플릭스 관련 커뮤니티 : </div>
+                </div>
             </Footer>
         </Container>
 

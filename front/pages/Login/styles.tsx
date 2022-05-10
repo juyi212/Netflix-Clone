@@ -124,4 +124,13 @@ export const Footer = styled.div`
   padding-bottom: 20px;
   font-size: 1em;
   position: relative;
+  & div {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 0;
+    color: #757575;
+    & div {
+      padding: 10px;
+    }
+  }
 `
