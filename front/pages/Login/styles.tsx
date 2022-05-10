@@ -93,21 +93,6 @@ export const LinkContainer = styled.p`
   }
 `;
 
-
-export const Header = styled.div`
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 90px;
-    color: red;
-    & div {
-      font-size: 40px;
-      margin : 10px 0 0 30px;
-      font-weight: bold;
-    }
-`
-
 export const Error = styled.div`
   color: #e01e5a;
   margin-top : 5px;
@@ -121,16 +106,28 @@ export const Footer = styled.div`
   min-width: 190px;
   width: 100%;
   min-height: 190px;
-  padding-bottom: 20px;
   font-size: 1em;
   position: relative;
   & div {
-    max-width: 800px;
+    max-width: 450px;
     margin: 0 auto;
     padding: 30px 0;
     color: #757575;
+    & h4 {
+      margin : 10px 0;
+    }
     & div {
       padding: 10px;
     }
   }
-`
+  & .community{
+    display: flex;
+    padding: 0;
+    & h4 {
+      margin : 10px 0;
+    }
+    & div {
+      margin: 0;
+    }
+  }
+  `
