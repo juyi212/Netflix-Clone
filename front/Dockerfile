@@ -6,9 +6,11 @@ COPY ./package.json /front
 
 RUN npm install
 
+RUN npm install yarn
+
 COPY . /front
 
-RUN npm run build
+RUN yarn run dev
 
 CMD ["npx", "serve", "-s", "build"]
 
