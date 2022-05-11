@@ -6,7 +6,7 @@ COPY ./package.json /front
 
 RUN npm install
 
-RUN yatn
+RUN yarn
 
 COPY . /front
 
