@@ -1,12 +1,12 @@
 FROM node:lts-alpine3.14
 
-WORKDIR /frontend
+WORKDIR /front
 
-COPY ./package.json /frontend
+COPY ./package.json /front
 
 RUN npm install
 
-COPY . /frontend
+COPY . /front
 
 RUN npm run build
 
