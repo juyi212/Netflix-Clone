@@ -6,12 +6,10 @@ COPY ./package.json /front
 
 RUN npm install
 
-RUN npm install yarn
+RUN yatn
 
 COPY . /front
 
-RUN yarn run dev
-
-CMD ["npx", "serve", "-s", "build"]
+CMD ["yarn", "dev"]
 
 EXPOSE 3000
