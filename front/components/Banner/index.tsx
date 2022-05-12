@@ -1,5 +1,4 @@
 import React, { useEffect, useState,useCallback } from 'react';
-import { Container } from './styles';
 import banner1 from '@images/banner1.jpg'
 import banner2 from '@images/banner2.jpg'
 import banner3 from '@images/banner3.jpg'
@@ -41,14 +40,14 @@ const Banner = () => {
 
 
     return (
-        <Container>
+        <div>
             <Slider
                 translateValue={translateValue}
                 images={images}
                 // moveRight={moveRight}
                 // moveLeft={moveLeft}
             />
-        </Container>
+        </div>
     )}
 
 export default Banner;

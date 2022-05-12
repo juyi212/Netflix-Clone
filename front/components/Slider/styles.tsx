@@ -25,6 +25,7 @@ export const Image = styled.img`
   object-fit:cover;
   object-position:center center;
   opacity: 0.4;
+  
 `;
 
 export const ArrowBox = styled.div`
