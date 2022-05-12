@@ -7,6 +7,7 @@ export const Header = styled.div`
     width: 100%;
     height: 90px;
     color: red;
+    z-index: 1000;
     & div {
       font-size: 40px;
       margin : 10px 0 0 30px;
