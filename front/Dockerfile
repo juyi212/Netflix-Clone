@@ -10,6 +10,6 @@ RUN yarn
 
 COPY . /front
 
-CMD ["yarn", "dev"]
+CMD ["yarn", "start"]
 
 EXPOSE 3000
