@@ -10,13 +10,15 @@
       "strict": true,
       "resolveJsonModule": true,
       "baseUrl": ".",
+      "typeRoots": ["./node_modules/@types","@types"],
       "paths": {
         "@hooks/*": ["hooks/*"],
         "@components/*": ["components/*"],
         "@layouts/*": ["layouts/*"],
         "@pages/*": ["pages/*"],
         "@utils/*": ["utils/*"],
-        "@typings/*": ["typings/*"]
+        "@typings/*": ["typings/*"],
+        "@images/*" : ["images/*"]
       }
     }
   }

@@ -15,7 +15,7 @@ const config: Configuration = {
   mode: isDevelopment ? 'development' : 'production',
   devtool: !isDevelopment ? 'hidden-source-map' : 'inline-source-map',
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.jsoån'],
     alias: {
       '@hooks': path.resolve(__dirname, 'hooks'),
       '@components': path.resolve(__dirname, 'components'),
@@ -23,6 +23,7 @@ const config: Configuration = {
       '@pages': path.resolve(__dirname, 'pages'),
       '@utils': path.resolve(__dirname, 'utils'),
       '@typings': path.resolve(__dirname, 'typings'),
+      '@images': path.resolve(__dirname, 'images'),
     },
   },
   entry: {
@@ -53,6 +54,15 @@ const config: Configuration = {
             production: {
               plugins: ['@emotion']
             }
+          },
+        },
+      },
+      {
+        test: /\.(png|jpe?g)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
           },
         },
       },

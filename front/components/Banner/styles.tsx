@@ -1,19 +1,27 @@
 import styled from '@emotion/styled';
 
+export const Container = styled.div`
+    margin-top:50px;
+    position:relative;
+`
 export const MainSwiper = styled.div`
-    width: 300vw;
-    transition: transform 0.5s;
+    position:relative;
+    max-width:70vw;
+    height:500px;
+    display:flex;
+    overflow:hidden;
+    margin:0 auto;
 `
 
 
-export const SwiperInner = styled.div`
-    width: 100vw;
-    display: flex;
-`
+// export const SwiperInner = styled.div`
+//     width: 100vw;
+//     display: flex;
+// `
 
 
-export const Item = styled.div`
- & img {
-     width: 100% 
- }
-`
+// export const Item = styled.div`
+//  & img {
+//      width: 100% 
+//  }
+// `
