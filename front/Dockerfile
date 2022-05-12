@@ -1,15 +1,15 @@
 FROM node:lts-alpine3.14
 
-WORKDIR /frontend
+WORKDIR /front
 
-COPY ./package.json /frontend
+COPY ./package.json /front
 
 RUN npm install
 
-COPY . /frontend
+RUN yarn
 
-RUN npm run build
+COPY . /front
 
-CMD ["npx", "serve", "-s", "build"]
+CMD ["yarn", "dev"]
 
 EXPOSE 3000
