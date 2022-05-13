@@ -2,6 +2,8 @@ package com.netflix.clone.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -13,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+public class SwaggerConfig implements WebMvcConfigurer {
 
 	@Bean
 	public Docket postsApi() {
@@ -32,5 +34,11 @@ public class SwaggerConfig {
 				.termsOfServiceUrl("https://www.notion.so/PJT-4131b4a0b22145d9b82ca1d14a8b8045")
 				.license("Netflix-Clone")
 				.licenseUrl("https://www.notion.so/PJT-4131b4a0b22145d9b82ca1d14a8b8045").version("1.0").build();
+	}
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("swagger-ui.html**").addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
 }
