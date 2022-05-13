@@ -20,14 +20,14 @@ pipeline {
             }
             options { skipDefaultCheckout(false) }
             steps {
-                sh 'mvn -B -DskipTests -f /var/jenkins_home/workspace/Netflix-Clone/back clean package'
+                sh 'mvn -B -DskipTests -f /root/.jenkins/workspace/netflix_clone_pipeline/back clean package'
             }
         }
         stage('Docker build') {
             agent any
             steps {
-                sh 'docker build -t latest_frontend:latest /var/jenkins_home/workspace/Netflix-Clone/front'
-                sh 'docker build -t latest_backend:latest /var/jenkins_home/workspace/Netflix-Clone/back'
+                sh 'docker build -t latest_frontend:latest /root/.jenkins/workspace/netflix_clone_pipeline/Netflix-Clone/front'
+                sh 'docker build -t latest_backend:latest /root/.jenkins/workspace/netflix_clone_pipeline/Netflix-Clone/back'
             }
         }
         stage('Docker run') {
@@ -55,7 +55,7 @@ docker rmi $(docker images -f "dangling=true" -q)'
                 sh 'docker run -d --name latest_front \
                     -p 80:80 \
                     -p 443:443 \
-                    -v /home/ubuntu/sslkey/:/var/jenkins_home/workspace/Netflix-Clone/sslkey/ \
+                    -v /home/ubuntu/sslkey/:/root/.jenkins/workspace/netflix_clone_pipeline/sslkey/ \
                     --network sayenet \
                     latest_front:latest'
                 sh 'docker run -d --name latest_back \
