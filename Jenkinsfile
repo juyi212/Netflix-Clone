@@ -53,7 +53,7 @@ pipeline {
 docker rmi $(docker images -f "dangling=true" -q)'
                 // docker container 실행
                 sh 'docker run -d --name latest_front \
-                    -p 85:85 \
+                    -p 80:80 \
                     -p 443:443 \
                     -v /home/ubuntu/sslkey/:/root/.jenkins/workspace/netflix_clone_pipeline/sslkey/ \
                     --network netflixnet \
