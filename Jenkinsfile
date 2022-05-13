@@ -20,14 +20,14 @@ pipeline {
             }
             options { skipDefaultCheckout(false) }
             steps {
-                sh 'mvn -B -DskipTests -f /var/jenkins_home/workspace/Netflix-Clone/back clean package'
+                sh 'mvn -B -DskipTests -f /root/.jenkins/workspace/Netflix-Clone/back clean package'
             }
         }
         stage('Docker build') {
             agent any
             steps {
-                sh 'docker build -t latest_frontend:latest /var/jenkins_home/workspace/Netflix-Clone/front'
-                sh 'docker build -t latest_backend:latest /var/jenkins_home/workspace/Netflix-Clone/back'
+                sh 'docker build -t latest_frontend:latest /root/.jenkins/workspace/Netflix-Clone/front'
+                sh 'docker build -t latest_backend:latest /root/.jenkins/workspace/Netflix-Clone/back'
             }
         }
         stage('Docker run') {
