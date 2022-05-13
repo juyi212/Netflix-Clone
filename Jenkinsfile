@@ -26,8 +26,8 @@ pipeline {
         stage('Docker build') {
             agent any
             steps {
-                sh 'docker build -t latest_front:latest /root/.jenkins/workspace/netflix_clone_pipeline/Netflix-Clone/front'
-                sh 'docker build -t latest_back:latest /root/.jenkins/workspace/netflix_clone_pipeline/Netflix-Clone/back'
+                sh 'docker build -t latest_front:latest /root/.jenkins/workspace/netflix_clone_pipeline/front'
+                sh 'docker build -t latest_back:latest /root/.jenkins/workspace/netflix_clone_pipeline/back'
             }
         }
         stage('Docker run') {
