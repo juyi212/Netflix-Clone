@@ -1,6 +1,8 @@
 package com.netflix.clone.user.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	
 	/* 일반 로그인 */
 	@Override
-	public User login(User user) throws Exception {
+	public Map<String,Object> login(User user) throws Exception {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 new UserAccount(user),
                 user.getuPassword(),
@@ -34,9 +36,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
         SecurityContextHolder.getContext().setAuthentication(token);
         User check=userRepository.findByuId(user.getuId());
+		Map<String, Object> resultMap = new HashMap<>();
         if(passwordEncoder.matches(user.getuPassword(), check.getuPassword())) {
         	System.out.println(token);
-        	return check;
+        	resultMap.put("user", user);
+        	resultMap.put("token", token);
+        	return resultMap;
         }
 		return null;
 		
@@ -61,5 +66,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         return new UserAccount(user);
+	}
+
+	@Override
+	public User selectUser(User user) throws Exception {
+		return userRepository.findByuId(user.getuId());
+	}
+
+	@Override
+	public User createKakaoUser(User user) throws Exception {
+		user.generateEuAuthKey();
+		// 3. 남은 유저 정보들 삽입 처리
+		return userRepository.save(user);
 	}
 }
