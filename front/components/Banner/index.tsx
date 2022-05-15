@@ -40,7 +40,7 @@ const Banner = () => {
 
 
     return (
-        <div>
+        <div style={{ marginBottom: '30px'}}>
             <Slider
                 translateValue={translateValue}
                 images={images}
