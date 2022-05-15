@@ -29,18 +29,24 @@ export const StyledSlider = styled(Slider)`
 //     transform:${({ translateValue }) => `translateX(-${translateValue}vw)`}
 // `;
 
-// export const Box = styled.div`
-//     display: flex;
-//     width: 100%;
-//     z-index: 3;
-//     transition: transform 300ms ease 100ms;
-//     &:hover {
-//         transform: scale(1.4) !important;
-//     }
-// `
+export const Box = styled.div`
+    display: flex;
+    width: 100%;
+    transition: transform 300ms ease 100ms;
+    z-index: 2;
+    &:after {
+        content: "";
+        display: block;
+        
+     }
+    &:hover {
+        transform: scale(1.4) !important;
+        z-index: 5;
+    }
+`
 
 export const Image = styled.img`
-    
+    width: 300px;
 `
 
 // export const ArrowBox = styled.div`

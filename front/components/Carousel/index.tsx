@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import banner1 from "@images/banner1.jpg"
 import banner2 from "@images/banner2.jpg"
 import banner3 from "@images/banner3.jpg"
-import { StyledSlider, Image } from './styles';
+import { StyledSlider, Image, Box } from './styles';
 import {FiChevronsLeft} from 'react-icons/fi'
 import {FiChevronsRight} from 'react-icons/fi'
 
@@ -51,12 +51,15 @@ const Carousel = () => {
             <StyledSlider {...settings}>
                 {images.map((picture, idx) => {
                     return (
+                        <Box>
+
                             <Image
                             key={picture.id}
                             src={picture.pic}
                             alt={"img" + idx}
                             />
 
+                        </Box>
                     );
                 })}
             </StyledSlider>
