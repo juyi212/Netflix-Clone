@@ -63,7 +63,7 @@ public class UserController {
 		User kakaoUser = new User();
 		System.out.println(user.toString());
 		kakaoUser.setuId(user.getuId());
-		kakaoUser.setuPassword(user.getuPassword());
+		kakaoUser.setuPassword("kakaopassword");
 		kakaoUser.setuName(user.getuName());
 		kakaoUser.setuProvider("kakao");
 		
