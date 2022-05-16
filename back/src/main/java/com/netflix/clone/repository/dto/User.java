@@ -3,9 +3,13 @@ package com.netflix.clone.repository.dto;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -25,13 +29,23 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	@Id // Primary key
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int uNo; // 시퀀스, auto_increment
+	@Column(nullable = false, length = 100)
 	private String uId;
+	@Column(nullable = false, length = 100)
 	private String uPassword;
+	@Column(nullable = false, length = 100)
 	private String uName;
+	
+	@ColumnDefault("'0'")
 	private String uPayYn;
+	
 	private LocalDateTime uJoinDate;
+	
+	@ColumnDefault("'normal'")
 	private String uProvider;
+	
 	private String uAuthKey;
 	private LocalDateTime uAuthKeyGeneratedAt;
 	
