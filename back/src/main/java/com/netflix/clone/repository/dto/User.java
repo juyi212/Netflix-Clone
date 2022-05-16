@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -29,9 +30,15 @@ public class User {
 	private String uId;
 	private String uPassword;
 	private String uName;
+	
+	@ColumnDefault("0")
 	private String uPayYn;
+	
 	private LocalDateTime uJoinDate;
+	
+	@ColumnDefault("normal")
 	private String uProvider;
+	
 	private String uAuthKey;
 	private LocalDateTime uAuthKeyGeneratedAt;
 	
