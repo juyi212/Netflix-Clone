@@ -15,7 +15,7 @@ const SignUp = () => {
     const [emailMessage, setEmailMessage] = useState<string>('')
 
     const [email, setEmail] = useState('');
-    const [nickname, onChangeNickname] = useInput('');
+    const [name, onChangeName] = useInput('');
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
 
@@ -41,21 +41,22 @@ const SignUp = () => {
 
     const onSubmit = useCallback((e: any) => {
         e.preventDefault()
-        if (email && nickname && !mismatchError) {
-            axios.post('/api/users', {
-                email,
-                nickname,
-                password
+        if (email && name ) {
+            console.log("???")
+            axios.post('http://3.39.105.32:9000/netflix-clone/user/join', {
+                "uId": email,
+                "uName" :name,
+                "uPassword":password
             }).then(() => {
                 alert("회원가입되었습니다! 로그인해주세요.")
                 setTimeout(() => {
                     <Route path="/" element={<Navigate replace to="/login"/>} />
                 }, 2000)
-            }).catch(() => {
-                alert("이미 가입된 이메일 입니다.")
+            }).catch((error) => {
+                console.log(error)
             })
         }
-    },[])
+    },[email, name, password, mismatchError])
 
     return (
         <Container>
@@ -67,7 +68,7 @@ const SignUp = () => {
                     <form onSubmit={onSubmit}>
                         <Input type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
                         { emailMessage && <Error>{emailMessage}</Error>}
-                        <Input type="text" value={nickname} onChange = {onChangeNickname} placeholder='닉네임'/>
+                        <Input type="text" value={name} onChange = {onChangeName} placeholder='닉네임'/>
                         <Input type="password" value={password} onChange= {onChangePassword} placeholder='비밀번호'/>
                         <Input type="password" value= {passwordCheck} onChange= {onChangePasswordCheck} placeholder='비밀번호 확인'/>
                         { mismatchError && <Error>비밀번호가 일치하지 않습니다.</Error> }

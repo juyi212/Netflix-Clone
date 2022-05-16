@@ -3,11 +3,20 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"
 
+export const Container = styled.div`
+    padding: 20px;
+`
+
 export const StyledSlider = styled(Slider)` 
     display: relative;
-    margin : 0 40px;
+    margin : 0 30px;
     .slick-list {
-        height: 250px;
+        height: 18vw;
+        align-items: center;
+    }
+    .slick-slide {
+        display: flex;
+        align-items: center;
     }
 `;
 
@@ -31,22 +40,36 @@ export const StyledSlider = styled(Slider)`
 
 export const Box = styled.div`
     display: flex;
+    padding-right: 10px;
     width: 100%;
-    transition: transform 300ms ease 100ms;
     z-index: 2;
+    transition: transform 500ms;
     &:after {
         content: "";
-        display: block;
-        
-     }
+         }
     &:hover {
-        transform: scale(1.4) !important;
+        transform: scale(1.3) !important;
         z-index: 5;
+        & div {
+            display: block;
+        }
     }
 `
 
 export const Image = styled.img`
-    width: 300px;
+    max-width: 100%;
+    display: flex;
+`
+
+export const Detail = styled.div`
+    width: 100%;
+    display: none;
+`
+
+export const MovieDetailContainer = styled.div`
+    width: 250px;
+    height: 250px;
+    z-index: 6;
 `
 
 // export const ArrowBox = styled.div`
@@ -67,7 +90,3 @@ export const Image = styled.img`
 //     `;
 
 
-    // text-align:center;
-    // display:flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
-    // align-items:center; /* 위아래 기준 중앙정렬 */
-    // justify-content:center; /* 좌우 기준 중앙정렬 */

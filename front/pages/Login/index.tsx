@@ -6,6 +6,7 @@ import axios from 'axios';
 import Nav from '@components/Nav';
 import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
+import KakaoLogin from '@components/KakaoLogin';
 
 
 const LogIn = () => {
@@ -17,20 +18,26 @@ const LogIn = () => {
         if( email && password) {
             axios
             .post(
-              '/api/users/login',
+              'http://3.39.105.32:9000/netflix-clone/user/join',
               { email, password },
               {
                 withCredentials: true,
               },
             )
-            .then(() => {
+            .then((res) => {
+                console.log(res.data)
               //mutate()
             })
             .catch((error) => {
+                console.log(error)
               //setLogInError(error.response?.data?.code === 401);
             });
         }
     }, [])
+
+    const onClickKakaoLogin = () => {
+
+    }
 
     return (
         <Container>
@@ -44,6 +51,7 @@ const LogIn = () => {
                             <Input type="password" value ={password} onChange = {onChangePassword} placeholder='비밀번호'/>
                             <Button type="submit"> 로그인 </Button>
                         </form>
+                        <KakaoLogin />
                         <LinkContainer>
                             Netflix 회원이 아닌가요? &nbsp;
                             <Link to="/signup">회원가입하러 가기</Link>

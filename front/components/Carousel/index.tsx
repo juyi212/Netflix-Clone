@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import banner1 from "@images/banner1.jpg"
 import banner2 from "@images/banner2.jpg"
 import banner3 from "@images/banner3.jpg"
-import { StyledSlider, Image, Box } from './styles';
+import { Container, StyledSlider, Image, Box, MovieDetailContainer,Detail } from './styles';
 import {FiChevronsLeft} from 'react-icons/fi'
 import {FiChevronsRight} from 'react-icons/fi'
+import { Dispatch } from 'react';
+import { SetStateAction } from 'react';
 
 
 
@@ -26,10 +28,11 @@ const settings = {
     slidesToShow: 5,
     slidesToScroll: 2,
     initialSlide: 0,
+    
 }
 
 const Carousel = () => {
-    const [translateValue, setTranslateValue] = useState<number>(0)
+    const [mouseCondition,setMouseCondition] = useState(false)
     
     // const clickLeftButton = () => {
     //     if (translateValue !== 0) {
@@ -45,25 +48,39 @@ const Carousel = () => {
     //         } else return 0
     //     })
     // }
+    
+    const onMouseOver = (val: number) => (event: any) => {
+        setMouseCondition((prev) => !prev)
+        console.log(val)
+    }
+
+    const onMouseOut = (val: number) => (event: any) => {
+        setMouseCondition((prev) => !prev)
+        console.log(val)
+    }
 
     return (
-        <div>
+        <Container>
+            <h1> 뜨고있는 컨텐츠 </h1>
             <StyledSlider {...settings}>
                 {images.map((picture, idx) => {
                     return (
                         <Box>
-
                             <Image
                             key={picture.id}
                             src={picture.pic}
                             alt={"img" + idx}
+                            onMouseOver ={onMouseOver(idx)}
+                            onMouseOut = {onMouseOut(idx)}
                             />
-
+                            <Detail>
+                                영화내용 영화내용 
+                            </Detail>
                         </Box>
                     );
                 })}
             </StyledSlider>
-            </div>
+        </Container>
         // <CarouselContainer>
         //     <ArrowBox>
         //         <FiChevronsLeft 

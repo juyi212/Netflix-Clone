@@ -1,5 +1,6 @@
 import React from 'react';
 import loadable from '@loadable/component'
+import OAuthRedirectHandler from '@components/KakaoLogin/OAuthRedirectHandler';
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 const LogIn = loadable(() => import('@pages/Login'))
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="/home" element={<Home />} ></Route>
                 <Route path="/login" element={<LogIn />} ></Route>
                 <Route path="/signup" element={<SignUp />} ></Route>
+                <Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
                 {/* 디테일 페이지 */}
             </Routes>
         </BrowserRouter>
