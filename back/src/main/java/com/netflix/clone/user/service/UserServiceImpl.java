@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		Map<String, Object> resultMap = new HashMap<>();
         if(passwordEncoder.matches(user.getuPassword(), check.getuPassword())) {
         	System.out.println(token);
-        	resultMap.put("user", user);
+        	resultMap.put("user", check);
         	resultMap.put("token", token);
         	return resultMap;
         }
