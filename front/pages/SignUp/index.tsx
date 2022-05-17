@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Footer, Body, Error, FormBody, Container,Label, Form, Input, Button, LinkContainer } from '@pages/Login/styles';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
 import { Route, Navigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
 
 const SignUp = () => {
+    const navigate = useNavigate();
     const [signUpError, setSignUpError] = useState(false);
     const [signUpSuccess, setSignUpSuccess] = useState(false);
     const [mismatchError, setMismatchError] = useState(false);
@@ -49,9 +50,7 @@ const SignUp = () => {
                 "uPassword":password
             }).then(() => {
                 alert("회원가입되었습니다! 로그인해주세요.")
-                setTimeout(() => {
-                    <Route path="/" element={<Navigate replace to="/login"/>} />
-                }, 2000)
+                navigate('/login')
             }).catch((error) => {
                 console.log(error)
             })
@@ -103,3 +102,4 @@ const SignUp = () => {
     )}
 
 export default SignUp; 
+

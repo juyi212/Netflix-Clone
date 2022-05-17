@@ -36,6 +36,7 @@ const config: Configuration = {
         test: /\.tsx?$/,
         loader: 'babel-loader',
         options: {
+          plugins: ["@babel/plugin-transform-runtime"],
           presets: [
             [
               '@babel/preset-env',
@@ -50,6 +51,7 @@ const config: Configuration = {
           env: {
             development: {
               plugins: [['@emotion', { sourceMap: true }], require.resolve('react-refresh/babel')],
+              
             },
             production: {
               plugins: ['@emotion']
@@ -70,9 +72,11 @@ const config: Configuration = {
         test: /\.css?$/,
         use: ['style-loader', 'css-loader'],
       },
+      
     ],
   },
-  plugins: [
+  plugins: 
+  [
     new ForkTsCheckerWebpackPlugin({
       async: false,
       // eslint: {

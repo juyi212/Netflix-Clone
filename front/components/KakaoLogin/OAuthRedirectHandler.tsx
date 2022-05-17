@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
+import kakaoUserInfo from '@hooks/kakaoUserInfo';
 
 const OAuthRedirectHandler = () => {
         useEffect(()=> {
@@ -22,7 +23,8 @@ const OAuthRedirectHandler = () => {
                 }
             })
             .then((res) => {
-                console.log(res)
+                
+                //kakaoUserInfo(res.data.access_token)
             }).catch((error) => {
                 console.log(error)
                 })

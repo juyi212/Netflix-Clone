@@ -14,12 +14,16 @@ const LogIn = () => {
     const [password, onChangePassword] = useInput('')
     
     const onSubmit = useCallback((e:any) => {
-        e.preventDafault()
+        e.preventDefault()
+        console.log("1")
         if( email && password) {
+            console.log("2")
             axios
             .post(
-              'http://3.39.105.32:9000/netflix-clone/user/join',
-              { email, password },
+              'http://3.39.105.32:9000/netflix-clone/user/login',
+              { 
+                  uId:email, 
+                  uPassword:password },
               {
                 withCredentials: true,
               },
@@ -30,10 +34,9 @@ const LogIn = () => {
             })
             .catch((error) => {
                 console.log(error)
-              //setLogInError(error.response?.data?.code === 401);
             });
         }
-    }, [])
+    }, [email, password])
 
     const onClickKakaoLogin = () => {
 
