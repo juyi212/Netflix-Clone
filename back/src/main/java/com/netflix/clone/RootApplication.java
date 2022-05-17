@@ -21,7 +21,7 @@ public class RootApplication implements WebMvcConfigurer {
 	/* 시큐리티 적용하면, 고쳐질수 있는 부분? */
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("*").allowedOrigins("http://localhost:3000").allowedMethods("*")
+		registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods("*")
 				.allowedHeaders("*").exposedHeaders("auth-token");
 	}
 
