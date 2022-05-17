@@ -3,7 +3,6 @@ import { Footer, Body, Error, FormBody, Container,Label, Form, Input, Button, Li
 import {Link, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
-import { Route, Navigate } from "react-router-dom";
 import Nav from '@components/Nav';
 import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'

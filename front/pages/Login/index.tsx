@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from 'react';
 import {Footer, FormBody, Body, Container,Label, Form, Input, Button, LinkContainer } from '@pages/Login/styles';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
 import Nav from '@components/Nav';
@@ -10,6 +10,7 @@ import KakaoLogin from '@components/KakaoLogin';
 
 
 const LogIn = () => {
+    const navigate = useNavigate()
     const [email, onChangeEmail] = useInput('')
     const [password, onChangePassword] = useInput('')
     
@@ -18,19 +19,20 @@ const LogIn = () => {
         console.log("1")
         if( email && password) {
             console.log("2")
-            axios
-            .post(
+            axios.post(
               'http://3.39.105.32:9000/netflix-clone/user/login',
               { 
-                  uId:email, 
-                  uPassword:password },
+                  "uId":email, 
+                  "uPassword":password 
+                },
               {
                 withCredentials: true,
               },
             )
             .then((res) => {
                 console.log(res.data)
-              //mutate()
+                localStorage.setItem("user", res.data["auth-token"])
+                navigate('/login')
             })
             .catch((error) => {
                 console.log(error)
