@@ -32,7 +32,7 @@ const LogIn = () => {
             .then((res) => {
                 console.log(res.data)
                 localStorage.setItem("user", res.data["auth-token"])
-                navigate('/login')
+                navigate('/home')
             })
             .catch((error) => {
                 console.log(error)
