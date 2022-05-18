@@ -16,6 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig implements WebMvcConfigurer {
+	// http://localhost:9000/netflix-clone/swagger-ui.html#/
 
 	@Bean
 	public Docket postsApi() {
