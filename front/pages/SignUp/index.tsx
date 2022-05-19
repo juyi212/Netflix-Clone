@@ -8,6 +8,7 @@ import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
 
 const SignUp = () => {
+    // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
     const navigate = useNavigate();
     const [signUpError, setSignUpError] = useState(false);
     const [signUpSuccess, setSignUpSuccess] = useState(false);

@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
 import kakaoUserInfo from '@hooks/kakaoUserInfo';
+import { useNavigate } from 'react-router-dom';
 
 const OAuthRedirectHandler = () => {
+    const navigate = useNavigate()
         useEffect(()=> {
             let code = new URL(window.location.href).searchParams.get("code");
             let grant_type = "authorization_code";
@@ -17,17 +19,14 @@ const OAuthRedirectHandler = () => {
             //     .map((k:any)=> encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
             //     .join('&');
 
-            // axios.post('https://kauth.kakao.com/oauth/token', queryString, {
-            //     headers: {
-            //       'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-            //     }
-            // })
-            // .then((res) => {
-                
-            //     //kakaoUserInfo(res.data.access_token)
-            // }).catch((error) => {
-            //     console.log(error)
-            //     })
+            axios.post('http://3.39.105.32:9000/netflix-clone/user/auth/kakao/callback', code)
+            .then((res) => {
+                console.log(res.data)
+                localStorage.setItem("user", res.data["auth-token"])
+                navigate('/home')
+            }).catch((error) => {
+                console.log(error)
+                })
             }, [])
     return (
         <div>

@@ -11,6 +11,7 @@
       "resolveJsonModule": true,
       "baseUrl": ".",
       "typeRoots": ["./node_modules/@types","@types"],
+      "types": ["@emotion/core"],
       "paths": {
         "@hooks/*": ["hooks/*"],
         "@components/*": ["components/*"],

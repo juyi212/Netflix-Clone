@@ -10,6 +10,7 @@ import KakaoLogin from '@components/KakaoLogin';
 
 
 const LogIn = () => {
+    // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
     const navigate = useNavigate()
     const [email, onChangeEmail] = useInput('')
     const [password, onChangePassword] = useInput('')
