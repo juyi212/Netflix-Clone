@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.netflix.clone.repository.dto.User;
@@ -63,6 +65,7 @@ public class UserController {
 			resultMap.put("uProvider", check.getuProvider());
 			
 			response.setHeader("auth-token", token);
+	        session.setAttribute("auth-token", token);
 	        Cookie cookie = new Cookie("auth-token", token);
 	        cookie.setPath("/");
 	        cookie.setHttpOnly(true);
@@ -94,7 +97,6 @@ public class UserController {
 	@PostMapping("/auth/kakao/callback")
 	public ResponseEntity<?> kakaoCallback(@RequestBody String accessCode, HttpServletResponse response, HttpSession session) throws Exception { // Data를 return 해주는 controller method
 		User kakaoUser = userService.oauth2AuthorizationKakao(accessCode);
-		kakaoUser.setuPassword("kakaopassword");
 		kakaoUser.setuProvider("kakao");
 		// 가입자 혹은 비가입자 체크해서 처리
 		try {
@@ -102,6 +104,9 @@ public class UserController {
 			if(originUser == null) {
 				userService.createKakaoUser(kakaoUser);
 				System.out.println("카카오 아이디로 회원가입 성공");
+			}else {
+				originUser.setuPassword(kakaoUser.getuPassword());
+				userService.updateKakaoUser(originUser);
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -120,16 +125,38 @@ public class UserController {
 			resultMap.put("uProvider", check.getuProvider());
 			
 	        response.setHeader("auth-token", token);
-
+	        session.setAttribute("auth-token", token);
+	        session.setAttribute("access_token",check.getuPassword());
 	        Cookie cookie = new Cookie("auth-token", token);
 	        cookie.setPath("/");
 	        cookie.setHttpOnly(true);
 	        cookie.setSecure(true);
 	        response.addCookie(cookie);
-			
+	        
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
 		resultMap.put("message", "로그인에 실패하였습니다.");
 		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
+	}
+	
+	@GetMapping("/auth/kakao/logout")
+	public ResponseEntity<?> kakaoLogout(String uId, HttpServletResponse response, HttpSession session) throws Exception {
+		String access_token = (String)session.getAttribute("access_token");
+		String result = userService.kakaoUserLogout(access_token);
+		Map<String, Object> resultMap = new HashMap<>();
+		if(result.equals(uId)) {
+			resultMap.put("message", "로그아웃에 성공하였습니다.");
+			session.invalidate();
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+		}
+		resultMap.put("message", "로그아웃에 실패하였습니다.");
+		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
+	}
+	@ApiOperation(value = "탈퇴를 위한 Restful API", response = User.class)
+	@DeleteMapping("/delete")
+	public ResponseEntity<String> deleteUser(String uId) throws Exception {
+		if (userService.deleteUser(uId) == null)
+			return new ResponseEntity<String>("탈퇴처리 성공", HttpStatus.OK);
+		return new ResponseEntity<String>("탈퇴처리 실패", HttpStatus.NO_CONTENT);
 	}
 }
