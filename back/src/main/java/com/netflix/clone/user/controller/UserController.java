@@ -76,7 +76,7 @@ public class UserController {
 	
 	/* 정보조회 */
 	@ApiOperation(value = "정보조회 처리하는 Restful API", response = User.class)
-	@PostMapping("/info")
+	@GetMapping("/info")
 	public ResponseEntity<?> getInfo( HttpSession session, HttpServletRequest request) throws Exception {
 		HttpStatus status = null;
 		Map<String, Object> resultMap = new HashMap<>();
