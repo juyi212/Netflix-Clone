@@ -11,41 +11,40 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // MovieDB 내 고유 id (auto_increment 아님)
+
+    @Column(nullable = false)
+    private char adult;
 
     @Column(nullable = false, length = 200)
     private String title;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 2000)
     private String overview;
 
-    @Column(nullable = false, length = 200)
-    private String origin_title;
+    @Column(name = "origin_title", nullable = false, length = 200)
+    private String originTitle;
 
-    @Column(nullable = false, length = 50)
-    private String genre_id;
+    @Column(name = "origin_country", length = 50)
+    private String originCountry;
 
-    @Column(nullable = false, length = 50)
-    private String origin_language;
+    @Column(name = "release_date")
+    private String releaseDate;
 
-    @Column(nullable = false)
-    private String release_date;
+    @Column(name = "poster_path", length = 500)
+    private String posterPath;
 
-    @Column(nullable = false, length = 500)
-    private String poster_path;
+    @Column(name = "video_path", length = 500)
+    private String videoPath;
 
-    @Column(nullable = true, length = 500)
-    private String video_path;
+    @Column(name = "is_display", nullable = false, length = 1)
+    private char isDisplay;
 
-    @Column(nullable = false, length = 1)
-    private char is_display;
+    @Column(name = "vote_count", nullable = false)
+    private int voteCount;
 
-    @Column(nullable = false)
-    private int vote_count;
-
-    @Column(nullable = false)
-    private int vote_average;
+    @Column(name = "vote_average", nullable = false)
+    private int voteAverage;
 
     @Column(nullable = false)
     private float popularity;
@@ -56,6 +55,14 @@ public class Movie {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public char getAdult() {
+        return adult;
+    }
+
+    public void setAdult(char adult) {
+        this.adult = adult;
     }
 
     public String getTitle() {
@@ -74,76 +81,68 @@ public class Movie {
         this.overview = overview;
     }
 
-    public String getOrigin_title() {
-        return origin_title;
+    public String getOriginTitle() {
+        return originTitle;
     }
 
-    public void setOrigin_title(String origin_title) {
-        this.origin_title = origin_title;
+    public void setOriginTitle(String originTitle) {
+        this.originTitle = originTitle;
     }
 
-    public String getGenre_id() {
-        return genre_id;
+    public String getOriginCountry() {
+        return originCountry;
     }
 
-    public void setGenre_id(String genre_id) {
-        this.genre_id = genre_id;
+    public void setOriginCountry(String originCountry) {
+        this.originCountry = originCountry;
     }
 
-    public String getOrigin_language() {
-        return origin_language;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setOrigin_language(String origin_language) {
-        this.origin_language = origin_language;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    public String getRelease_date() {
-        return release_date;
+    public String getPosterPath() {
+        return posterPath;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 
-    public String getPoster_path() {
-        return poster_path;
+    public String getVideoPath() {
+        return videoPath;
     }
 
-    public void setPoster_path(String poster_path) {
-        this.poster_path = poster_path;
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
     }
 
-    public String getVideo_path() {
-        return video_path;
+    public char getIsDisplay() {
+        return isDisplay;
     }
 
-    public void setVideo_path(String video_path) {
-        this.video_path = video_path;
+    public void setIsDisplay(char isDisplay) {
+        this.isDisplay = isDisplay;
     }
 
-    public char getIs_display() {
-        return is_display;
+    public int getVoteCount() {
+        return voteCount;
     }
 
-    public void setIs_display(char is_display) {
-        this.is_display = is_display;
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
     }
 
-    public int getVote_count() {
-        return vote_count;
+    public int getVoteAverage() {
+        return voteAverage;
     }
 
-    public void setVote_count(int vote_count) {
-        this.vote_count = vote_count;
-    }
-
-    public int getVote_average() {
-        return vote_average;
-    }
-
-    public void setVote_average(int vote_average) {
-        this.vote_average = vote_average;
+    public void setVoteAverage(int voteAverage) {
+        this.voteAverage = voteAverage;
     }
 
     public float getPopularity() {

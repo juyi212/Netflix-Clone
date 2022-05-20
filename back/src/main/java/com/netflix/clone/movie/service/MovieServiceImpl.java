@@ -15,9 +15,25 @@ public class MovieServiceImpl implements MovieService{
     private MovieRepository movieRepository;
 
     @Override
-    public List<Movie> getTrendTodayMovies() throws Exception {
+    public List<Movie> getPopularMovie() throws Exception {
         List<Movie> movieList = new ArrayList<>();
         movieRepository.findTop10ByOrderByPopularityDesc().forEach(e -> movieList.add(e));
+
+        return movieList;
+    }
+
+    @Override
+    public List<Movie> getCategoryMovie(String genre) throws Exception {
+        List<Movie> movieList = new ArrayList<>();
+        movieRepository.findTop20ByCategory(genre).forEach(e -> movieList.add(e));
+
+        return movieList;
+    }
+
+    @Override
+    public List<Movie> getCountryMovie(String oriCountry) throws Exception {
+        List<Movie> movieList = new ArrayList<>();
+        movieRepository.findTop20ByOriginCountry(oriCountry).forEach(e -> movieList.add(e));
 
         return movieList;
     }

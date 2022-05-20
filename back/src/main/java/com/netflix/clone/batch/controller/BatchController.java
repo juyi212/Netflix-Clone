@@ -15,8 +15,8 @@ public class BatchController {
     @Autowired
     private BatchService batchService;
 
-    /* MovieDB에서 14일 이내 수정된 영화 정보 조회*/
-    @ApiOperation(value = "MovieDB에서 14일 이내 수정된 영화 정보 조회 Restful API")
+    /* MovieDB에서 14일 이내 수정된 영화 정보 DB 갱신*/
+    @ApiOperation(value = "MovieDB에서 14일 이내 수정된 영화 정보 DB 갱신 Restful API")
     @GetMapping("/change_movie")
     public String getChangeMovie() {
         try {
