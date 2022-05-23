@@ -12,7 +12,7 @@ const Home = () => {
     const navigate = useNavigate()
     // header에 토큰을 같이 보낸다 
     const headerValue = localStorage.getItem("user");
-    const { data: userData, error, mutate: revalidateUser } = useSWR(['http://3.39.105.32:9000/netflix-clone/user/info', headerValue], fetcher);
+    const { data: userData, error, mutate: revalidateUser } = useSWR(['http://localhost:9000/netflix-clone/user/info', headerValue], fetcher);
 
     if (error) {
         navigate('/login')

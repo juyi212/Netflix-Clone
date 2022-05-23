@@ -19,7 +19,7 @@ const LogIn = () => {
         e.preventDefault()
         if( email && password) {
             axios.post(
-              'http://3.39.105.32:9000/netflix-clone/user/login',
+              'http://localhost:9000/netflix-clone/user/login',
               { 
                   "uId":email, 
                   "uPassword":password 

@@ -86,6 +86,9 @@ public class UserController {
 
 		try {
 			resultMap.putAll(jwtService.get(request.getHeader("auth-token")));
+			User infoUser=new User();
+			infoUser.setuId((String) resultMap.get("uId"));
+			resultMap.put("user", userService.selectUser(infoUser));
 			status = HttpStatus.ACCEPTED;
 		} catch (RuntimeException e) {
 			resultMap.put("errMessage", e.getMessage());
