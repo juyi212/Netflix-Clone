@@ -63,6 +63,7 @@ const Carousel = () => {
                 {images.map((picture, idx) => {
                     return (
                         <Card 
+                            key = {picture.id}
                             picture = {picture.pic}
                             id = {picture.id}              
                         />

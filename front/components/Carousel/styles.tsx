@@ -21,24 +21,6 @@ export const StyledSlider = styled(Slider)`
     }
 `
 
-
-// export const CarouselContainer = styled.div` 
-//     margin: 10px;
-//     position: relative;
-//     max-width: 300vw;
-//     overflow : hidden;
-//     `
-// type ImageBoxProps = {
-//     translateValue: number | null;
-// };
-
-// export const CarouselBox = styled.div<ImageBoxProps>`
-//     display:flex;
-//     padding-left: 30px;
-//     transition:1s;
-//     transform:${({ translateValue }) => `translateX(-${translateValue}vw)`}
-// `;
-
 export const MovieDetailContainer = styled.div`
     width: 250px;
     height: 250px;

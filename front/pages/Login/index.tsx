@@ -17,9 +17,7 @@ const LogIn = () => {
     
     const onSubmit = useCallback((e:any) => {
         e.preventDefault()
-        console.log("1")
         if( email && password) {
-            console.log("2")
             axios.post(
               'http://3.39.105.32:9000/netflix-clone/user/login',
               { 
@@ -31,8 +29,8 @@ const LogIn = () => {
               },
             )
             .then((res) => {
-                console.log(res.data)
                 localStorage.setItem("user", res.data["auth-token"])
+                console.log(res.data)
                 navigate('/home')
             })
             .catch((error) => {

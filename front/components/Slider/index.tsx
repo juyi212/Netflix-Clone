@@ -1,5 +1,5 @@
 import React from 'react';
-import { SliderContainer, ImageBox, Image, ArrowBox } from './styles'
+import { SliderContainer, ImageBox, Image } from './styles'
 import {FiChevronsLeft} from 'react-icons/fi'
 import {FiChevronsRight} from 'react-icons/fi'
 
@@ -30,16 +30,6 @@ const Slider: React.FC<Props> = ({
                 );
                 })}
             </ImageBox>
-            {/* <ArrowBox>
-                <FiChevronsLeft 
-                    className='left'
-                    onClick={moveLeft}
-                />
-                <FiChevronsRight 
-                    className='right'
-                    onClick={moveRight}
-                />
-            </ArrowBox> */}
         </SliderContainer>
     )}
 

@@ -7,7 +7,7 @@ export const SliderContainer = styled.div`
   height: 850px;
   display:flex;
   overflow:hidden;
-  margin:0 auto;
+  margin:0;
 `;
 
 type ImageBoxProps = {
@@ -25,25 +25,24 @@ export const Image = styled.img`
   object-fit:cover;
   object-position:center center;
   opacity: 0.4;
-  
 `;
 
-export const ArrowBox = styled.div`
-  position:absolute;
-  left:0;
-  top:0;
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px;
-  .left, .right{
-    font-size:2rem;
-    cursor:pointer;
-    &:hover{
-      color:red;
-    }
-  }
-`;
+// export const ArrowBox = styled.div`
+//   position:absolute;
+//   left:0;
+//   top:0;
+//   width:100%;
+//   height:100%;
+//   display:flex;
+//   justify-content:space-between;
+//   align-items:center;
+//   padding:20px;
+//   .left, .right{
+//     font-size:2rem;
+//     cursor:pointer;
+//     &:hover{
+//       color:red;
+//     }
+//   }
+// `;
 
