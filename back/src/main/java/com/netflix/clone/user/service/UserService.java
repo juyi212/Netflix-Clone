@@ -19,8 +19,8 @@ public interface UserService {
 //	/* U :: 회원 수정 - 비밀번호 수정 */
 //	int updateUser(User user) throws Exception;
 //
-//	/* D :: 회원 삭제 */
-//	int deleteUser(String uId) throws Exception;
+	/* D :: 회원 삭제 */
+	User deleteUser(String uId) throws Exception;
 //
 //	/* R :: 아이디 중복 체크 */
 //	int checkUId(String uId) throws Exception;
@@ -32,6 +32,10 @@ public interface UserService {
 	User createKakaoUser(User user) throws Exception;
 
 	User oauth2AuthorizationKakao(String accessCode) throws Exception;
+
+	User updateKakaoUser(User kakaoUser);
+
+	String kakaoUserLogout(String access_token);
 
 	/* 카카오 로그인 */
 //	Map<String, Object> kakaoLogin(User user) throws Exception;

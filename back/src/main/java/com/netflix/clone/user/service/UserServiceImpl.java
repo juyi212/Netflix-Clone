@@ -138,6 +138,35 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //        kakaoUser.setuId(email);
         kakaoUser.setuId(id);
         kakaoUser.setuName(nickname);
+        kakaoUser.setuPassword(resultMap.get("access_token"));
         return kakaoUser;
+	}
+
+	@Override
+	public User deleteUser(String uId) throws Exception {
+		userRepository.deleteByuId(uId);
+		return userRepository.findByuId(uId);
+	}
+
+	@Override
+	public User updateKakaoUser(User kakaoUser) {
+		return userRepository.save(kakaoUser);
+	}
+
+	@Override
+	public String kakaoUserLogout(String access_token) {
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+	    headers.set("Authorization", "Bearer " + access_token);
+	    
+	    LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+	    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
+
+	    String url = "https://kapi.kakao.com/v1/user/logout";
+	    
+	    String result = restTemplate.postForObject(url, request, String.class);
+		System.out.println(result);
+		
+		return result;
 	}
 }
