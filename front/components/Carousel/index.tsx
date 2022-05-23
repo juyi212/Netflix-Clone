@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import banner1 from "@images/banner1.jpg"
 import banner2 from "@images/banner2.jpg"
 import banner3 from "@images/banner3.jpg"
 import Card from '@components/Card';
 import { Container, StyledSlider, MovieDetailContainer } from './styles';
+import useSWR from 'swr';
+import fetcher2 from '@utils/fetcher2';
+import axios from 'axios';
 
 
 
@@ -27,9 +30,14 @@ const settings = {
     initialSlide: 0,
     
 }
+type Props = {
+    category: string
+}
 
-const Carousel = () => {
+const Carousel: React.FC<Props> = ({ category }) => {
     const [mouseCondition,setMouseCondition] = useState(false)
+    const { data: movieData, error, mutate } = useSWR(`http://3.39.105.32:9000/netflix-clone/movie/popular_movie`, fetcher2);
+
     
     // const clickLeftButton = () => {
     //     if (translateValue !== 0) {

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Link } from "react-router-dom";
 
 export const Header = styled.div`
     position: absolute;
@@ -20,7 +21,7 @@ export const Header = styled.div`
       font-size: 15px;
       color : white;
       margin-left: 30px;
-      & div {
+      & a {
         padding-left: 30px;
       }
     }
@@ -33,27 +34,35 @@ export const SecondaryNav = styled.div`
   margin-right: 30px;
   position: relative;
   align-items: center;
-  .dropdown-contents {
-    padding: 20px;
-    display: none;
-    position: absolute;
-    background-color: black;
-    border-radius: 7px;
-    margin-top: 5px;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    color: white;
-    & div {
-      display: flex;
-      margin-bottom: 10px;
-    }
-  }
-  .dropdown {
-    &:hover .dropdown-contents{
-      display: block;
-      right: 0;
-    }
-  }
 }
 `
+export const DropDownContents = styled.div`
+  padding: 20px;
+  display: none;
+  position: absolute;
+  background-color: black;
+  border-radius: 7px;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  color: white;
+  cursor: pointer;
+  & div {
+    display: flex;
+    margin-bottom: 10px;
+  }
+`
+
+export const DropDown = styled.div`
+  display: inline-block;
+  &:hover ${DropDownContents}{
+    display: block;
+    right: 0;
+  }
+`
+
+
+export const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+`;

@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
+import Nav from '@components/Nav';
 
 const LogIn = loadable(() => import('@pages/Login'))
 const SignUp = loadable(() => import('@pages/SignUp'))
@@ -16,11 +17,12 @@ const App = () => {
 
     return (
         <BrowserRouter>
+            <Nav></Nav>
             <Routes>
                 <Route path="/" element={<Navigate replace to="/login" />} ></Route>
-                <Route path="/home" element={<Home /> } ></Route>
                 <Route path="/login" element={<LogIn />} ></Route>
                 <Route path="/signup" element={<SignUp />} ></Route>
+                <Route path="/home" element={<Home /> } ></Route>
                 <Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
                 {/* 디테일 페이지 */}
             </Routes>

@@ -7,10 +7,15 @@ import Nav from '@components/Nav';
 import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
 import KakaoLogin from '@components/KakaoLogin';
+import useSWR from 'swr';
+import fetcher from '@utils/fetcher';
 
 
 const LogIn = () => {
     // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
+    const headerValue = localStorage.getItem("user");
+    const { data: userData, error, mutate }  = useSWR('http://3.39.105.32:9000/netflix-clone/user/info' ,fetcher );
+
     const navigate = useNavigate()
     const [email, onChangeEmail] = useInput('')
     const [password, onChangePassword] = useInput('')
@@ -42,6 +47,10 @@ const LogIn = () => {
     const onClickKakaoLogin = () => {
 
     }
+
+    // if (error ===) {
+    //     navigate('/home')
+    //   }
 
     return (
         <Container>
