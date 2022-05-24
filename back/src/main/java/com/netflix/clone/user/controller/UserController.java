@@ -53,7 +53,7 @@ public class UserController {
 	/* 일반 로그인 */
 	@ApiOperation(value = "로그인 처리하는 Restful API(uId,uPassword)", response = User.class)
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody User user, HttpSession session, HttpServletResponse response) {
+	public ResponseEntity<?> login(@RequestBody User user, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
 		User check=null;
 		try {
 			check = userService.login(user);
@@ -72,7 +72,7 @@ public class UserController {
 			resultMap.put("uName", check.getuName());
 			resultMap.put("uJoinDate", check.getuJoinDate());
 			resultMap.put("uProvider", check.getuProvider());
-			
+			request.getSession().setAttribute("temp", "temp");
 			response.setHeader("auth-token", token);
 	        session.setAttribute("auth-token", token);
 	        Cookie cookie = new Cookie("auth-token", token);
@@ -153,7 +153,7 @@ public class UserController {
 	}
 	
 	@GetMapping("logout")
-	public ResponseEntity<?> logout(String uId, HttpServletResponse response, HttpSession session) throws Exception {
+	public ResponseEntity<?> logout(String uId, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
 		User check=new User();
 		check.setuId(uId);
 		User checkUser=userService.selectUser(check);

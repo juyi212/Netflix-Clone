@@ -28,31 +28,24 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final DataSource dataSource;
 //	private final UserServiceImpl userServiceImpl;	
 	private JwtService jwtService;
-
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.mvcMatchers("/", "/user/*","/login/*")
-				.permitAll()
-				.mvcMatchers(HttpMethod.GET, "/profile/*")
-				.permitAll()
-				.anyRequest()
-				.authenticated()
-				.and()
-	            // stateless한 세션 정책 설정 
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
-		
+		http.authorizeRequests().mvcMatchers("/", "/user/*", "/login/*").permitAll()
+				.mvcMatchers(HttpMethod.GET, "/profile/*").permitAll().anyRequest().authenticated().and()
+				// stateless한 세션 정책 설정
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.addFilterBefore(new JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
+
 //		http.rememberMe().userDetailsService(userServiceImpl).tokenRepository(tokenRepository());
 
 	}
-	
+
 	@Bean
 	public PersistentTokenRepository tokenRepository() {
 		JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
@@ -62,37 +55,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring()
-				.antMatchers("/user/**")
-				.antMatchers("/item/**")
-				.antMatchers("/itemSell/**")
-				.antMatchers("/itemBuy/**")
-				.antMatchers("/**")
-				.antMatchers("/chat/**")
-				.antMatchers("/login/**")
-				.antMatchers("/v2/**")
-				.antMatchers("/webjars/**")
-				.antMatchers("/swagger**")
+		web.ignoring().antMatchers("/user/**").antMatchers("/item/**").antMatchers("/itemSell/**")
+				.antMatchers("/itemBuy/**").antMatchers("/**").antMatchers("/chat/**").antMatchers("/login/**")
+				.antMatchers("/v2/**").antMatchers("/webjars/**").antMatchers("/swagger**")
 				.antMatchers("/swagger-resources/**").mvcMatchers("/node_modules/**")
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-		
-		
+
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
-	
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-    
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-       // Do any additional configuration here
-       return builder.build();
-    }
+
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	@Bean
+	public RestTemplate restTemplate(RestTemplateBuilder builder) {
+		// Do any additional configuration here
+		return builder.build();
+	}
 }
