@@ -11,13 +11,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.netflix.clone.repository.dto.User;
@@ -40,9 +38,14 @@ public class UserController {
 	/* C :: 회원 가입 */
 	@ApiOperation(value = "회원가입을 위한 Restful API(uId,uPassword,uName)", response = User.class)
 	@PostMapping("/join")
-	public ResponseEntity<String> createUser(@RequestBody User user, HttpServletRequest request) throws Exception {
-		if (userService.insertUser(user) != null) {
-			return new ResponseEntity<String>(user.getuId() + "계정 가입 성공", HttpStatus.OK);
+	public ResponseEntity<String> createUser(@RequestBody User user, HttpServletRequest request) {
+		try {
+			if (userService.insertUser(user) != null) {
+				return new ResponseEntity<String>(user.getuId() + "계정 가입 성공", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("계정 가입 실패", HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<String>("계정 가입 실패", HttpStatus.NO_CONTENT);
 	}
@@ -50,8 +53,14 @@ public class UserController {
 	/* 일반 로그인 */
 	@ApiOperation(value = "로그인 처리하는 Restful API(uId,uPassword)", response = User.class)
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody User user, HttpSession session, HttpServletResponse response) throws Exception {
-		User check = userService.login(user);
+	public ResponseEntity<?> login(@RequestBody User user, HttpSession session, HttpServletResponse response) {
+		User check=null;
+		try {
+			check = userService.login(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("로그인 실패", HttpStatus.NO_CONTENT);
+		}
 		Map<String, Object> resultMap = new HashMap<>();
 		if (check != null) {
 			// 파라미터 1번째 것은 FE 대로 따라가기..
@@ -93,6 +102,7 @@ public class UserController {
 		} catch (RuntimeException e) {
 			resultMap.put("errMessage", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
+			return new ResponseEntity<Map<String, Object>>(resultMap, status);
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
@@ -142,18 +152,36 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
 	}
 	
-	@GetMapping("/auth/kakao/logout")
-	public ResponseEntity<?> kakaoLogout(String uId, HttpServletResponse response, HttpSession session) throws Exception {
-		String access_token = (String)session.getAttribute("access_token");
-		String result = userService.kakaoUserLogout(access_token);
+	@GetMapping("logout")
+	public ResponseEntity<?> logout(String uId, HttpServletResponse response, HttpSession session) throws Exception {
+		User check=new User();
+		check.setuId(uId);
+		User checkUser=userService.selectUser(check);
+		String result="";
 		Map<String, Object> resultMap = new HashMap<>();
-		if(result.equals(uId)) {
-			resultMap.put("message", "로그아웃에 성공하였습니다.");
-			session.invalidate();
-			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+		if (checkUser.getuProvider().equals("kakao")) {
+			try {
+				String access_token = (String) session.getAttribute("access_token");
+				result = userService.kakaoUserLogout(access_token);
+
+			} catch (Exception e) {
+				resultMap.put("message", "카카오 로그아웃에 실패하였습니다.");
+				e.printStackTrace();
+				return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
+			}
 		}
-		resultMap.put("message", "로그아웃에 실패하였습니다.");
-		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
+		if(!result.equals("")&&!result.equals(uId)) {
+			resultMap.put("message", "로그아웃에 실패하였습니다.");
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
+		}
+		session.invalidate();
+        Cookie cookie = new Cookie("auth-token", null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        resultMap.put("message", "로그아웃에 성공하였습니다.");
+		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+
 	}
 	@ApiOperation(value = "탈퇴를 위한 Restful API", response = User.class)
 	@DeleteMapping("/delete")
