@@ -56,7 +56,6 @@ docker rmi $(docker images -f "dangling=true" -q)'
                     -p 3000:3000 \
                     -p 85:85 \
                     -p 443:443 \
-
                     --network netflixnet \
                     latest_front:latest'
                 sh 'docker run -d --name latest_back \
