@@ -57,7 +57,7 @@ docker rmi $(docker images -f "dangling=true" -q)'
                     -p 85:85 \
                     -p 443:443 \
                     -v /home/ubuntu/sslkey/:/root/.jenkins/workspace/netflix_clone_pipeline/sslkey/ \
-                    -v /app/node_modules \
+                    -v /front/node_modules \
                     --network netflixnet \
                     latest_front:latest'
                 sh 'docker run -d --name latest_back \
