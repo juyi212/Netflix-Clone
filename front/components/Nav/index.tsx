@@ -12,8 +12,10 @@ const Nav = () => {
     // headervalue 들고오는 것도 따로 분리하기 
     const navigate = useNavigate()
     const { data: userData, error, mutate: revalidateUser } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', fetcher);
+    
     const onClickLogout = useCallback(() => {
-        axios.delete(`http://3.39.105.32:9000/netflix-clone/user/delete?uId=${userData.uId}`)
+        // 탈퇴임 
+        axios.get(`http://3.39.105.32:9000/netflix-clone/user/logout?uId=${userData.uId}`)
         .then((res) => {
             // token 지우고 login 페이지로 이동하기 
             localStorage.removeItem('user')
@@ -28,8 +30,7 @@ const Nav = () => {
     return (
         <Header>
             <div className="logo">NETFLIX</div>
-            {/* userData or headerValue 로 분기  */}
-
+            {/* userData 로 분기  */}
 
                 <div className="main-nav">
                     <StyledLink to='/home'>홈</StyledLink>

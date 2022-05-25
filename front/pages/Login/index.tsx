@@ -1,5 +1,4 @@
 import React, {useState, useCallback} from 'react';
-import {Footer, FormBody, Body, Container,Label, Form, Input, Button, LinkContainer } from '@pages/Login/styles';
 import {Link, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
@@ -9,6 +8,7 @@ import {GrInstagram} from 'react-icons/gr'
 import KakaoLogin from '@components/KakaoLogin';
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
+import './style.scss'
 
 
 const LogIn = () => {
@@ -24,7 +24,7 @@ const LogIn = () => {
         e.preventDefault()
         if( email && password) {
             axios.post(
-              'http://localhost:9000/netflix-clone/user/login',
+              'http://3.39.105.32:9000/netflix-clone/user/login',
               { 
                   "uId":email, 
                   "uPassword":password 
@@ -53,26 +53,26 @@ const LogIn = () => {
     //   }
 
     return (
-        <Container>
-            <Body>
+        <div className="container" style={{backgroundImage: `url(/assets/netflix-background.jpeg)`}}>
+            <div className="body">
                 <Nav />
-                <FormBody>
-                    <Form>
-                        <Label>로그인</Label>
+                <div className="formbody">
+                    <div className="form">
+                        <h1 className="label">로그인</h1>
                         <form onSubmit = {onSubmit}>
-                            <Input type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
-                            <Input type="password" value ={password} onChange = {onChangePassword} placeholder='비밀번호'/>
-                            <Button type="submit"> 로그인 </Button>
+                            <input className="inputform" type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
+                            <input className="inputform" type="password" value ={password} onChange = {onChangePassword} placeholder='비밀번호'/>
+                            <button className="buttonform" type="submit"> 로그인 </button>
                         </form>
                         <KakaoLogin />
-                        <LinkContainer>
+                        <p className="link-container">
                             Netflix 회원이 아닌가요? &nbsp;
                             <Link to="/signup">회원가입하러 가기</Link>
-                        </LinkContainer>
-                    </Form>
-                </FormBody>
-            </Body>
-            <Footer>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className="footer">
                     <div>
                     <h4>질문이 있으신가요? </h4>
                     <div>- 문의 이메일 : dea8307@gmail.com<br/>
@@ -86,8 +86,8 @@ const LogIn = () => {
                         </div>
                     </div>
             </div>
-            </Footer>
-        </Container>
+            </div>
+        </div>
 
     )}
 

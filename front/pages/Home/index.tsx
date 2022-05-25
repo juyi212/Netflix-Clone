@@ -22,8 +22,9 @@ const Home = () => {
             {/* 로그인 여부 확인 후 마이페이지 버튼들 보여주기 */}
             <Banner />
             <Carousel category={"popular_movie"}/>
+            <Carousel category={"popular_movie"}/>
             {/* <Carousel category={""}/> */}
-            {/* <Carousel /> */}
+            
         </div>
     )}
 

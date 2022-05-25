@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useCallback } from 'react';
-import banner1 from '@images/banner1.jpg'
-import banner2 from '@images/banner2.jpg'
-import banner3 from '@images/banner3.jpg'
+import banner1 from '@assets/banner1.jpg'
+import banner2 from '@assets/banner2.jpg'
+import banner3 from '@assets/banner3.jpg'
 import Slider from '@components/Slider'
 import { SetStateAction } from 'react';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import banner1 from "@images/banner1.jpg"
-import banner2 from "@images/banner2.jpg"
-import banner3 from "@images/banner3.jpg"
+import banner1 from "@assets/banner1.jpg"
+import banner2 from "@assets/banner2.jpg"
+import banner3 from "@assets/banner3.jpg"
 import Card from '@components/Card';
 import { Container, StyledSlider, MovieDetailContainer } from './styles';
 import useSWR from 'swr';
@@ -10,22 +10,22 @@ import axios from 'axios';
 
 
 
-const images = [
-    {pic : banner1, id: 1}, 
-    {pic : banner2, id: 2}, 
-    {pic : banner3, id: 3},    
-    {pic : banner3, id: 3},    
-    {pic : banner3, id: 3},    
-    {pic : banner3, id: 3},    
-    {pic : banner3, id: 3},    
-    {pic : banner3, id: 3},    
-]
+// const images = [
+//     {pic : banner1, id: 1}, 
+//     {pic : banner2, id: 2}, 
+//     {pic : banner3, id: 3},    
+//     {pic : banner3, id: 3},    
+//     {pic : banner3, id: 3},    
+//     {pic : banner3, id: 3},    
+//     {pic : banner3, id: 3},    
+//     {pic : banner3, id: 3},    
+// ]
 
 const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 7,
     slidesToScroll: 2,
     initialSlide: 0,
     
@@ -34,10 +34,26 @@ type Props = {
     category: string
 }
 
+// export type MovieType = {
+//     adult: string,
+//     id: number,
+//     isDisplay: string,
+//     originCountry: string,
+//     originTitle: string,
+//     overview: string,
+//     popularity: number,
+//     posterPath: string,
+//     releaseDate: string,
+//     title: string,
+//     videoPath: string,
+//     voteAverage: number,
+//     voteCount: number
+//   }
+
 const Carousel: React.FC<Props> = ({ category }) => {
     const [mouseCondition,setMouseCondition] = useState(false)
-    const { data: movieData, error, mutate } = useSWR(`http://3.39.105.32:9000/netflix-clone/movie/popular_movie`, fetcher2);
-
+    const { data: movieData, error, mutate } = useSWR(`http://3.39.105.32:9000/netflix-clone/movie/${category}`, fetcher2);
+    console.log(movieData)
     
     // const clickLeftButton = () => {
     //     if (translateValue !== 0) {
@@ -68,12 +84,10 @@ const Carousel: React.FC<Props> = ({ category }) => {
         <Container>
             <h1> 뜨고있는 컨텐츠 </h1>
             <StyledSlider {...settings}>
-                {images.map((picture, idx) => {
+                {movieData?.map((movie: Object) => {
                     return (
                         <Card 
-                            key = {picture.id}
-                            picture = {picture.pic}
-                            id = {picture.id}              
+                            movie = {movie}
                         />
                         // <Box>
                         //     <Image

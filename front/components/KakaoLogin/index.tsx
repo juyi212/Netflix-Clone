@@ -6,7 +6,7 @@ const KakaoLogin = () => {
     return (
         <a href={KAKAO_AUTH_URL}>
             <img 
-                src="/images/kakao_login.png" 
+                src="/assets/kakao_login.png" 
                 style={{width: "100%"}}
             />
         </a>

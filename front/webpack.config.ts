@@ -15,7 +15,7 @@ const config: Configuration = {
   mode: isDevelopment ? 'development' : 'production',
   devtool: !isDevelopment ? 'hidden-source-map' : 'inline-source-map',
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.jsoån'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.jsoån', 'scss'],
     alias: {
       '@hooks': path.resolve(__dirname, 'hooks'),
       '@components': path.resolve(__dirname, 'components'),
@@ -23,7 +23,7 @@ const config: Configuration = {
       '@pages': path.resolve(__dirname, 'pages'),
       '@utils': path.resolve(__dirname, 'utils'),
       '@typings': path.resolve(__dirname, 'typings'),
-      '@images': path.resolve(__dirname, 'images'),
+      '@assets': path.resolve(__dirname, 'assets'),
     },
   },
   entry: {
@@ -60,17 +60,17 @@ const config: Configuration = {
         },
       },
       {
-        test: /\.(png|jpe?g)$/,
+        test: /\.(png|jpe?g|gif)$/,
         use: {
           loader: 'file-loader',
           options: {
-            name: '[path][name].[ext]',
+            name: 'assets/[path][name].[ext]',
           },
         },
       },
       {
-        test: /\.css?$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(scss|css)$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       
     ],

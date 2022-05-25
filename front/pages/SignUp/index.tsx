@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { Footer, Body, Error, FormBody, Container,Label, Form, Input, Button, LinkContainer } from '@pages/Login/styles';
 import {Link, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
 import Nav from '@components/Nav';
 import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
+import '../Login/style.scss'
 
 const SignUp = () => {
     // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
@@ -58,33 +58,33 @@ const SignUp = () => {
     },[email, name, password, mismatchError])
 
     return (
-        <Container>
-            <Body>
+        <div className="container" style={{backgroundImage: `url(/assets/netflix-background.jpeg)`}}>
+            <div className="body">
             <Nav />
-            <FormBody>
-                <Form>
-                    <Label>회원가입</Label>
+            <div className="formbody">
+                <div className="form">
+                    <h1 className="label">회원가입</h1>
                     <form onSubmit={onSubmit}>
-                        <Input type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
-                        { emailMessage && <Error>{emailMessage}</Error>}
-                        <Input type="text" value={name} onChange = {onChangeName} placeholder='닉네임'/>
-                        <Input type="password" value={password} onChange= {onChangePassword} placeholder='비밀번호'/>
-                        <Input type="password" value= {passwordCheck} onChange= {onChangePasswordCheck} placeholder='비밀번호 확인'/>
-                        { mismatchError && <Error>비밀번호가 일치하지 않습니다.</Error> }
+                        <input className="inputform" type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
+                        { emailMessage && <div className="error">{emailMessage}</div>}
+                        <input className="inputform" type="text" value={name} onChange = {onChangeName} placeholder='닉네임'/>
+                        <input className="inputform" type="password" value={password} onChange= {onChangePassword} placeholder='비밀번호'/>
+                        <input className="inputform" type="password" value= {passwordCheck} onChange= {onChangePasswordCheck} placeholder='비밀번호 확인'/>
+                        { mismatchError && <div className="error">비밀번호가 일치하지 않습니다.</div> }
                         {/* { !nickname && <Error>닉네임을 입력해주세요.</Error> } */}
-                        { signUpError && <Error>이미 가입된 이메일입니다.</Error>}
+                        { signUpError && <div className="error">이미 가입된 이메일입니다.</div>}
                         {/* {signUpSuccess && <Success>회원가입되었습니다! 로그인해주세요.</Success>} */}
-                        <Button type="submit"> 회원가입 </Button>
+                        <button className="buttonform" type="submit"> 회원가입 </button>
                     </form>
-                    <LinkContainer>
+                    <p className="link-container">
                         이미 회원이신가요?&nbsp;
                         <Link to="/login">로그인 하러가기</Link>
-                    </LinkContainer>
-                </Form>
-            </FormBody>
-            </Body>
-            <Footer>
-            <div>
+                    </p>
+                </div>
+            </div>
+            </div>
+            <div className="footer">
+                <div>
                     <h4>질문이 있으신가요? </h4>
                     <div>- 문의 이메일 : dea8307@gmail.com<br/>
                     - 깃헙주소 : https://github.com/juyi212/Netflix-Clone
@@ -96,9 +96,9 @@ const SignUp = () => {
                             <GrInstagram size="24"/>
                         </div>
                     </div>
+                </div>
             </div>
-            </Footer>
-    </Container>
+    </div>
     )}
 
 export default SignUp; 
