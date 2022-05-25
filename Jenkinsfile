@@ -53,10 +53,11 @@ pipeline {
 docker rmi $(docker images -f "dangling=true" -q)'
                 // docker container 실행
                 sh 'docker run -d --name latest_front \
-                    -p 3000:3000 \
+                    -p 3001:3000 \
                     -p 85:85 \
                     -p 443:443 \
                     -v /home/ubuntu/sslkey/:/root/.jenkins/workspace/netflix_clone_pipeline/sslkey/ \
+                    -v /app/node_modules \
                     --network netflixnet \
                     latest_front:latest'
                 sh 'docker run -d --name latest_back \
