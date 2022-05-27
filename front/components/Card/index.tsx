@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import {Header, Image, Box, Detail} from './styles'
-import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai'
+import {Header, Image, Box, Detail, HeaderFirst} from './styles'
+import {AiFillHeart, AiOutlineHeart, AiOutlineCheckCircle, AiOutlineDownCircle} from 'react-icons/ai'
+import {BsHandThumbsUp, BsHandThumbsUpFill, BsPlusCircle} from 'react-icons/bs';
 import axios from 'axios';
 // import { MovieType } from '@components/Carousel';
 
@@ -18,7 +19,7 @@ const Card: React.FC<Props> = ({movie}) => {
             setLike(true)
         }
     }, [like])
-    console.log(movie.id)
+    console.log(movie)
 
     return (
             <Box>
@@ -28,10 +29,13 @@ const Card: React.FC<Props> = ({movie}) => {
                 />
                 <Detail className="detail">
                     <Header>
-                        <div>{movie.title} &nbsp;&nbsp;</div>
-                        <div onClick ={onChangeLike}>{ like ? <AiFillHeart size="20" color="red" /> :  <AiOutlineHeart size="20" color="red" />}</div>
+                        <HeaderFirst>
+                            <div onClick ={onChangeLike}>{ like ? <AiOutlineCheckCircle size="32" /> :  <BsPlusCircle size="32"  />}</div>
+                            <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="32" /> :  <BsHandThumbsUp size="32" />}</div>
+                        </HeaderFirst>
+                        <div><AiOutlineDownCircle size="32"/></div>
                     </Header> 
-                    <div> 영화 카테고리 </div>
+                    <div> 영화장르 (확인필요) </div>
                 </Detail>
             </Box>
     )}

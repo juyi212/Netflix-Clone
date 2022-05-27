@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import banner1 from "@assets/banner1.jpg"
 import banner2 from "@assets/banner2.jpg"
 import banner3 from "@assets/banner3.jpg"
@@ -30,9 +30,11 @@ const settings = {
     initialSlide: 0,
     
 }
-type Props = {
-    category: string
-}
+interface ContentProps {
+    category?: string;
+    genre_id? : string;
+  }
+  
 
 // export type MovieType = {
 //     adult: string,
@@ -50,11 +52,11 @@ type Props = {
 //     voteCount: number
 //   }
 
-const Carousel: React.FC<Props> = ({ category }) => {
+const Carousel = React.memo(({ category }: PropsWithChildren<ContentProps>)  => {
     const [mouseCondition,setMouseCondition] = useState(false)
-    const { data: movieData, error, mutate } = useSWR(`http://3.39.105.32:9000/netflix-clone/movie/${category}`, fetcher2);
-    console.log(movieData)
-    
+    const { data: movieData, error, mutate } = useSWR(
+        category && `http://3.39.105.32:9000/netflix-clone/movie/${category}`, fetcher2);
+
     // const clickLeftButton = () => {
     //     if (translateValue !== 0) {
     //         setTranslateValue((prev) => prev - 100);
@@ -82,7 +84,7 @@ const Carousel: React.FC<Props> = ({ category }) => {
 
     return (
         <Container>
-            <h1> 뜨고있는 컨텐츠 </h1>
+            <h2> 뜨고있는 컨텐츠 </h2>
             <StyledSlider {...settings}>
                 {movieData?.map((movie: Object) => {
                     return (
@@ -131,6 +133,6 @@ const Carousel: React.FC<Props> = ({ category }) => {
         //         })}
         //     </CarouselBox>
         // </CarouselContainer>
-    )}
+    )})
 
 export default Carousel;

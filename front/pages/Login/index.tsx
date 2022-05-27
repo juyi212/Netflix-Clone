@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
 import Nav from '@components/Nav';
@@ -14,8 +14,9 @@ import './style.scss'
 const LogIn = () => {
     // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
     const headerValue = localStorage.getItem("user");
-    const { data: userData, error, mutate }  = useSWR('http://3.39.105.32:9000/netflix-clone/user/info' ,fetcher );
-
+    const { data: userData, error, mutate }  = useSWR('http://3.39.105.32:9000/netflix-clone/user/info' ,fetcher, {
+        revalidateOnMount:true
+    });
     const navigate = useNavigate()
     const [email, onChangeEmail] = useInput('')
     const [password, onChangePassword] = useInput('')
@@ -35,7 +36,6 @@ const LogIn = () => {
             )
             .then((res) => {
                 localStorage.setItem("user", res.data["auth-token"])
-                console.log(res.data)
                 navigate('/home')
             })
             .catch((error) => {
@@ -48,9 +48,9 @@ const LogIn = () => {
 
     }
 
-    // if (error ===) {
-    //     navigate('/home')
-    //   }
+    if (!error && userData) {
+        return <Navigate replace to="/home" />
+    }
 
     return (
         <div className="container" style={{backgroundImage: `url(/assets/netflix-background.jpeg)`}}>

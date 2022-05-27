@@ -5,19 +5,23 @@ import "slick-carousel/slick/slick-theme.css";
 import { Box, Detail } from '@components/Card/styles';
 
 export const Container = styled.div`
-    padding: 15px;
+    padding: 0 15px;
     z-index: 1;
+    & h2 {
+        margin: 10px 0 0 20px;
+    }
 `
 
 export const StyledSlider = styled(Slider)` 
     margin : 0 20px;
     .slick-list {
-        height: 18vw;
-        padding-top: 20px;
+        height: 23vw;
+        padding-top: 60px;
         z-index: 3;
+        
     }
     .slick-slide {
-        padding-right: 20px;
+        padding-right: 10px;
         display: flex;
         align-items: center;
         z-index: 3;
@@ -29,6 +33,7 @@ export const StyledSlider = styled(Slider)`
         .detail {
             display: block;
             flex-direction: column;
+            z-index: 10;
         }
         & img {
             border-radius: 0;
@@ -41,7 +46,7 @@ export const StyledSlider = styled(Slider)`
     //     z-index: 10;
     // }
     // &:not(&--open) ${Box}:hover {
-    //     transform: scale(1.1) !important;
+    //     transform: scale(1.13) !important;
     //     z-index: 10;
     //     transition-delay: 0.5s;
     //   }

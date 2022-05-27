@@ -17,7 +17,7 @@ export const Box = styled.div`
 `
 export const Image = styled.img`
     width: 100%;
-    height: 250px;
+    height: 220px;
     object-fit: fill;
     border-radius: 12px;
 `
@@ -26,4 +26,11 @@ export const Header = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+`
+
+export const HeaderFirst = styled.div`
+    display: flex;
+    & div {
+        padding-left: 10px;
+    }
 `

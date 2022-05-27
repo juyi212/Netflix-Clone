@@ -1,14 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
 import Nav from '@components/Nav';
 import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
 import '../Login/style.scss'
+import fetcher from '@utils/fetcher';
+import useSWR from 'swr';
 
 const SignUp = () => {
     // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
+    const { data: userData, error, mutate }  = useSWR('http://3.39.105.32:9000/netflix-clone/user/info' ,fetcher );
     const navigate = useNavigate();
     const [signUpError, setSignUpError] = useState(false);
     const [signUpSuccess, setSignUpSuccess] = useState(false);
@@ -56,6 +59,10 @@ const SignUp = () => {
             })
         }
     },[email, name, password, mismatchError])
+
+    if (userData) {
+        return <Navigate replace to="/home" />
+    }
 
     return (
         <div className="container" style={{backgroundImage: `url(/assets/netflix-background.jpeg)`}}>
