@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Link } from "react-router-dom";
 
 export const Header = styled.div`
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 98%;
