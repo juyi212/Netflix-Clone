@@ -34,7 +34,7 @@ public class UserController {
 	/* jwt 객체 불러오기 */
 	@Autowired
 	private JwtService jwtService;
-	
+
 	/* C :: 회원 가입 */
 	@ApiOperation(value = "회원가입을 위한 Restful API(uId,uPassword,uName)", response = User.class)
 	@PostMapping("/join")
@@ -53,8 +53,9 @@ public class UserController {
 	/* 일반 로그인 */
 	@ApiOperation(value = "로그인 처리하는 Restful API(uId,uPassword)", response = User.class)
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody User user, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
-		User check=null;
+	public ResponseEntity<?> login(@RequestBody User user, HttpSession session, HttpServletResponse response,
+			HttpServletRequest request) {
+		User check = null;
 		try {
 			check = userService.login(user);
 		} catch (Exception e) {
@@ -67,44 +68,36 @@ public class UserController {
 			String token = jwtService.create(check);
 			resultMap.put("auth-token", token);
 			resultMap.put("uNo", check.getuNo());
-			resultMap.put("uId", check.getuId()); 
+			resultMap.put("uId", check.getuId());
 			resultMap.put("uPassword", check.getuPassword());
 			resultMap.put("uName", check.getuName());
 			resultMap.put("uJoinDate", check.getuJoinDate());
 			resultMap.put("uProvider", check.getuProvider());
 			response.setHeader("auth-token", token);
-	        session.setAttribute("auth-token", token);
-	        Cookie cookie = new Cookie("auth-token", token);
-	        cookie.setDomain("3.39.105.32");
-	        cookie.setPath("/");
-	        cookie.setHttpOnly(false);
-	        cookie.setSecure(true);
-	        response.addCookie(cookie);
-	        cookie.setDomain("localhost");
-	        response.addCookie(cookie);
-//	        ResponseCookie temp = ResponseCookie.from("access-token", token)
-//	            	.path("/")
-//	                .secure(true)
-//	                .sameSite("None")
-//	                .httpOnly(false)
-//	                .domain("localhost")
-//	                .build();
-//	        response.addHeader("temp", temp.toString());
-			return new ResponseEntity<Map<String,Object>>(resultMap, HttpStatus.OK);
+			session.setAttribute("auth-token", token);
+			Cookie cookie = new Cookie("auth-token", token);
+			cookie.setDomain("3.39.105.32");
+			cookie.setPath("/");
+			cookie.setHttpOnly(false);
+			cookie.setSecure(true);
+			response.addCookie(cookie);
+			cookie.setDomain("localhost");
+			response.addCookie(cookie);
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("로그인 실패", HttpStatus.NO_CONTENT);
 	}
-	
+
 	/* 정보조회 */
 	@ApiOperation(value = "정보조회 처리하는 Restful API", response = User.class)
 	@GetMapping("/info")
-	public ResponseEntity<?> getInfo( HttpSession session, HttpServletRequest request) throws Exception {
+	public ResponseEntity<?> getInfo(HttpSession session, HttpServletRequest request) throws Exception {
 		HttpStatus status = null;
 		Map<String, Object> resultMap = new HashMap<>();
 
 		try {
-			resultMap.putAll(jwtService.get(request.getHeader("auth-token")));
-			User infoUser=new User();
+			resultMap.putAll(jwtService.get((String) session.getAttribute("auth-token")));
+			User infoUser = new User();
 			infoUser.setuId((String) resultMap.get("uId"));
 			resultMap.put("user", userService.selectUser(infoUser));
 			status = HttpStatus.ACCEPTED;
@@ -115,18 +108,19 @@ public class UserController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
 	@PostMapping("/auth/kakao/callback")
-	public ResponseEntity<?> kakaoCallback(@RequestBody String accessCode, HttpServletResponse response, HttpSession session) throws Exception { // Data를 return 해주는 controller method
+	public ResponseEntity<?> kakaoCallback(@RequestBody String accessCode, HttpServletResponse response,
+			HttpSession session) throws Exception { // Data를 return 해주는 controller method
 		User kakaoUser = userService.oauth2AuthorizationKakao(accessCode);
 		kakaoUser.setuProvider("kakao");
 		// 가입자 혹은 비가입자 체크해서 처리
 		try {
 			User originUser = userService.selectUser(kakaoUser);
-			if(originUser == null) {
+			if (originUser == null) {
 				userService.createKakaoUser(kakaoUser);
 				System.out.println("카카오 아이디로 회원가입 성공");
-			}else {
+			} else {
 				originUser.setuPassword(kakaoUser.getuPassword());
 				userService.updateKakaoUser(originUser);
 			}
@@ -134,47 +128,48 @@ public class UserController {
 			e1.printStackTrace();
 		}
 		User check = userService.selectUser(kakaoUser);
-		
+
 		Map<String, Object> resultMap = new HashMap<>();
-		if(check != null) {
+		if (check != null) {
 			String token = jwtService.create(check);
 			resultMap.put("auth-token", token);
 			resultMap.put("uNo", check.getuNo());
-			resultMap.put("uId", check.getuId()); 
+			resultMap.put("uId", check.getuId());
 			resultMap.put("uPassword", check.getuPassword());
 			resultMap.put("uName", check.getuName());
 			resultMap.put("uJoinDate", check.getuJoinDate());
 			resultMap.put("uProvider", check.getuProvider());
-			
-	        response.setHeader("auth-token", token);
-	        session.setAttribute("auth-token", token);
-	        session.setAttribute("access_token",check.getuPassword());
-	        Cookie cookie = new Cookie("auth-token", token);
-	        cookie.setPath("/");
-	        cookie.setHttpOnly(true);
-	        cookie.setSecure(true);
-	        response.addCookie(cookie);
-	        
+
+			response.setHeader("auth-token", token);
+			session.setAttribute("auth-token", token);
+			Cookie cookie = new Cookie("auth-token", token);
+			cookie.setPath("/");
+			cookie.setDomain("3.39.105.32");
+			cookie.setHttpOnly(false);
+			cookie.setSecure(true);
+			response.addCookie(cookie);
+			cookie.setDomain("localhost");
+			response.addCookie(cookie);
+
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
 		resultMap.put("message", "로그인에 실패하였습니다.");
 		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
 	}
-	
+
 	@GetMapping("logout")
-	public ResponseEntity<?> logout(String uId, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
-		User check=new User();
+	public ResponseEntity<?> logout(String uId, HttpServletResponse response, HttpSession session,
+			HttpServletRequest request) throws Exception {
+		User check = new User();
 		check.setuId(uId);
-		User checkUser=userService.selectUser(check);
-		String result="";
+		User checkUser = userService.selectUser(check);
+		String result = "";
 		System.out.println(session.getAttribute("auth-token"));
 		Map<String, Object> resultMap = new HashMap<>();
-		resultMap.put("auth-token",session.getAttribute("auth-token"));
 		if (checkUser.getuProvider().equals("kakao")) {
 			try {
-				Map<String, Object> tokenResult=jwtService.get(request.getHeader("auth-token"));
-				String access=(String) tokenResult.get("access_token");
-//				String access_token = (String) session.getAttribute("access_token");
+				Map<String, Object> tokenResult = jwtService.get((String)session.getAttribute("auth-token"));
+				String access = (String) tokenResult.get("access_token");
 				result = userService.kakaoUserLogout(access);
 
 			} catch (Exception e) {
@@ -183,20 +178,21 @@ public class UserController {
 				return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
 			}
 		}
-		if(!result.equals("")&&!result.equals(uId)) {
+		if (!result.equals("") && !result.equals(uId)) {
 			resultMap.put("message", "로그아웃에 실패하였습니다.");
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
 		}
 		System.out.println(session.getAttribute("auth-token"));
 		session.invalidate();
-        Cookie cookie = new Cookie("auth-token", null);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        resultMap.put("message", "로그아웃에 성공하였습니다.");
+		Cookie cookie = new Cookie("auth-token", null);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		resultMap.put("message", "로그아웃에 성공하였습니다.");
 		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 
 	}
+
 	@ApiOperation(value = "탈퇴를 위한 Restful API", response = User.class)
 	@DeleteMapping("/delete")
 	public ResponseEntity<String> deleteUser(String uId) throws Exception {
