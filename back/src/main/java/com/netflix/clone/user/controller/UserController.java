@@ -91,12 +91,12 @@ public class UserController {
 	/* 정보조회 */
 	@ApiOperation(value = "정보조회 처리하는 Restful API", response = User.class)
 	@GetMapping("/info")
-	public ResponseEntity<?> getInfo(HttpSession session, HttpServletRequest request) throws Exception {
+	public ResponseEntity<?> getInfo(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpStatus status = null;
 		Map<String, Object> resultMap = new HashMap<>();
 
 		try {
-			resultMap.putAll(jwtService.get((String) session.getAttribute("auth-token")));
+			resultMap.putAll(jwtService.get((String)session.getAttribute("auth-token")));
 			User infoUser = new User();
 			infoUser.setuId((String) resultMap.get("uId"));
 			resultMap.put("user", userService.selectUser(infoUser));
