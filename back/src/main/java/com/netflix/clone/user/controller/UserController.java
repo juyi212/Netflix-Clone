@@ -96,7 +96,8 @@ public class UserController {
 		Map<String, Object> resultMap = new HashMap<>();
 
 		try {
-			resultMap.putAll(jwtService.get((String)session.getAttribute("auth-token")));
+//			resultMap.putAll(jwtService.get((String)session.getAttribute("auth-token")));
+			resultMap.putAll(jwtService.get((String)request.getHeader("auth-token")));
 			User infoUser = new User();
 			infoUser.setuId((String) resultMap.get("uId"));
 			resultMap.put("user", userService.selectUser(infoUser));
@@ -164,11 +165,12 @@ public class UserController {
 		check.setuId(uId);
 		User checkUser = userService.selectUser(check);
 		String result = "";
-		System.out.println(session.getAttribute("auth-token"));
 		Map<String, Object> resultMap = new HashMap<>();
 		if (checkUser.getuProvider().equals("kakao")) {
 			try {
-				Map<String, Object> tokenResult = jwtService.get((String)session.getAttribute("auth-token"));
+//				System.out.println(session.getAttribute("auth-token"));
+//				Map<String, Object> tokenResult = jwtService.get((String)session.getAttribute("auth-token"));
+				Map<String, Object> tokenResult = jwtService.get((String)request.getHeader("auth-token"));
 				String access = (String) tokenResult.get("access_token");
 				result = userService.kakaoUserLogout(access);
 

@@ -36,11 +36,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().mvcMatchers("/", "/user/*", "/login/*").permitAll()
+		http.csrf().disable()
+		.authorizeRequests().mvcMatchers("/", "/user/*", "/login/*").permitAll()
 				.mvcMatchers(HttpMethod.GET, "/profile/*").permitAll().anyRequest().authenticated().and()
 				// stateless한 세션 정책 설정
 				.sessionManagement()
-//				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 				.addFilterBefore(new JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
 
