@@ -10,6 +10,7 @@ import Nav from '@components/Nav';
 const LogIn = loadable(() => import('@pages/Login'))
 const SignUp = loadable(() => import('@pages/SignUp'))
 const Home = loadable(() => import('@pages/Home'))
+const Detail = loadable(() => import('../pages/Detail/index'))
 
 const App = () => {
     // const headerValue = localStorage.getItem("user");
@@ -20,6 +21,7 @@ const App = () => {
             <Nav></Nav>
             <Routes>
                 <Route path="/" element={<Navigate replace to="/login" />} ></Route>
+                <Route path="/:id" element = {<Detail />}/>             
                 <Route path="/login" element={<LogIn />} ></Route>
                 <Route path="/signup" element={<SignUp />} ></Route>
                 <Route path="/home" element={<Home /> } ></Route>

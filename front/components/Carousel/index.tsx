@@ -33,6 +33,7 @@ const settings = {
 interface ContentProps {
     category?: string;
     genre_id? : string;
+    onOpenDetail : () => void;
   }
   
 
@@ -52,7 +53,7 @@ interface ContentProps {
 //     voteCount: number
 //   }
 
-const Carousel = React.memo(({ category }: PropsWithChildren<ContentProps>)  => {
+const Carousel = React.memo(({ category, onOpenDetail}: PropsWithChildren<ContentProps>)  => {
     const [mouseCondition,setMouseCondition] = useState(false)
     const { data: movieData, error, mutate } = useSWR(
         category && `http://3.39.105.32:9000/netflix-clone/movie/${category}`, fetcher2);
@@ -84,12 +85,13 @@ const Carousel = React.memo(({ category }: PropsWithChildren<ContentProps>)  => 
 
     return (
         <Container>
-            <h2> 뜨고있는 컨텐츠 </h2>
+            <h1> 뜨고있는 컨텐츠 </h1>
             <StyledSlider {...settings}>
                 {movieData?.map((movie: Object) => {
                     return (
                         <Card 
                             movie = {movie}
+                            onOpenDetail = {onOpenDetail}
                         />
                         // <Box>
                         //     <Image

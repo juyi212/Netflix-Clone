@@ -7,7 +7,7 @@ import { Box, Detail } from '@components/Card/styles';
 export const Container = styled.div`
     padding: 0 15px;
     z-index: 1;
-    & h2 {
+    & h1 {
         margin: 10px 0 0 20px;
     }
 `
@@ -15,8 +15,8 @@ export const Container = styled.div`
 export const StyledSlider = styled(Slider)` 
     margin : 0 20px;
     .slick-list {
-        height: 23vw;
-        padding-top: 60px;
+        height: 22vw;
+        padding-top: 30px;
         z-index: 3;
         
     }

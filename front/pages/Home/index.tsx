@@ -4,14 +4,19 @@ import Nav from '@components/Nav';
 import Carousel from '@components/Carousel';
 import React, { useCallback, useEffect, useState } from 'react';
 import fetcher from '@utils/fetcher';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import Detail from '@pages/Detail';
+import { DetailContainer } from '@pages/Detail/styles';
 
 
 
 const Home = () => {
     // header에 토큰을 같이 보낸다 
     const { data: userData, error, mutate: revalidateUser } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', fetcher);
+
     const [pageNum, setPageNum] = useState(1);
+    const [showDetailPage, setShowDetailPage] = useState(false)
+    
     function handleScroll () {
         const scrollHeight = document.documentElement.scrollHeight;
         const scrollTop = document.documentElement.scrollTop;
@@ -35,31 +40,49 @@ const Home = () => {
             window.removeEventListener("scroll", handleScroll);
             };
         }, [pageNum]);
+    
+    const onOpenDetail = useCallback(() => {
+        // e.stopPropagation()
+        setShowDetailPage((prev) => !prev)
+    }, [showDetailPage])
+
+    const onCloseDetail = useCallback(() => {
+        setShowDetailPage(false)
+    }, [])
 
 
-    if (!userData) {
-        return <Navigate replace to="/login" />
-    }
+    // if (!userData) {
+    //     return <Navigate replace to="/login" />
+    // }
     return (
         <div>
             {/* 로그인 여부 확인 후 마이페이지 버튼들 보여주기 */}
             <Banner />
-            {pageNum > 0 && <>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
-            </>}
+            {pageNum > 0 && 
+                <>
+                    {/* <Carousel category={"popular_movie"} genre_id={undefined} /> */}
+                    <Carousel category={"popular_movie"} genre_id={undefined} onOpenDetail = {onOpenDetail}/>
+                    {/* <Carousel category={"popular_movie"} genre_id={undefined} onOpenDetail = {onOpenDetail}/> */}
+                    {/* <Detail show ={showDetailPage} onCloseDetail = {onCloseDetail}></Detail> */}
+                    {showDetailPage && (
+                        <Routes>
+                            <Route path="/:id" element={<Detail />} />
+                        </Routes>
+                        )
+                     }
+                </>
+            }
             {pageNum > 1 && <>
+                {/* <Carousel category={"popular_movie"} genre_id={undefined}/>
                 <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
+                <Carousel category={"popular_movie"} genre_id={undefined}/> */}
             </>}
             {pageNum > 2 && <>
+                {/* <Carousel category={"popular_movie"} genre_id={undefined}/>
                 <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
+                <Carousel category={"popular_movie"} genre_id={undefined}/> */}
             </>}
-            
+
         </div>
     )}
 
