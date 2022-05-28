@@ -76,8 +76,9 @@ public class UserController {
 			response.setHeader("auth-token", token);
 	        session.setAttribute("auth-token", token);
 	        Cookie cookie = new Cookie("auth-token", token);
+	        cookie.setDomain("3.39.105.32");
 	        cookie.setPath("/");
-	        cookie.setHttpOnly(true);
+	        cookie.setHttpOnly(false);
 	        cookie.setSecure(true);
 	        response.addCookie(cookie);
 			
@@ -161,8 +162,10 @@ public class UserController {
 		Map<String, Object> resultMap = new HashMap<>();
 		if (checkUser.getuProvider().equals("kakao")) {
 			try {
-				String access_token = (String) session.getAttribute("access_token");
-				result = userService.kakaoUserLogout(access_token);
+				Map<String, Object> tokenResult=jwtService.get(request.getHeader("auth-token"));
+				String access=(String) tokenResult.get("access_token");
+//				String access_token = (String) session.getAttribute("access_token");
+				result = userService.kakaoUserLogout(access);
 
 			} catch (Exception e) {
 				resultMap.put("message", "카카오 로그아웃에 실패하였습니다.");

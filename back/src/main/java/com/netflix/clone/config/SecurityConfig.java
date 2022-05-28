@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private final DataSource dataSource;
 //	private final UserServiceImpl userServiceImpl;	
 	private JwtService jwtService;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().mvcMatchers("/", "/user/*", "/login/*").permitAll()
@@ -79,4 +79,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// Do any additional configuration here
 		return builder.build();
 	}
+
 }
