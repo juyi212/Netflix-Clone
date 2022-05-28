@@ -81,6 +81,10 @@ public class UserController {
 	        cookie.setHttpOnly(false);
 	        cookie.setSecure(true);
 	        response.addCookie(cookie);
+	        String cookieString="cookieName=value;domain=3.39.105.32;path=/;SameSite=None;";
+	        cookie = new Cookie("auth-token", cookieString);
+	        cookie.setHttpOnly(false);
+	        response.addCookie(cookie);
 			
 			return new ResponseEntity<Map<String,Object>>(resultMap, HttpStatus.OK);
 		}
