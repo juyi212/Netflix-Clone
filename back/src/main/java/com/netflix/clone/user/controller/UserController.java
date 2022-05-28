@@ -72,7 +72,6 @@ public class UserController {
 			resultMap.put("uName", check.getuName());
 			resultMap.put("uJoinDate", check.getuJoinDate());
 			resultMap.put("uProvider", check.getuProvider());
-			request.getSession().setAttribute("temp", "temp");
 			response.setHeader("auth-token", token);
 	        session.setAttribute("auth-token", token);
 	        Cookie cookie = new Cookie("auth-token", token);
@@ -81,11 +80,16 @@ public class UserController {
 	        cookie.setHttpOnly(false);
 	        cookie.setSecure(true);
 	        response.addCookie(cookie);
-//	        String cookieString="cookieName=value;domain=3.39.105.32;path=/;SameSite=None;";
-//	        cookie = new Cookie("auth-token", cookieString);
-//	        cookie.setHttpOnly(false);
-//	        response.addCookie(cookie);
-			
+	        cookie.setDomain("localhost");
+	        response.addCookie(cookie);
+//	        ResponseCookie temp = ResponseCookie.from("access-token", token)
+//	            	.path("/")
+//	                .secure(true)
+//	                .sameSite("None")
+//	                .httpOnly(false)
+//	                .domain("localhost")
+//	                .build();
+//	        response.addHeader("temp", temp.toString());
 			return new ResponseEntity<Map<String,Object>>(resultMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("로그인 실패", HttpStatus.NO_CONTENT);
@@ -163,7 +167,9 @@ public class UserController {
 		check.setuId(uId);
 		User checkUser=userService.selectUser(check);
 		String result="";
+		System.out.println(session.getAttribute("auth-token"));
 		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("auth-token",session.getAttribute("auth-token"));
 		if (checkUser.getuProvider().equals("kakao")) {
 			try {
 				Map<String, Object> tokenResult=jwtService.get(request.getHeader("auth-token"));
@@ -181,6 +187,7 @@ public class UserController {
 			resultMap.put("message", "로그아웃에 실패하였습니다.");
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.NO_CONTENT);
 		}
+		System.out.println(session.getAttribute("auth-token"));
 		session.invalidate();
         Cookie cookie = new Cookie("auth-token", null);
         cookie.setPath("/");

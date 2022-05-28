@@ -39,7 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().mvcMatchers("/", "/user/*", "/login/*").permitAll()
 				.mvcMatchers(HttpMethod.GET, "/profile/*").permitAll().anyRequest().authenticated().and()
 				// stateless한 세션 정책 설정
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.sessionManagement()
+//				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
 				.addFilterBefore(new JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
 
 //		http.rememberMe().userDetailsService(userServiceImpl).tokenRepository(tokenRepository());
