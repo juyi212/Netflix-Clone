@@ -18,7 +18,7 @@ COPY . /front
 # EXPOSE 80
 EXPOSE 3000
 
-CMD ["yarn", "build"]
+CMD ["yarn", "run", "build"]
 
 # FROM node:12.2.0-alpine
 # WORKDIR /app
