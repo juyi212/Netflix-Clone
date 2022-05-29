@@ -6,7 +6,7 @@ import Nav from '@components/Nav';
 import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
 import '../Login/style.scss'
-import fetcher from '@utils/fetcher';
+import fetcher from '@utils/userfetcher';
 import useSWR from 'swr';
 
 const SignUp = () => {

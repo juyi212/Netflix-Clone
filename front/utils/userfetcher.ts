@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const fetcher =  async(url: string) => {
+const userfetcher =  async(url: string) => {
     const headerValue = localStorage.getItem("user") ?? "";
     const res = await axios.get(url, {headers: { 'auth-token' :  headerValue  }})
     if (!res){
@@ -10,5 +10,5 @@ const fetcher =  async(url: string) => {
     }
     return res.data
 }
-export default fetcher;
+export default userfetcher;
 

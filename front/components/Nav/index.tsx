@@ -1,4 +1,4 @@
-import fetcher from '@utils/fetcher';
+import fetcher from '@utils/userfetcher';
 import React, { useCallback } from 'react';
 import useSWR from 'swr';
 import { Header, SecondaryNav, StyledLink,DropDown, DropDownContents } from './styles';

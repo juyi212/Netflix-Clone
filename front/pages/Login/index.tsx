@@ -7,7 +7,7 @@ import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
 import KakaoLogin from '@components/KakaoLogin';
 import useSWR from 'swr';
-import fetcher from '@utils/fetcher';
+import fetcher from '@utils/userfetcher';
 import './style.scss'
 
 

@@ -3,16 +3,18 @@ import {Header, Image, Box, Detail, HeaderFirst} from './styles'
 import {AiFillHeart, AiOutlineHeart, AiOutlineCheckCircle, AiOutlineDownCircle} from 'react-icons/ai'
 import {BsHandThumbsUp, BsHandThumbsUpFill, BsPlusCircle} from 'react-icons/bs';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 // import { MovieType } from '@components/Carousel';
 
 
 interface Props {
     movie : any,
-    onOpenDetail : () => void
 }
 
-const Card: React.FC<Props> = ({movie, onOpenDetail}) => {
+const Card: React.FC<Props> = ({movie}) => {
+    // let location = useLocation();
+    // let state = location.state as { backgroundLocation?: Location };
+
     const navigate = useNavigate()
     const [like, setLike] = useState(false)
     const onChangeLike = useCallback(() => {
@@ -40,9 +42,13 @@ const Card: React.FC<Props> = ({movie, onOpenDetail}) => {
                             <div onClick ={onChangeLike}>{ like ? <AiOutlineCheckCircle size="32" /> :  <BsPlusCircle size="32"  />}</div>
                             <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="32" /> :  <BsHandThumbsUp size="32" />}</div>
                         </HeaderFirst>
-                        <div onClick={onOpenDetail}><AiOutlineDownCircle size="32"/></div>
+                        <Link 
+                            to={`./${movie.id}`}
+                            state={{ backgroundLocation: location }}
+                        ><AiOutlineDownCircle size="32"/></Link>
                     </Header> 
                     <div> 영화장르 (확인필요) </div>
+                    
                 </Detail>
             </Box>
     )}
