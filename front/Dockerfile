@@ -15,8 +15,8 @@ COPY . /front
 # COPY ./nginx/homepage.conf /etc/nginx/conf.d/homepage.conf
 # COPY --from=build-stage ./homepage/build /usr/share/nginx/html/homepage
 
-EXPOSE 80
-#EXPOSE 3000
+# EXPOSE 80
+EXPOSE 3000
 
 CMD ["yarn", "build"]
 
