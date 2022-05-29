@@ -10,9 +10,15 @@ RUN yarn
 
 COPY . /front
 
-CMD ["yarn", "dev"]
+FROM nginx:stable-alpine as production-stage
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./nginx/homepage.conf /etc/nginx/conf.d/homepage.conf
 
-EXPOSE 3000
+COPY --from=build-stage ./homepage/build /usr/share/nginx/html/homepage
+EXPOSE 80
+#EXPOSE 3000
+
+CMD ["yarn", "build"]
 
 # FROM node:12.2.0-alpine
 # WORKDIR /app
