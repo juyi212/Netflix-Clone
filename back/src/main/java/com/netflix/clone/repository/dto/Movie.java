@@ -49,6 +49,9 @@ public class Movie {
     @Column(nullable = false)
     private float popularity;
 
+    private String  category;
+
+
     public int getId() {
         return id;
     }
@@ -151,5 +154,13 @@ public class Movie {
 
     public void setPopularity(float popularity) {
         this.popularity = popularity;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
