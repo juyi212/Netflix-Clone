@@ -4,13 +4,14 @@ import Nav from '@components/Nav';
 import Carousel from '@components/Carousel';
 import React, { useCallback, useEffect, useState } from 'react';
 import fetcher from '@utils/userfetcher';
-import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Detail from '@pages/Detail';
 
 
 
 
 const Home = () => {
+    
     // header에 토큰을 같이 보낸다 
     const { data: userData, error, mutate: revalidateUser } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', fetcher);
 
@@ -18,7 +19,7 @@ const Home = () => {
     const [showDetailPage, setShowDetailPage] = useState(false);
     let location = useLocation();
     let state = location.state as { backgroundLocation?: Location };
-
+    
     function handleScroll () {
         const scrollHeight = document.documentElement.scrollHeight;
         const scrollTop = document.documentElement.scrollTop;
@@ -50,36 +51,31 @@ const Home = () => {
     return (
         <div>
 
-            <Banner />
+            <Banner />                
+                {/* {state?.backgroundLocation && (
+                    <Routes>
+                        <Route path="/home/:id" element={<Detail />} />
+                    </Routes>
+                )} */}
             {pageNum > 0 && 
                 <>
-                    {/* <div>
-                        <Link 
-                            to="./12"
-                            state={{ backgroundLocation: location }}
-                            >Home</Link>
-                    </div> */}
                     {/* <Carousel category={"popular_movie"} genre_id={undefined} /> */}
                     <Carousel category={"popular_movie"} genre_id={undefined}  />
-                    {/* <Carousel category={"popular_movie"} genre_id={undefined} onOpenDetail = {onOpenDetail}/> */}
-                    {/* <Carousel category={"popular_movie"} genre_id={undefined} onOpenDetail = {onOpenDetail}/>  */}
+                    <Carousel category={"popular_movie"} genre_id={undefined}  />
+                    <Carousel category={"popular_movie"} genre_id={undefined}  />
                 </>
             }
             {pageNum > 1 && <>
-                {/* <Carousel category={"popular_movie"} genre_id={undefined}/>
                 <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/> */}
+                <Carousel category={"popular_movie"} genre_id={undefined}/>
+                <Carousel category={"popular_movie"} genre_id={undefined}/> 
             </>}
             {pageNum > 2 && <>
-                {/* <Carousel category={"popular_movie"} genre_id={undefined}/>
                 <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/> */}
+                <Carousel category={"popular_movie"} genre_id={undefined}/>
+            <Carousel category={"popular_movie"} genre_id={undefined}/>
             </>}
-                {state?.backgroundLocation && (
-                        <Routes>
-                            <Route path="/home/:id" element={<Detail />} />
-                        </Routes>
-                )}
+            <Outlet /> 
         </div>
     )}
 

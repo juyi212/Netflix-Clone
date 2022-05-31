@@ -12,10 +12,6 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({movie}) => {
-    // let location = useLocation();
-    // let state = location.state as { backgroundLocation?: Location };
-
-    const navigate = useNavigate()
     const [like, setLike] = useState(false)
     const onChangeLike = useCallback(() => {
         if (like) {
@@ -26,9 +22,9 @@ const Card: React.FC<Props> = ({movie}) => {
     }, [like])
     
 
-    const onClickGoToDetail = () => {
-        navigate(`./${movie.id}`)
-    }
+    // const onClickGoToDetail = () => {
+    //     navigate(`/home/${movie.id}`)
+    // }
 
     return (
             <Box>
@@ -43,8 +39,7 @@ const Card: React.FC<Props> = ({movie}) => {
                             <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="32" /> :  <BsHandThumbsUp size="32" />}</div>
                         </HeaderFirst>
                         <Link 
-                            to={`./${movie.id}`}
-                            state={{ backgroundLocation: location }}
+                            to={`/home/${movie.id}`}
                         ><AiOutlineDownCircle size="32"/></Link>
                     </Header> 
                     <div> 영화장르 (확인필요) </div>
