@@ -17,4 +17,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     List<Movie> findTop20ByOriginCountry(String oriCountry);
 
+    Movie findById(int movieId);
+
 }

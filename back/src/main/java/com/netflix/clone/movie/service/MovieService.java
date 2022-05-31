@@ -10,4 +10,6 @@ public interface MovieService {
     List<Movie> getCategoryMovie(String genreId) throws Exception;
 
     List<Movie> getCountryMovie(String oriCountry) throws Exception;
+
+    Movie getMovieDetail(int movieId) throws Exception;
 }

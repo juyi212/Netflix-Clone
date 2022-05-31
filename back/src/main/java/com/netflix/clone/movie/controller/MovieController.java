@@ -59,4 +59,18 @@ public class MovieController {
 
         return movieList;
     }
+
+    /* 영화 ID 별 조회 */
+    @ApiOperation(value = "영화 ID 별 조회 Restful API", response = Movie.class)
+    @GetMapping("/movie_detail")
+    public Movie getMovieDetail(@RequestParam("movieId") String movieId) {
+        Movie movie = null;
+        try {
+            movie = movieService.getMovieDetail(Integer.parseInt(movieId));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return movie;
+    }
 }
