@@ -55,4 +55,12 @@ public class MovieServiceImpl implements MovieService{
 
         return movieList;
     }
+
+    @Override
+    public Movie getMovieDetail(int movieId) throws Exception {
+        Movie movie = null;
+        movie = movieRepository.findById(movieId);
+
+        return movie;
+    }
 }
