@@ -28,13 +28,12 @@
 # CMD ["npm", "start"]
 
 FROM node:lts-alpine as build-stage
-WORKDIR /front
-COPY ./package.json /front
+WORKDIR /homepage
+COPY . .
 
 RUN npm install
 RUN npm run build
 
-COPY . /front
 FROM nginx:stable-alpine as production-stage
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx/homepage.conf /etc/nginx/conf.d/homepage.conf
