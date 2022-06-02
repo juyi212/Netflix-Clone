@@ -27,7 +27,7 @@
 # RUN npm install react-scripts@3.0.1 -g
 # CMD ["npm", "start"]
 
-FROM node:lts-alpine3.14 as build-stage
+FROM node:lts-alpine as build-stage
 WORKDIR /homepage
 COPY . .
 
