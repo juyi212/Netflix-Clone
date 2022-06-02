@@ -18,8 +18,8 @@ COPY . /front
 # EXPOSE 80
 EXPOSE 3000
 
-# CMD ["yarn", "run", "build"]
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["yarn", "run", "build"]
+# CMD ["nginx", "-g", "daemon off;"]
 # FROM node:12.2.0-alpine
 # WORKDIR /app
 # ENV PATH /app/node_modules/.bin:$PATH
