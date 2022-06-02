@@ -1,5 +1,4 @@
-FROM node:lts-alpine3.14
-
+# FROM node:lts-alpine3.14
 # WORKDIR /front
 
 # COPY ./package.json /front
@@ -28,6 +27,7 @@ FROM node:lts-alpine3.14
 # RUN npm install react-scripts@3.0.1 -g
 # CMD ["npm", "start"]
 
+FROM node:lts-alpine3.14 as build-stage
 WORKDIR /homepage
 COPY . .
 
