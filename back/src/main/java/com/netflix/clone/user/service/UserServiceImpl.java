@@ -3,6 +3,8 @@ package com.netflix.clone.user.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.netflix.clone.repository.dto.UserZzim;
+import com.netflix.clone.repository.mapper.UserZzimRepository;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -32,6 +34,8 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService, UserDetailsService {
 	
 	private final UserRepository userRepository;
+	private final UserZzimRepository userZzimRepository;
+
     private final PasswordEncoder passwordEncoder;
     
     private final RestTemplate restTemplate;
@@ -168,5 +172,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		System.out.println(result);
 		
 		return result;
+	}
+
+	@Override
+	public int insertMovieZzim(int movieId, int userNo) throws Exception {
+		UserZzim zzim = new UserZzim(movieId, userNo);
+		userZzimRepository.save(zzim);
+
+		return 1;
 	}
 }

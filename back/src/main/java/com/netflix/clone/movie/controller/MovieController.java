@@ -4,10 +4,7 @@ import com.netflix.clone.movie.service.MovieService;
 import com.netflix.clone.repository.dto.Movie;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -72,5 +69,21 @@ public class MovieController {
         }
 
         return movie;
+    }
+
+    /* 영화 좋아요 */
+    @ApiOperation(value = "영화 좋아요 Restful API")
+    @PutMapping("/movie_like")
+    public String updateMovieLike(@RequestParam("movieId") String movieId) {
+        try {
+            if(movieService.updateMovieLike(Integer.parseInt(movieId)) <= 0) {
+                return "FAIL";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "FAIL";
+        }
+
+        return "OK";
     }
 }

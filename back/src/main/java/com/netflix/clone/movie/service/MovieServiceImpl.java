@@ -6,6 +6,7 @@ import com.netflix.clone.repository.mapper.MovieCategoryRepository;
 import com.netflix.clone.repository.mapper.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,5 +63,14 @@ public class MovieServiceImpl implements MovieService{
         movie = movieRepository.findById(movieId);
 
         return movie;
+    }
+
+    @Override
+    @Transactional
+    public int updateMovieLike(int movieId) throws Exception {
+        Movie movie = movieRepository.findById(movieId);
+        movie.setVoteCount(movie.getVoteCount() + 1);
+
+        return 1;
     }
 }
