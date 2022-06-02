@@ -37,7 +37,9 @@ public interface UserService {
 
 	String kakaoUserLogout(String access_token);
 
-	/* 카카오 로그인 */
+    int insertMovieZzim(int movieId, int userNo) throws Exception;
+
+    /* 카카오 로그인 */
 //	Map<String, Object> kakaoLogin(User user) throws Exception;
 //
 //	/* 로그인 시, 이메일로 맞는 salt 값 받아오기 */

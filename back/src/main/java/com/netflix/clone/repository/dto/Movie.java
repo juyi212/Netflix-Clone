@@ -2,6 +2,7 @@ package com.netflix.clone.repository.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "movie")
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicUpdate
 public class Movie {
     @Id
     private int id; // MovieDB 내 고유 id (auto_increment 아님)

@@ -12,4 +12,6 @@ public interface MovieService {
     List<Movie> getCountryMovie(String oriCountry) throws Exception;
 
     Movie getMovieDetail(int movieId) throws Exception;
+
+    int updateMovieLike(int movieId) throws Exception;
 }

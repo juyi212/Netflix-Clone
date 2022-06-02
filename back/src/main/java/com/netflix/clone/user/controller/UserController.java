@@ -11,12 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.netflix.clone.repository.dto.User;
 import com.netflix.clone.user.jwt.JwtService;
@@ -201,5 +196,19 @@ public class UserController {
 		if (userService.deleteUser(uId) == null)
 			return new ResponseEntity<String>("탈퇴처리 성공", HttpStatus.OK);
 		return new ResponseEntity<String>("탈퇴처리 실패", HttpStatus.NO_CONTENT);
+	}
+
+	/* 영화 찜 */
+	@ApiOperation(value = "유저별 영화 찜 저장 Restful API")
+	@PostMapping("/insert_movie_zzim")
+	public String insertMovieZzim(@RequestParam("movieId") String movieId, @RequestParam("userNo") String userNo) {
+		try {
+			userService.insertMovieZzim(Integer.parseInt(movieId), Integer.parseInt(userNo));
+		}catch (Exception e) {
+			e.printStackTrace();
+			return "FAIL";
+		}
+
+		return "OK";
 	}
 }
