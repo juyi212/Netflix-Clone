@@ -28,7 +28,7 @@
 # CMD ["npm", "start"]
 
 FROM node:lts-alpine as build-stage
-WORKDIR /homepage
+WORKDIR /front
 COPY . .
 
 RUN npm install
