@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-const fetcher2 = (url: string) => 
-    axios.get(url, { withCredentials: true })
-        .then((response) => response.data)
-        .catch((err)=> err)
+const fetcher2 = async(url: string) => {
+    const res = await axios.get(url, { withCredentials: true })
+    if (!res){
+        const error = new Error('An error occurred while fetching the data.')
+        return error
+    }
+    return res.data
+}
 export default fetcher2;

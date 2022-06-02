@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { Navigate, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { DetailContainer, ImageView, MovieCastInfo, MovieContent } from './styles';
-import {TiDeleteOutline} from 'react-icons/ti'
+import { DetailContainer,Icons, ImageView,Image,MovieContainer, MovieCastInfo, MovieContent } from './styles';
+import {TiDelete} from 'react-icons/ti'
 import useSWR from 'swr';
 import fetcher2 from '@utils/fetcher2';
 
@@ -14,28 +14,29 @@ import fetcher2 from '@utils/fetcher2';
 const Detail = () => {
     const navigate = useNavigate()
     const movieId = useParams().id
-
-    const { data: movieDetail, error, mutate } = useSWR(
-            `http://3.39.105.32:9000/netflix-clone/movie/movie_detail?movieId=${movieId}`, fetcher2);
     
-    console.log(movieDetail)
+    const { data: movieDetail, error, mutate } = useSWR(
+        movieId && `http://3.39.105.32:9000/netflix-clone/movie/movie_detail?movieId=${movieId}`, fetcher2);
+    console.log(movieDetail?.overview)
 
-    // if (!show) {
-    //     return null;
-    // }
     const onClickDismiss = () => {
         navigate(-1)
     }
 
     return (
         <DetailContainer>
-            <div>
-                <TiDeleteOutline size="40" onClick={onClickDismiss}/>
-            </div>
+            <Icons>
+                <TiDelete size="50" onClick={onClickDismiss} color="black"/>
+            </Icons>
             <ImageView>
+                <Image src={movieDetail?.posterPath}/>
             </ImageView>
-            <MovieContent></MovieContent>
-            <MovieCastInfo></MovieCastInfo>
+            <MovieContainer>
+                <MovieContent>
+                    
+                </MovieContent>
+                <MovieCastInfo></MovieCastInfo>
+            </MovieContainer>
         </DetailContainer>
     )
 }
