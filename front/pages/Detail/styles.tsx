@@ -11,6 +11,7 @@ export const DetailContainer = styled.div`
   left: 0;
   right: 0;
   z-index: 1033;
+  margin-top: 30px;
 `;
 
 export const Icons = styled.div`

@@ -5,13 +5,14 @@ export const Header = styled.div`
     position: fixed;
     left: 0;
     top: 0;
-    width: 98%;
+    width: 100%;
     height: 90px;
     color: red;
     z-index: 1000;
     display: flex; 
-    margin-left: 30px;
+    padding-left: 30px;
     align-items: center;
+
     .logo {
       font-size: 40px;
       font-weight: bold;
@@ -20,7 +21,7 @@ export const Header = styled.div`
       display: flex;
       font-size: 15px;
       color : white;
-      margin-left: 30px;
+      padding-left: 30px;
       & a {
         padding-left: 30px;
       }
@@ -31,7 +32,7 @@ export const SecondaryNav = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-grow: 1;
-  margin-right: 30px;
+  padding-right: 30px;
   position: relative;
   align-items: center;
 }

@@ -1,5 +1,5 @@
 import fetcher from '@utils/userfetcher';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import useSWR from 'swr';
 import { Header, SecondaryNav, StyledLink,DropDown, DropDownContents } from './styles';
 import gravatar from 'gravatar';
@@ -9,7 +9,6 @@ import axios from 'axios';
 import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 
 const Nav = React.memo(() => {
-    // headervalue 들고오는 것도 따로 분리하기 
     const navigate = useNavigate()
     const { data: userData, error, mutate } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', fetcher, {
         revalidateOnMount:true
@@ -29,10 +28,23 @@ const Nav = React.memo(() => {
         }
     }, [userData])
 
-
+    useEffect(() => {
+        const header = document.querySelector(".header");
+        if (header) {
+            const headerHeight = header?.getBoundingClientRect().height;
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > headerHeight) {
+                    header.setAttribute("style", "background-color:rgba(0,0,0,.8);");
+                } else {
+                    header.setAttribute("style", "background: transparent;");
+                }
+            });
+        }
+    },[])
+        
 
     return (
-        <Header>
+        <Header className='header'>
             <div className="logo">NETFLIX</div>
             {/* userData 로 분기  */}
             { userData  && 

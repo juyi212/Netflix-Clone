@@ -27,22 +27,4 @@ export const Image = styled.img`
   opacity: 0.4;
 `;
 
-// export const ArrowBox = styled.div`
-//   position:absolute;
-//   left:0;
-//   top:0;
-//   width:100%;
-//   height:100%;
-//   display:flex;
-//   justify-content:space-between;
-//   align-items:center;
-//   padding:20px;
-//   .left, .right{
-//     font-size:2rem;
-//     cursor:pointer;
-//     &:hover{
-//       color:red;
-//     }
-//   }
-// `;
 
