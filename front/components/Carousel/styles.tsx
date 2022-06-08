@@ -8,20 +8,36 @@ export const Container = styled.div`
     padding: 0 15px;
     z-index: 1;
     & h1 {
-        margin: 10px 0 0 20px;
+        margin: 0 0 0 20px;
     }
 `
 
 export const StyledSlider = styled(Slider)` 
     margin : 0 20px;
     .slick-list {
-        height: 22vw;
-        padding-top: 30px;
+        height: 18vw;
         z-index: 3;
+        @media screen and (max-width: 2000px) {
+            height: 22vw;
+            &:not(&--open) ${Box}: hover{
+                transform: scale(1.1) !important;
+                transition: transform 0.1s;
+                z-index: 10;
+                .detail {
+                    display: none;
+                }
+                & img {
+                    border-radius: 0;
+                    border-top-left-radius: 12px;
+                    border-top-right-radius: 12px;
         
+                }
+            }
+        }
     }
     .slick-slide {
-        padding-right: 10px;
+        padding-top: 50px;
+        padding-right: 20px;
         display: flex;
         align-items: center;
         z-index: 3;
@@ -42,44 +58,6 @@ export const StyledSlider = styled(Slider)`
 
         }
     }
-    // &:hover ${Box}{
-    //     z-index: 10;
-    // }
-    // &:not(&--open) ${Box}:hover {
-    //     transform: scale(1.13) !important;
-    //     z-index: 10;
-    //     transition-delay: 0.5s;
-    //   }
-    // &:not(&--left) ${Box}:hover {
-    //     transform: scale(1.1)  translateX(20.5%) !important;
-    //     z-index: 10;
-    //     transition-delay: 0.2s;
-    // }
-    // &:not(&--right) ${Box}:hover {
-    //     transform: scale(1.1) translateX(-20.5%) !important;
-    //     z-index: 10;
-    //     transition-delay: 0.2s;
-    //   }
-    
-    //   &:not(&--open):hover ${Box} {
-    //     transform: translateX(-20%);
-    //     transition-delay: 0.2s;
-    //   }
-    
-    //   &:not(&--right):hover ${Box} {
-    //     transform: translateX(-20%);
-    //     transition-delay: 0.2s;
-    //   }
-    
-    //   &:not(&--open) ${Box}:hover ~${Box} {
-    //     transform: translateX(25%);
-    //     transition-delay: 0.2s;
-    //   }
-    
-    //   &:not(&--left) ${Box}:hover ~${Box} {
-    //     transform: translateX(25%);
-    //     transition-delay: 0.2s;
-    //   }
 `
 
 export const MovieDetailContainer = styled.div`

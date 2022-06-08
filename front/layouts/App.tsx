@@ -20,16 +20,12 @@ const App = () => {
         <BrowserRouter>
             <Nav></Nav>
             <Routes >
-            {/* <Routes location={state?.backgroundLocation || location}> */}
                 <Route path="/" element={<Navigate replace to="/login" />} ></Route>
                 <Route path="/login" element={<LogIn />} ></Route>
                 <Route path="/signup" element={<SignUp />} ></Route>
                 <Route path="/home" element={<Home /> } >
-
-                <Route path="/home/:id" element = {<Detail />}/>             
-                </Route>
+                <Route path="/home/:id" element = {<Detail />}/></Route>
                 <Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
-                {/* 디테일 페이지 */}
             </Routes>
         </BrowserRouter>
     )}

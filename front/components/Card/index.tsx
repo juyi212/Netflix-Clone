@@ -4,6 +4,9 @@ import {AiFillHeart, AiOutlineHeart, AiOutlineCheckCircle, AiOutlineDownCircle} 
 import {BsHandThumbsUp, BsHandThumbsUpFill, BsPlusCircle} from 'react-icons/bs';
 import axios from 'axios';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import useSWR from 'swr';
+import userfetcher from '@utils/userfetcher';
+import category from '@utils/category';
 // import { MovieType } from '@components/Carousel';
 
 
@@ -13,6 +16,9 @@ interface Props {
 
 const Card: React.FC<Props> = ({movie}) => {
     const [like, setLike] = useState(false)
+    const [zzim, setZzim] = useState(false)
+    const test = [12,13,14];
+    const CategoryName= category(test).toString();
     const onChangeLike = useCallback(() => {
         if (like) {
             setLike(false)
@@ -20,12 +26,21 @@ const Card: React.FC<Props> = ({movie}) => {
             setLike(true)
         }
     }, [like])
-    
 
+    const onChangeZzim = useCallback(() => {
+        if (zzim) {
+            setZzim(false)
+            // contextapi ㅅㅏ요ㅇ하기 
+            // axios.post(`http://3.39.105.32:9000/netflix-clone/user/insert_movie_zzim?movieId=${movie.id}&userNo=${}`)
+        } else {
+            setZzim(true)
+        }
+    }, [zzim])
+    
     // const onClickGoToDetail = () => {
     //     navigate(`/home/${movie.id}`)
     // }
-
+    
     return (
             <Box>
                 <Image
@@ -35,15 +50,16 @@ const Card: React.FC<Props> = ({movie}) => {
                 <Detail className="detail">
                     <Header>
                         <HeaderFirst>
-                            <div onClick ={onChangeLike}>{ like ? <AiOutlineCheckCircle size="32" /> :  <BsPlusCircle size="32"  />}</div>
+                            <div onClick ={onChangeZzim}>{ zzim ? <AiOutlineCheckCircle size="32" /> :  <BsPlusCircle size="32"  />}</div>
                             <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="32" /> :  <BsHandThumbsUp size="32" />}</div>
                         </HeaderFirst>
                         <Link 
                             to={`/home/${movie.id}`}
                         ><AiOutlineDownCircle size="32"/></Link>
                     </Header> 
-                    <div> 영화장르 (확인필요) </div>
-                    
+                    {movie.category && 
+                        <div style={{color: "white" }}> {CategoryName} </div>
+                    }
                 </Detail>
             </Box>
     )}

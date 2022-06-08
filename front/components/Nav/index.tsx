@@ -44,7 +44,9 @@ const Nav = React.memo(() => {
                     </div>
                     <SecondaryNav>
                         <div>
-                            <AiOutlineSearch  style={{marginRight: "25px", color: "white"}} size="24" />
+                            <AiOutlineSearch 
+                                // onClick ={onChangeSearchInput}
+                                style={{marginRight: "25px", color: "white"}} size="24" />
                         </div>
                         <DropDown>
                             <img className= "profile-image" src={gravatar.url("dea830@naver.com", {s: '28px', d: 'retro'})} alt={"gg"}/>

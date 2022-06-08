@@ -6,8 +6,6 @@ import {FiChevronsRight} from 'react-icons/fi'
 interface Props {
     translateValue: number;
     images: { pic: string; id: number }[];
-    // moveRight: () => void;
-    // moveLeft: () => void;
 }
 
 const Slider: React.FC<Props> = ({
@@ -25,7 +23,7 @@ const Slider: React.FC<Props> = ({
                     <Image
                     key={picture.id}
                     src={picture.pic}
-                    alt={"dog" + idx}
+                    
                     />
                 );
                 })}

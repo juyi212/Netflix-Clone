@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import fetcher from '@utils/userfetcher';
 import { Link, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Detail from '@pages/Detail';
+import userfetcher from '@utils/userfetcher';
 
 
 
@@ -13,7 +14,7 @@ import Detail from '@pages/Detail';
 const Home = () => {
     
     // header에 토큰을 같이 보낸다 
-    const { data: userData, error, mutate: revalidateUser } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', fetcher);
+    const { data: userData, error, mutate: revalidateUser } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', userfetcher);
 
     const [pageNum, setPageNum] = useState(1);
     const [showDetailPage, setShowDetailPage] = useState(false);
@@ -73,7 +74,7 @@ const Home = () => {
             {pageNum > 2 && <>
                 <Carousel category={"popular_movie"} genre_id={undefined}/>
                 <Carousel category={"popular_movie"} genre_id={undefined}/>
-            <Carousel category={"popular_movie"} genre_id={undefined}/>
+                <Carousel category={"popular_movie"} genre_id={undefined}/>
             </>}
             <Outlet /> 
         </div>
