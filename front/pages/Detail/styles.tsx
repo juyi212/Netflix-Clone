@@ -1,5 +1,19 @@
 import styled from '@emotion/styled';
 
+export const DetailBackground = styled.div`
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1030;
+    background-color: rgba(0, 0, 0, .6);
+`
+
 export const DetailContainer = styled.div`
   position: fixed;
   text-align: center;
@@ -29,9 +43,9 @@ export const ImageView = styled.div`
       width: 100%; 
       height: 100%;   
       top: 0;
-      background: linear-gradient(to top, black, black 30%, transparent);
+      // background: linear-gradient(to top, black, black 20%, transparent);
       background-repeat: no-repeat;
-      // transition: all 500ms ease;
+
   }
 `
 
@@ -43,7 +57,7 @@ export const MovieContainer  =styled.div`
 
 `
 
-export const MovieContent = styled.img`
+export const MovieContent = styled.div`
 `
-export const MovieCastInfo = styled.img`
+export const MovieCastInfo = styled.div`
 `

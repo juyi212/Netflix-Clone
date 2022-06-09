@@ -1,4 +1,4 @@
-import fetcher from '@utils/userfetcher';
+import userfetcher from '@utils/userfetcher';
 import React, { useCallback, useEffect } from 'react';
 import useSWR from 'swr';
 import { Header, SecondaryNav, StyledLink,DropDown, DropDownContents } from './styles';
@@ -10,7 +10,7 @@ import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 
 const Nav = React.memo(() => {
     const navigate = useNavigate()
-    const { data: userData, error, mutate } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', fetcher, {
+    const { data: userData, error, mutate } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', userfetcher, {
         revalidateOnMount:true
     });
     const onClickLogout = useCallback(() => {

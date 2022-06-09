@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import { Navigate, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { DetailContainer,Icons, ImageView,Image,MovieContainer, MovieCastInfo, MovieContent } from './styles';
+import { DetailContainer,Icons, ImageView,Image,MovieContainer, MovieCastInfo, MovieContent, DetailBackground } from './styles';
 import {TiDelete} from 'react-icons/ti'
 import useSWR from 'swr';
 import fetcher2 from '@utils/fetcher2';
@@ -22,39 +22,46 @@ const Detail = () => {
     const onClickDismiss = () => {
         navigate(-1)
     }
+    // 스크롤 막기 해야해..
+    
+    useEffect(() => {
+        document.body.style.cssText = `
+          position: fixed; 
+          top: -${window.scrollY}px;
+          overflow-y: scroll;
+          width: 99%;`
+        return () => {
+          const scrollY = document.body.style.top;
+          document.body.style.cssText = '';
+          window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+        };
+      }, []);
 
-    // useEffect(() => {
-    //     document.body.style.cssText = `
-    //       position: fixed; 
-    //       top: -${window.scrollY}px;
-    //       overflow-y: scroll;
-    //       width: 99%;`
-    //     return () => {
-    //       const scrollY = document.body.style.top;
-    //       document.body.style.cssText = '';
-    //       window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-    //     };
-    //   }, []);
       
       
 
     return (
-        <DetailContainer>
-            <Icons>
-                <TiDelete size="50" onClick={onClickDismiss} color="black"/>
-            </Icons>
-            <ImageView>
-                <Image src={movieDetail?.posterPath}/>
-            </ImageView>
+        <DetailBackground>
             
-            <MovieContainer>
-                <MovieContent>
-                    
-                </MovieContent>
-                <MovieCastInfo></MovieCastInfo>
-            </MovieContainer>
-        </DetailContainer>
+            <DetailContainer>
+                <Icons>
+                    <TiDelete size="50" onClick={onClickDismiss} color="black"/>
+                </Icons>
+                <ImageView>
+                    <Image src={movieDetail?.posterPath}/>
+                </ImageView>
+                
+                <MovieContainer>
+                    <MovieContent>
+                        ㅎㅎ
+                    </MovieContent>
+                    <MovieCastInfo></MovieCastInfo>
+                </MovieContainer>
+                
+            </DetailContainer>
+        </DetailBackground>
     )
 }
 
 export default Detail;
+

@@ -12,9 +12,10 @@ import category from '@utils/category';
 
 interface Props {
     movie : any,
+    uId? : string;
 }
 
-const Card: React.FC<Props> = ({movie}) => {
+const Card: React.FC<Props> = ({movie, uId}) => {
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
     const test = [12,13,14];
@@ -29,11 +30,18 @@ const Card: React.FC<Props> = ({movie}) => {
 
     const onChangeZzim = useCallback(() => {
         if (zzim) {
+            // 찜된 상태 
             setZzim(false)
-            // contextapi ㅅㅏ요ㅇ하기 
-            // axios.post(`http://3.39.105.32:9000/netflix-clone/user/insert_movie_zzim?movieId=${movie.id}&userNo=${}`)
         } else {
+            // 찜할 상태 
             setZzim(true)
+            axios.post(`http://3.39.105.32:9000/netflix-clone/user/insert_movie_zzim?movieId=${movie.id}&userNo=${uId}`)
+            .then((res)=>{
+                console.log(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
         }
     }, [zzim])
     
@@ -55,6 +63,7 @@ const Card: React.FC<Props> = ({movie}) => {
                         </HeaderFirst>
                         <Link 
                             to={`/home/${movie.id}`}
+                            
                         ><AiOutlineDownCircle size="32"/></Link>
                     </Header> 
                     {movie.category && 

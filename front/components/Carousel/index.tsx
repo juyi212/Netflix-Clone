@@ -42,54 +42,27 @@ const settings = {
 interface ContentProps {
     category?: string;
     genre_id? : string;
+    uId? : string;
   }
   
 
-// export type MovieType = {
-//     adult: string,
-//     id: number,
-//     isDisplay: string,
-//     originCountry: string,
-//     originTitle: string,
-//     overview: string,
-//     popularity: number,
-//     posterPath: string,
-//     releaseDate: string,
-//     title: string,
-//     videoPath: string,
-//     voteAverage: number,
-//     voteCount: number
-//   }
 
-const Carousel = React.memo(({ category}: PropsWithChildren<ContentProps>)  => {
+function useCategorySWR (category? : string) {
+    return useSWR(() => {
+        if (category === "popular_movie") {
+            return `http://3.39.105.32:9000/netflix-clone/movie/${category}`
+        } else if (category === "category_movie") {
+            return `http://3.39.105.32:9000/netflix-clone/movie/category_movie?genreId=10751`
+        } else {
+            return `http://3.39.105.32:9000/netflix-clone/movie/country_movie?oriCountry=g`
+        }
+    }, fetcher2)
+}
+
+const Carousel = React.memo(({ category, genre_id, uId }: PropsWithChildren<ContentProps>)  => {
     const [mouseCondition,setMouseCondition] = useState(false)
-    const { data: movieData, error, mutate } = useSWR(
-        category && `http://3.39.105.32:9000/netflix-clone/movie/${category}`, fetcher2);
-
-    // const clickLeftButton = () => {
-    //     if (translateValue !== 0) {
-    //         setTranslateValue((prev) => prev - 100);
-    //         } else {
-    //         setTranslateValue(100 * (images.length - 1));
-    //         }
-    // }
-    // const clickRightButton = () => {
-    //     setTranslateValue((prev) => {
-    //         if (translateValue !== 100 * (images.length - 1)) {
-    //             return prev + 100
-    //         } else return 0
-    //     })
-    // }
-    
-    // const onMouseOver = (val: number) => (event: any) => {
-    //     setMouseCondition((prev) => !prev)
-    //     console.log(val)
-    // }
-
-    // const onMouseOut = (val: number) => (event: any) => {
-    //     setMouseCondition((prev) => !prev)
-    //     console.log(val)
-    // }
+    const {data: movieData, error, mutate} = useCategorySWR(category);
+   
 
     return (
         <Container>
@@ -100,6 +73,7 @@ const Carousel = React.memo(({ category}: PropsWithChildren<ContentProps>)  => {
                         <Card 
                             movie = {movie}
                             key ={index}
+                            uId = {uId}
                         />
                         // <Box>
                         //     <Image

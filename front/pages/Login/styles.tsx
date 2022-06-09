@@ -16,7 +16,7 @@ export const Body = styled.div `
     max-width: 450px;
     &:before {
         content: "";
-        height: 91px;
+        height: 200px;
         display: block;
     }
 `
@@ -27,7 +27,7 @@ export const FormBody = styled.div`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 90vh;
     max-width: 450px;
     padding: 20px 0 30px;
 

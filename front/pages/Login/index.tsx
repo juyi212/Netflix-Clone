@@ -9,6 +9,7 @@ import KakaoLogin from '@components/KakaoLogin';
 import useSWR from 'swr';
 import fetcher from '@utils/userfetcher';
 import './style.scss'
+import { Body, Button, Container, Footer, Form, FormBody, Input, Label, LinkContainer } from './styles';
 
 
 const LogIn = () => {
@@ -53,26 +54,25 @@ const LogIn = () => {
     }
 
     return (
-        <div className="container" style={{backgroundImage: `url(/assets/netflix-background.jpeg)`}}>
-            <div className="body">
-                <Nav />
-                <div className="formbody">
-                    <div className="form">
-                        <h1 className="label">로그인</h1>
+        <Container style={{backgroundImage: `url(/assets/netflix-background.jpeg)`}}>
+            <Body>
+                <FormBody>
+                    <Form>
+                        <Label>로그인</Label>
                         <form onSubmit = {onSubmit}>
-                            <input className="inputform" type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
-                            <input className="inputform" type="password" value ={password} onChange = {onChangePassword} placeholder='비밀번호'/>
-                            <button className="buttonform" type="submit"> 로그인 </button>
+                            <Input className="inputform" type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
+                            <Input className="inputform" type="password" value ={password} onChange = {onChangePassword} placeholder='비밀번호'/>
+                            <Button className="buttonform" type="submit"> 로그인 </Button>
                         </form>
                         <KakaoLogin />
-                        <p className="link-container">
+                        <LinkContainer>
                             Netflix 회원이 아닌가요? &nbsp;
                             <Link to="/signup">회원가입하러 가기</Link>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div className="footer">
+                        </LinkContainer>
+                    </Form>
+                </FormBody>
+            </Body>
+            <Footer>
                     <div>
                     <h4>질문이 있으신가요? </h4>
                     <div>- 문의 이메일 : dea8307@gmail.com<br/>
@@ -86,8 +86,8 @@ const LogIn = () => {
                         </div>
                     </div>
             </div>
-            </div>
-        </div>
+            </Footer>
+        </Container>
 
     )}
 
