@@ -57,16 +57,14 @@ const Home = () => {
             {pageNum > 0 && 
                 <>
                     {/* <Carousel category={"popular_movie"} genre_id={undefined} onChangeDetailPageshow = {onChangeDetailPageshow}/> */}
-                    <Carousel category={"popular_movie"} genre_id={undefined} uId ={userData?.user.uNo} />
-                    <Carousel category={"popular_movie"} genre_id={undefined} uId ={userData?.user.uNo} />
-                    <Carousel category={"popular_movie"} genre_id={undefined} uId ={userData?.user.uNo} />
+                    <Carousel header = {"지금 뜨고 컨텐츠 "} category={"popular_movie"} genre_id={"878"} uId ={userData?.user.uNo} />
+                    <Carousel header = {"나만의 판타지를 소개할게"} category={"category_movie"} genre_id={"14"} uId ={userData?.user.uNo}/>
                 </>
             }
             {pageNum > 1 && 
             <>
-                <Carousel category={"category_movie"} genre_id={undefined} uId ={userData?.user.uNo}/>
-                <Carousel category={"category_movie"} genre_id={undefined} uId ={userData?.user.uNo}/>
-                <Carousel category={"category_movie"} genre_id={undefined} uId ={userData?.user.uNo}/>
+                <Carousel header = {"SF 모여라"} category={"category_movie"} genre_id={"878"} uId ={userData?.user.uNo}/>
+                <Carousel header = {"힐링의 음악 컨텐츠"} category={"category_movie"} genre_id={"18"} uId ={userData?.user.uNo}/>
             </>}
             {/* {pageNum > 2 && <>
                 <Carousel category={"popular_movie"} genre_id={undefined}/>

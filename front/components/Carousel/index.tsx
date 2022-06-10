@@ -9,18 +9,6 @@ import fetcher2 from '@utils/fetcher2';
 import axios from 'axios';
 
 
-
-// const images = [
-//     {pic : banner1, id: 1}, 
-//     {pic : banner2, id: 2}, 
-//     {pic : banner3, id: 3},    
-//     {pic : banner3, id: 3},    
-//     {pic : banner3, id: 3},    
-//     {pic : banner3, id: 3},    
-//     {pic : banner3, id: 3},    
-//     {pic : banner3, id: 3},    
-// ]
-
 const settings = {
     slide: 'div',
     dots: false,
@@ -40,33 +28,34 @@ const settings = {
 ]
 }
 interface ContentProps {
-    category?: string;
+    category: string;
     genre_id? : string;
     uId? : string;
+    header : string;
   }
   
 
 
-function useCategorySWR (category? : string) {
+function useCategorySWR (category? : string, genre_id? : string) {
     return useSWR(() => {
         if (category === "popular_movie") {
             return `http://3.39.105.32:9000/netflix-clone/movie/${category}`
         } else if (category === "category_movie") {
-            return `http://3.39.105.32:9000/netflix-clone/movie/category_movie?genreId=10751`
+            return `http://3.39.105.32:9000/netflix-clone/movie/category_movie?genreId=${genre_id}`
         } else {
             return `http://3.39.105.32:9000/netflix-clone/movie/country_movie?oriCountry=g`
         }
     }, fetcher2)
 }
 
-const Carousel = React.memo(({ category, genre_id, uId }: PropsWithChildren<ContentProps>)  => {
+const Carousel = React.memo(({ category, genre_id, header, uId }: PropsWithChildren<ContentProps>)  => {
     const [mouseCondition,setMouseCondition] = useState(false)
-    const {data: movieData, error, mutate} = useCategorySWR(category);
+    const {data: movieData, error, mutate} = useCategorySWR(category, genre_id);
    
 
     return (
         <Container>
-            <h1> 뜨고있는 컨텐츠 </h1>
+            <h1> {header} </h1>
             <StyledSlider {...settings}>
                 {movieData?.map((movie: Object, index: string) => {
                     return (

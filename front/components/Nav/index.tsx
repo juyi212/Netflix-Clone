@@ -1,7 +1,7 @@
 import userfetcher from '@utils/userfetcher';
 import React, { useCallback, useEffect } from 'react';
 import useSWR from 'swr';
-import { Header, SecondaryNav, StyledLink,DropDown, DropDownContents } from './styles';
+import { Header, SecondaryNav, StyledLink,DropDown, DropDownContents, SearchContainer, SearchInput } from './styles';
 import gravatar from 'gravatar';
 import {BsPersonCircle} from 'react-icons/bs'
 import {AiOutlineQuestionCircle, AiOutlineSearch} from 'react-icons/ai'
@@ -55,11 +55,13 @@ const Nav = React.memo(() => {
                         <StyledLink to='/like'>내가 찜한 콘텐츠</StyledLink>
                     </div>
                     <SecondaryNav>
-                        <div>
+                        <SearchContainer>
                             <AiOutlineSearch 
-                                // onClick ={onChangeSearchInput}
-                                style={{marginRight: "25px", color: "white"}} size="24" />
-                        </div>
+                                className="searchIcon"
+                                style={{ color: "white"}} 
+                                size="24" />
+                            <SearchInput />
+                        </SearchContainer>
                         <DropDown>
                             <img className= "profile-image" src={gravatar.url("dea830@naver.com", {s: '28px', d: 'retro'})} alt={"gg"}/>
                             <DropDownContents>

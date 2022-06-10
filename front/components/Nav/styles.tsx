@@ -37,6 +37,31 @@ export const SecondaryNav = styled.div`
   align-items: center;
 }
 `
+
+
+export const SearchContainer = styled.div`
+  display: flex;
+  margin-right: 25px;
+  height: 35px;
+  width: 180px;
+  background-color: black;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border: 1px solid white;
+  .searchIcon {
+    margin: 5px 0 0 5px;
+  }
+`
+
+export const SearchInput = styled.input`
+  outline-style:none;
+  color: white;
+  font-size: 12px;
+  height: 30px;
+  background-color: black;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border: 0 solid;
+`
+
 export const DropDownContents = styled.div`
   padding: 20px;
   display: none;

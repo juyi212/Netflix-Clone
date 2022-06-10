@@ -51,10 +51,14 @@ const Card: React.FC<Props> = ({movie, uId}) => {
     
     return (
             <Box>
+                <Link
+                    to={`/home/${movie.id}`}
+                >
                 <Image
                     alt="d"
                     src={movie.posterPath}
-                />
+                    />
+                </Link>
                 <Detail className="detail">
                     <Header>
                         <HeaderFirst>
