@@ -27,4 +27,17 @@ public class BatchController {
         }
         return "OK";
     }
+
+    /* MovieDB에서 인기 영화 정보 200개 DB 갱신*/
+    @ApiOperation(value = "MovieDB에서 인기 영화 정보 200개 DB 갱신 Restful API")
+    @GetMapping("/popular_movie")
+    public String getPopularMovie() {
+        try {
+            batchService.getPopulareMovie();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "FAIL";
+        }
+        return "OK";
+    }
 }
