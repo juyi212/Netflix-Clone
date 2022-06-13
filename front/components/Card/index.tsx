@@ -18,7 +18,7 @@ interface Props {
 const Card: React.FC<Props> = ({movie, uId}) => {
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
-    const test = [12,13,14];
+    const test = ["12","13","14"];
     const CategoryName= category(test).toString();
     const onChangeLike = useCallback(() => {
         if (like) {

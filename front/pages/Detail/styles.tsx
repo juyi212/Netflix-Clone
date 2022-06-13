@@ -53,11 +53,27 @@ export const Image = styled.img `
   height: 600px;
   width: 100%;  
 `
+export const MovieTitle = styled.h1`
+
+`
+
 export const MovieContainer  =styled.div`
-
+    display: flex;
+    margin: 45px;
+    text-align: left;
 `
-
 export const MovieContent = styled.div`
+    width: 60%;
+    font-size: 20px;
 `
-export const MovieCastInfo = styled.div`
+export const MovieDetailInfo = styled.div`
+  margin-left: 20px;
+  font-size: 20px;
+  & div {
+    margin-bottom: 10px;
+    .firstInfo {
+      color: gray;
+      margin-right: 10px;
+    }
+  }
 `

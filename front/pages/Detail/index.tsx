@@ -1,23 +1,34 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import { Navigate, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { DetailContainer,Icons, ImageView,Image,MovieContainer, MovieCastInfo, MovieContent, DetailBackground } from './styles';
+import { DetailContainer,Icons, ImageView,Image,MovieContainer, MovieContent, DetailBackground, MovieTitle, MovieDetailInfo } from './styles';
 import {TiDelete} from 'react-icons/ti'
 import useSWR from 'swr';
 import fetcher2 from '@utils/fetcher2';
+import category from '@utils/category';
 
-// interface ContentProps {
-//     show: boolean;
-//     onCloseDetail: () => void;
-//   }
 
-// ({show, onCloseDetail}: PropsWithChildren<ContentProps>
-const Detail = () => {
+const Detail = React.memo(() => {
     const navigate = useNavigate()
     const movieId = useParams().id
     
     const { data: movieDetail, error, mutate } = useSWR(
         movieId && `http://3.39.105.32:9000/netflix-clone/movie/movie_detail?movieId=${movieId}`, fetcher2);
-    console.log(movieDetail?.overview)
+    
+        const movieCate = () => {
+        if (movieDetail?.movie.category) {
+            const movieCategory = movieDetail?.movie.category;
+            const tempToArray = movieCategory.split(',')
+            const CategoryName = category(tempToArray)
+            return CategoryName;
+        }
+        return "없음";
+    }
+
+    //     let CategoryName : any = [];
+    // if (movieDetail?.movie.category) {
+    //     movieCate()
+    // } 
+
 
     const onClickDismiss = () => {
         navigate(-1)
@@ -48,20 +59,32 @@ const Detail = () => {
                     <TiDelete size="50" onClick={onClickDismiss} color="black"/>
                 </Icons>
                 <ImageView>
-                    <Image src={movieDetail?.posterPath}/>
+                    <Image src={movieDetail?.movie.posterPath}/>
                 </ImageView>
                 
+                    <MovieTitle>
+                        {movieDetail?.movie.originTitle} : {movieDetail?.movie.title}
+                    </MovieTitle>
                 <MovieContainer>
                     <MovieContent>
-                        ㅎㅎ
+                        {movieDetail?.movie.overview}
                     </MovieContent>
-                    <MovieCastInfo></MovieCastInfo>
+                    <MovieDetailInfo>
+                        <div>
+                            <span className="firstInfo">카테고리: </span>
+                            {movieCate()}
+                        </div>
+                        <div>
+                            <span className="firstInfo">국가: </span>
+                            <span>{movieDetail?.movie.originCountry}</span>
+                        </div>
+                    </MovieDetailInfo>
                 </MovieContainer>
                 
             </DetailContainer>
         </DetailBackground>
     )
-}
+})
 
 export default Detail;
 
