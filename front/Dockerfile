@@ -1,23 +1,26 @@
-FROM node:lts-alpine3.14
-WORKDIR /front
+# FROM node:lts-alpine3.14
+# WORKDIR /front
 
-COPY ./package.json /front
+# COPY ./package.json /front
 
-RUN npm install
+# RUN npm install
 
-RUN yarn
+# RUN yarn
 
-COPY . /front
+# COPY . /front
 
-# FROM nginx:stable-alpine as production-stage
-# RUN rm /etc/nginx/conf.d/default.conf
-# COPY ./nginx/homepage.conf /etc/nginx/conf.d/homepage.conf
-# COPY --from=build-stage ./homepage/build /usr/share/nginx/html/homepage
+# # FROM nginx:stable-alpine as production-stage
+# # RUN rm /etc/nginx/conf.d/default.conf
+# # COPY ./nginx/homepage.conf /etc/nginx/conf.d/homepage.conf
+# # COPY --from=build-stage ./homepage/build /usr/share/nginx/html/homepage
 
-# EXPOSE 80
-EXPOSE 3000
+# # EXPOSE 80
+# EXPOSE 3000
 
-CMD ["yarn", "run", "dev"]
+# CMD ["yarn", "run", "dev"]
+
+
+
 # CMD ["nginx", "-g", "daemon off;"]
 # FROM node:12.2.0-alpine
 # WORKDIR /app
@@ -42,3 +45,19 @@ CMD ["yarn", "run", "dev"]
 # EXPOSE 80
 
 # CMD ["nginx", "-g", "daemon off;"]
+
+
+FROM node:lts-alpine3.14
+WORKDIR /front
+
+COPY ./package.json /front
+
+RUN npm install
+
+COPY . /front
+
+RUN npm run build
+
+CMD ["npx", "serve", "-s", "build"]
+
+EXPOSE 3000 # frontend를 확인해보니 3000 포트를 사용하더군요!
