@@ -22,4 +22,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query(value = "select distinct m.* from movie m left join user_zzim uz on m.id = uz.movie_id where uz.user_no = :userNo", nativeQuery = true)
     List<Movie> findByZzim(@Param(value = "userNo") String userNo);
 
+    @Query(value = "select distinct m.* from movie m where m.origin_country = :searchKey or m.origin_title = :searchKey or m.title = :searchKey", nativeQuery = true)
+    List<Movie> findBySearchKey(@Param(value = "searchKey") String searchKey);
 }

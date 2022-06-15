@@ -97,5 +97,18 @@ public class MovieServiceImpl implements MovieService{
         return movieList;
     }
 
+    @Override
+    public List<Movie> getSearchMovie(String searchKey) throws Exception {
+        List<Movie> movieList = new ArrayList<>();
+        movieRepository.findBySearchKey(searchKey).forEach(e -> movieList.add(e));
+
+        for(int i=0; i<movieList.size(); i++) {
+            List<String> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
+            movieList.get(i).setCategory(categoryList);
+        }
+
+        return movieList;
+    }
+
 
 }

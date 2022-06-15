@@ -141,4 +141,19 @@ public class MovieController {
         return movieList;
     }
 
+    /* 영화 검색 */
+    @ApiOperation(value = "영화 검색 Restful API", response = Movie.class)
+    @GetMapping("/search_movie")
+    public List<Movie> getSearchMovie(@RequestParam("searchKey") String searchKey) {
+        List<Movie> movieList = null;
+
+        try {
+            movieList = movieService.getSearchMovie(searchKey);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return movieList;
+    }
+
 }
