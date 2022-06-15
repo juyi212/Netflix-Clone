@@ -56,10 +56,10 @@ RUN npm install
 
 COPY . /front
 
-# RUN npm run dev
+RUN npm run dev
 
-CMD ["npm", "run", "dev"]
+# CMD ["npm", "run", "dev"]
 
-# CMD ["npx", "serve", "-s", "build"]
+CMD ["npx", "serve", "-s", "build"]
 
 EXPOSE 3000
