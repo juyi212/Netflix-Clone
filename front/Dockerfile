@@ -50,7 +50,7 @@
 FROM node:lts-alpine3.14
 WORKDIR /front
 
-COPY ./package.json /front
+COPY ./package.json /front/package.json
 
 RUN npm install
 
