@@ -62,4 +62,4 @@ CMD ["npm", "run", "dev"]
 
 # CMD ["npx", "serve", "-s", "build"]
 
-EXPOSE 3000 # frontend를 확인해보니 3000 포트를 사용하더군요!
+EXPOSE 3000
