@@ -56,7 +56,7 @@ RUN npm install
 
 COPY . /front
 
-RUN npm run build
+RUN npm run dev
 
 # CMD ["npm", "run", "build"]
 
