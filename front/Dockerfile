@@ -56,8 +56,10 @@ RUN npm install
 
 COPY . /front
 
-RUN npm run build
+# RUN npm run build
 
-CMD ["npx", "serve", "-s", "build"]
+CMD ["npm", "run", "build"]
+
+# CMD ["npx", "serve", "-s", "build"]
 
 EXPOSE 3000 # frontend를 확인해보니 3000 포트를 사용하더군요!
