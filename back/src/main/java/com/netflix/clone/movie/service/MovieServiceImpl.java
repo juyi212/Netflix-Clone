@@ -83,5 +83,13 @@ public class MovieServiceImpl implements MovieService{
         return 1;
     }
 
+    @Override
+    public List<Movie> getMovieZzim(String userNo) throws Exception {
+        List<Movie> movieList = new ArrayList<>();
+        movieRepository.findByZzim(userNo).forEach(e -> movieList.add(e));
+
+        return movieList;
+    }
+
 
 }

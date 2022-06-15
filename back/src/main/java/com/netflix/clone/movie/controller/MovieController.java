@@ -124,4 +124,21 @@ public class MovieController {
         return "OK";
     }
 
+    /* 사용자 별 찜한 영화 조회 */
+    @ApiOperation(value = "사용자 별 찜한 영화 조회 Restful API", response = Movie.class)
+    @GetMapping("/movie_zzim")
+    public List<Movie> getMovieZzim(@RequestParam("userNo") String userNo) {
+        HttpStatus status = null;
+        Map<String, Object> resultMap = new HashMap<>();
+        List<Movie> movieList = null;
+
+        try {
+            movieList = movieService.getMovieZzim(userNo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return movieList;
+    }
+
 }

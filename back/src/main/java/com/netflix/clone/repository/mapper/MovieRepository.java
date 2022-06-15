@@ -2,7 +2,6 @@ package com.netflix.clone.repository.mapper;
 
 import com.netflix.clone.repository.dto.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,5 +18,8 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findTop20ByOriginCountry(String oriCountry);
 
     Movie findById(int movieId);
+
+    @Query(value = "select distinct m.* from movie m left join user_zzim uz on m.id = uz.movie_id where uz.user_no = :userNo", nativeQuery = true)
+    List<Movie> findByZzim(@Param(value = "userNo") String userNo);
 
 }

@@ -16,4 +16,6 @@ public interface MovieService {
     int updateMovieLike(int movieId) throws Exception;
 
     int updateMovieDislike(int movieId) throws Exception;
+
+    List<Movie> getMovieZzim(String userNo) throws Exception;
 }
