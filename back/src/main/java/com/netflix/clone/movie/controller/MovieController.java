@@ -107,4 +107,21 @@ public class MovieController {
 
         return "OK";
     }
+
+    /* 영화 좋아요 해제 */
+    @ApiOperation(value = "영화 좋아요 해제 Restful API")
+    @PutMapping("/movie_dislike")
+    public String updateMovieDislike(@RequestParam("movieId") String movieId) {
+        try {
+            if(movieService.updateMovieDislike(Integer.parseInt(movieId)) <= 0) {
+                return "FAIL";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "FAIL";
+        }
+
+        return "OK";
+    }
+
 }

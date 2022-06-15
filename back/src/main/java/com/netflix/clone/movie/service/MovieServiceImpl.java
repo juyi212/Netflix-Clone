@@ -73,4 +73,15 @@ public class MovieServiceImpl implements MovieService{
 
         return 1;
     }
+
+    @Override
+    @Transactional
+    public int updateMovieDislike(int movieId) throws Exception {
+        Movie movie = movieRepository.findById(movieId);
+        movie.setVoteCount(movie.getVoteCount() - 1);
+
+        return 1;
+    }
+
+
 }

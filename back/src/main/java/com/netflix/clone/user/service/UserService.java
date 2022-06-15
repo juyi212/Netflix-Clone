@@ -39,6 +39,8 @@ public interface UserService {
 
     int insertMovieZzim(int movieId, int userNo) throws Exception;
 
+    int deleteMovieZzim(int movieId, int userNo) throws Exception;
+
     /* 카카오 로그인 */
 //	Map<String, Object> kakaoLogin(User user) throws Exception;
 //
