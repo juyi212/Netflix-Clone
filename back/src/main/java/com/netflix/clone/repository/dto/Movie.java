@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "movie")
@@ -51,7 +52,8 @@ public class Movie {
     @Column(nullable = false)
     private float popularity;
 
-    private String  category;
+    @Transient
+    private List<String> category;
 
 
     public int getId() {
@@ -158,11 +160,11 @@ public class Movie {
         this.popularity = popularity;
     }
 
-    public String getCategory() {
+    public List<String> getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(List<String> category) {
         this.category = category;
     }
 }
