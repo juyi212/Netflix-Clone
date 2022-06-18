@@ -25,17 +25,8 @@ public class MovieServiceImpl implements MovieService{
         movieRepository.findTop10ByOrderByPopularityDesc().forEach(e -> movieList.add(e));
 
         for(int i=0; i<movieList.size(); i++) {
-            List<MovieCategory> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
-            StringBuilder sb = new StringBuilder("");
-
-            for(int j=0; j<categoryList.size(); j++) {
-                sb.append(categoryList.get(j).getCategoryId());
-                if(j < categoryList.size() - 1) {
-                    sb.append(",");
-                }
-            }
-
-            movieList.get(i).setCategory(sb.toString());
+            List<String> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
+            movieList.get(i).setCategory(categoryList);
         }
 
         return movieList;
@@ -46,6 +37,11 @@ public class MovieServiceImpl implements MovieService{
         List<Movie> movieList = new ArrayList<>();
         movieRepository.findTop20ByCategory(genre).forEach(e -> movieList.add(e));
 
+        for(int i=0; i<movieList.size(); i++) {
+            List<String> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
+            movieList.get(i).setCategory(categoryList);
+        }
+
         return movieList;
     }
 
@@ -53,6 +49,11 @@ public class MovieServiceImpl implements MovieService{
     public List<Movie> getCountryMovie(String oriCountry) throws Exception {
         List<Movie> movieList = new ArrayList<>();
         movieRepository.findTop20ByOriginCountry(oriCountry).forEach(e -> movieList.add(e));
+
+        for(int i=0; i<movieList.size(); i++) {
+            List<String> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
+            movieList.get(i).setCategory(categoryList);
+        }
 
         return movieList;
     }
@@ -73,4 +74,41 @@ public class MovieServiceImpl implements MovieService{
 
         return 1;
     }
+
+    @Override
+    @Transactional
+    public int updateMovieDislike(int movieId) throws Exception {
+        Movie movie = movieRepository.findById(movieId);
+        movie.setVoteCount(movie.getVoteCount() - 1);
+
+        return 1;
+    }
+
+    @Override
+    public List<Movie> getMovieZzim(String userNo) throws Exception {
+        List<Movie> movieList = new ArrayList<>();
+        movieRepository.findByZzim(userNo).forEach(e -> movieList.add(e));
+
+        for(int i=0; i<movieList.size(); i++) {
+            List<String> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
+            movieList.get(i).setCategory(categoryList);
+        }
+
+        return movieList;
+    }
+
+    @Override
+    public List<Movie> getSearchMovie(String searchKey) throws Exception {
+        List<Movie> movieList = new ArrayList<>();
+        movieRepository.findBySearchKey(searchKey).forEach(e -> movieList.add(e));
+
+        for(int i=0; i<movieList.size(); i++) {
+            List<String> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
+            movieList.get(i).setCategory(categoryList);
+        }
+
+        return movieList;
+    }
+
+
 }

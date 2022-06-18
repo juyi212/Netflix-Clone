@@ -14,4 +14,10 @@ public interface MovieService {
     Movie getMovieDetail(int movieId) throws Exception;
 
     int updateMovieLike(int movieId) throws Exception;
+
+    int updateMovieDislike(int movieId) throws Exception;
+
+    List<Movie> getMovieZzim(String userNo) throws Exception;
+
+    List<Movie> getSearchMovie(String searchKey) throws Exception;
 }

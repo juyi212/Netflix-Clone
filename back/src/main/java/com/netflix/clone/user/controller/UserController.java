@@ -211,4 +211,18 @@ public class UserController {
 
 		return "OK";
 	}
+
+	/* 영화 찜 해제 */
+	@ApiOperation(value = "유저별 영화 찜 삭제 Restful API")
+	@DeleteMapping("/delete_movie_zzim")
+	public String deleteMovieZzim(@RequestParam("movieId") String movieId, @RequestParam("userNo") String userNo) {
+		try {
+			userService.deleteMovieZzim(Integer.parseInt(movieId), Integer.parseInt(userNo));
+		}catch (Exception e) {
+			e.printStackTrace();
+			return "FAIL";
+		}
+
+		return "OK";
+	}
 }

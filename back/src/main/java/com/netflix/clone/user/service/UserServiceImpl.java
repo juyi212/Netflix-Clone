@@ -3,7 +3,9 @@ package com.netflix.clone.user.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.netflix.clone.repository.dto.Movie;
 import com.netflix.clone.repository.dto.UserZzim;
+import com.netflix.clone.repository.mapper.MovieRepository;
 import com.netflix.clone.repository.mapper.UserZzimRepository;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -178,6 +181,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public int insertMovieZzim(int movieId, int userNo) throws Exception {
 		UserZzim zzim = new UserZzim(movieId, userNo);
 		userZzimRepository.save(zzim);
+
+		return 1;
+	}
+
+	@Override
+	@Transactional
+	public int deleteMovieZzim(int movieId, int userNo) throws Exception {
+		UserZzim zzim = new UserZzim(movieId, userNo);
+		userZzimRepository.delete(zzim);
 
 		return 1;
 	}
