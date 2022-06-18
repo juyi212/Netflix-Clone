@@ -1,5 +1,5 @@
 import userfetcher from '@utils/userfetcher';
-import React, { useCallback, useEffect } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { Header, SecondaryNav, StyledLink,DropDown, DropDownContents, SearchContainer, SearchInput } from './styles';
 import gravatar from 'gravatar';
@@ -7,26 +7,42 @@ import {BsPersonCircle} from 'react-icons/bs'
 import {AiOutlineQuestionCircle, AiOutlineSearch} from 'react-icons/ai'
 import axios from 'axios';
 import { Navigate, NavLink, useNavigate } from 'react-router-dom';
+import { UserContext } from '@layouts/App';
+
+
+// export const UserContext = createContext({})
 
 const Nav = React.memo(() => {
     const navigate = useNavigate()
-    const { data: userData, error, mutate } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', userfetcher, {
-        revalidateOnMount:true
-    });
+    const context = useContext(UserContext)
+    const [search, setSearch] = useState("")
+
+
     const onClickLogout = useCallback(() => {
-        if(userData) {
-            axios.get(`http://3.39.105.32:9000/netflix-clone/user/logout?uId=${userData.uId}`)
+        if(context.userData) {
+            axios.get(`http://3.39.105.32:9000/netflix-clone/user/logout?uId=${context.userData.uId}`)
             .then((res) => {
                 localStorage.removeItem('user')
                 // 로그아웃을 하고 로그인페이지로 넘어가면 userData가 확인되어 login 페이지로 이동하지 않는다.. 어떻게 해결해야할까 > null로 해결! 
-                mutate(null)
+                context.mutateUsers(null)
                 navigate('/login')
             })
             .catch((error) => {
                 console.log(error)
             })
         }
-    }, [userData])
+    }, [context.userData])
+
+    const onChangeSearch = (e: any) => {
+        setSearch(e.target.value)
+        // console.log(search)
+    }
+
+    const onKeyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.code === "Enter") {
+            alert(`You have typed "${search}"`);
+        }
+    }
 
     useEffect(() => {
         const header = document.querySelector(".header");
@@ -44,15 +60,16 @@ const Nav = React.memo(() => {
         
 
     return (
+        // <UserContext.Provider></UserContext.Provider>
         <Header className='header'>
             <div className="logo">NETFLIX</div>
             {/* userData 로 분기  */}
-            { userData  && 
+            { context.userData  && 
                 <>
                     <div className="main-nav">
                         <StyledLink to='/home'>홈</StyledLink>
                         <StyledLink to='/new'>NEW! 요즘 대세 콘텐츠 </StyledLink>
-                        <StyledLink to='/like'>내가 찜한 콘텐츠</StyledLink>
+                        <StyledLink to='/my-list'>내가 찜한 콘텐츠</StyledLink>
                     </div>
                     <SecondaryNav>
                         <SearchContainer>
@@ -60,7 +77,13 @@ const Nav = React.memo(() => {
                                 className="searchIcon"
                                 style={{ color: "white"}} 
                                 size="24" />
-                            <SearchInput />
+                            <SearchInput 
+                                type="text" 
+                                value={search} 
+                                placeholder="제목을 검색해주세요." 
+                                onChange={onChangeSearch}
+                                onKeyPress={onKeyUpHandler}
+                                />
                         </SearchContainer>
                         <DropDown>
                             <img className= "profile-image" src={gravatar.url("dea830@naver.com", {s: '28px', d: 'retro'})} alt={"gg"}/>

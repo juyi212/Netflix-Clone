@@ -27,7 +27,7 @@ export const FormBody = styled.div`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    min-height: 90vh;
+    min-height: 100vh;
     max-width: 450px;
     padding: 20px 0 30px;
 

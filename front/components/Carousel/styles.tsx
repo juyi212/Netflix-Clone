@@ -15,9 +15,9 @@ export const Container = styled.div`
 export const StyledSlider = styled(Slider)` 
     margin : 0 20px;
     .slick-list {
-        height: 18vw;
+        height: 20vw;
         z-index: 3;
-        @media screen and (max-width: 2000px) {
+        @media screen and (max-width: 1500px) {
             height: 22vw;
             &:not(&--open) ${Box}: hover{
                 transform: scale(1.1) !important;

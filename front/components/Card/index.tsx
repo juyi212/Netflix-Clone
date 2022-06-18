@@ -18,20 +18,26 @@ interface Props {
 const Card: React.FC<Props> = ({movie, uId}) => {
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
+
+    const { data: userData, error, mutate } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', userfetcher, {
+        revalidateOnMount:true
+    });
+
     const test = ["12","13","14"];
     const CategoryName= category(test).toString();
-    const onChangeLike = useCallback(() => {
-        if (like) {
-            setLike(false)
-        } else {
-            setLike(true)
-        }
-    }, [like])
+
 
     const onChangeZzim = useCallback(() => {
         if (zzim) {
             // 찜된 상태 
             setZzim(false)
+            axios.post(`http://3.39.105.32:9000/netflix-clone/user/delete_movie_zzim?movieId=${movie.id}&userNo=${uId}`)
+            .then((res)=>{
+                console.log(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
         } else {
             // 찜할 상태 
             setZzim(true)
@@ -44,6 +50,14 @@ const Card: React.FC<Props> = ({movie, uId}) => {
             })
         }
     }, [zzim])
+
+    const onChangeLike = useCallback(() => {
+        if (like) {
+            setLike(false)
+        } else {
+            setLike(true)
+        }
+    }, [like])
     
     // const onClickGoToDetail = () => {
     //     navigate(`/home/${movie.id}`)

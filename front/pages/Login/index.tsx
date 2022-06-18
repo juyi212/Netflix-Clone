@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useContext} from 'react';
 import {Link, Navigate, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
@@ -10,9 +10,10 @@ import useSWR from 'swr';
 import fetcher from '@utils/userfetcher';
 import './style.scss'
 import { Body, Button, Container, Footer, Form, FormBody, Input, Label, LinkContainer } from './styles';
+import { UserContext } from '@layouts/App';
 
 
-const LogIn = () => {
+const LogIn = React.memo(() => {
     // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
     const headerValue = localStorage.getItem("user");
     const { data: userData, error, mutate }  = useSWR('http://3.39.105.32:9000/netflix-clone/user/info' ,fetcher, {
@@ -21,6 +22,7 @@ const LogIn = () => {
     const navigate = useNavigate()
     const [email, onChangeEmail] = useInput('')
     const [password, onChangePassword] = useInput('')
+    const context = useContext(UserContext)
     
     const onSubmit = useCallback((e:any) => {
         e.preventDefault()
@@ -37,6 +39,7 @@ const LogIn = () => {
             )
             .then((res) => {
                 localStorage.setItem("user", res.data["auth-token"])
+                context.mutateUsers()
                 navigate('/home')
             })
             .catch((error) => {
@@ -89,6 +92,6 @@ const LogIn = () => {
             </Footer>
         </Container>
 
-    )}
+    )})
 
 export default LogIn; 

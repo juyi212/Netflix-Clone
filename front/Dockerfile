@@ -17,6 +17,7 @@ COPY . /front
 # EXPOSE 80
 EXPOSE 3000
 
+#CMD ["npm", "run", "build"]
 CMD ["yarn", "run", "dev"]
 # CMD ["nginx", "-g", "daemon off;"]
 # FROM node:12.2.0-alpine

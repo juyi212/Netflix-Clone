@@ -14,6 +14,9 @@ const Detail = React.memo(() => {
     const { data: movieDetail, error, mutate } = useSWR(
         movieId && `http://3.39.105.32:9000/netflix-clone/movie/movie_detail?movieId=${movieId}`, fetcher2);
     
+
+        console.log(movieDetail?.movie)
+
         const movieCate = () => {
         if (movieDetail?.movie.category) {
             const movieCategory = movieDetail?.movie.category;
@@ -56,15 +59,14 @@ const Detail = React.memo(() => {
             
             <DetailContainer>
                 <Icons>
-                    <TiDelete size="50" onClick={onClickDismiss} color="black"/>
+                    <TiDelete size="50" onClick={onClickDismiss} color="white"/>
                 </Icons>
                 <ImageView>
                     <Image src={movieDetail?.movie.posterPath}/>
                 </ImageView>
-                
-                    <MovieTitle>
-                        {movieDetail?.movie.originTitle} : {movieDetail?.movie.title}
-                    </MovieTitle>
+                <MovieTitle>
+                    {movieDetail?.movie.originTitle} : {movieDetail?.movie.title}
+                </MovieTitle>
                 <MovieContainer>
                     <MovieContent>
                         {movieDetail?.movie.overview}

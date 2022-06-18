@@ -9,7 +9,7 @@ import Detail from '@pages/Detail';
 import userfetcher from '@utils/userfetcher';
 
 
-const Home = () => {
+const Home = React.memo(() => {
     
     // header에 토큰을 같이 보낸다 
     const { data: userData, error, mutate: revalidateUser } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', userfetcher);
@@ -73,6 +73,6 @@ const Home = () => {
             </>} */}
             
         </div>
-    )}
+    )})
 
 export default Home;

@@ -54,7 +54,7 @@ export const Image = styled.img `
   width: 100%;  
 `
 export const MovieTitle = styled.h1`
-
+  margin : 0 30px;
 `
 
 export const MovieContainer  =styled.div`
