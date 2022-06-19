@@ -19,13 +19,8 @@
 
 # CMD ["yarn", "run", "dev"]
 
-
-
-<<<<<<< HEAD
 #CMD ["npm", "run", "build"]
-CMD ["yarn", "run", "dev"]
-=======
->>>>>>> 6ec4ae4e394da81deacce37b18b5a74dd66cf438
+
 # CMD ["nginx", "-g", "daemon off;"]
 # FROM node:12.2.0-alpine
 # WORKDIR /app
