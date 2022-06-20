@@ -75,7 +75,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:sable-alpine as production-stage
+FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /front/dist /usr/share/nginx/html
 EXPOSE 3000
 
