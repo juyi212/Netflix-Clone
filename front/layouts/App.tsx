@@ -13,6 +13,7 @@ const SignUp = loadable(() => import('@pages/SignUp'))
 const Home = loadable(() => import('@pages/Home'))
 const Detail = loadable(() => import('@pages/Detail'))
 const MyList = loadable(() => import('@pages/MyList'))
+const Search = loadable(() => import('@pages/Search'))
 
 export const UserContext = createContext({
     userData: { 
@@ -46,10 +47,9 @@ const App = () => {
             <Routes >
                 <Route path="/" element={<Navigate replace to="/login" />} ></Route>
                 <Route path="/login" element={
-                <UserContext.Provider value={value}>
-                    <LogIn />
-                </UserContext.Provider>
-                
+                    <UserContext.Provider value={value}>
+                        <LogIn />
+                    </UserContext.Provider>
                 } ></Route>
                 <Route path="/signup" element={<SignUp />} ></Route>
                 <Route path="/my-list" element={   
@@ -57,8 +57,10 @@ const App = () => {
                         <MyList />
                     </UserContext.Provider>
                     } ></Route>
+                <Route path="/search/:word" element = {<Search />}/>
                 <Route path="/home" element={<Home /> } >
-                <Route path="/home/:id" element = {<Detail />}/></Route>
+                    <Route path="/home/:id" element = {<Detail />}/>
+                </Route>
                 <Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
             </Routes>
         </BrowserRouter>

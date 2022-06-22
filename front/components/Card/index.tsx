@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { PropsWithChildren, useCallback, useState } from 'react';
 import {Header, Image, Box, Detail, HeaderFirst} from './styles'
 import {AiFillHeart, AiOutlineHeart, AiOutlineCheckCircle, AiOutlineDownCircle} from 'react-icons/ai'
 import {BsHandThumbsUp, BsHandThumbsUpFill, BsPlusCircle} from 'react-icons/bs';
@@ -10,12 +10,12 @@ import category from '@utils/category';
 // import { MovieType } from '@components/Carousel';
 
 
-interface Props {
+interface ContentProps {
     movie : any,
     uId? : string;
 }
 
-const Card: React.FC<Props> = ({movie, uId}) => {
+const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
 
@@ -89,6 +89,6 @@ const Card: React.FC<Props> = ({movie, uId}) => {
                     }
                 </Detail>
             </Box>
-    )}
+    )})
 
 export default Card;

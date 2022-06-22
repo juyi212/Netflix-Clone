@@ -8,6 +8,8 @@ import {AiOutlineQuestionCircle, AiOutlineSearch} from 'react-icons/ai'
 import axios from 'axios';
 import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '@layouts/App';
+import debounce from '@utils/debounce';
+import useDebounce from '@utils/debounce';
 
 
 // export const UserContext = createContext({})
@@ -15,7 +17,9 @@ import { UserContext } from '@layouts/App';
 const Nav = React.memo(() => {
     const navigate = useNavigate()
     const context = useContext(UserContext)
-    const [search, setSearch] = useState("")
+    const [search, setSearch] = useState<string>('')
+    const debouncedValue = useDebounce(search, 500)
+
 
 
     const onClickLogout = useCallback(() => {
@@ -33,16 +37,32 @@ const Nav = React.memo(() => {
         }
     }, [context.userData])
 
-    const onChangeSearch = (e: any) => {
+    const onChangeSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
-        // console.log(search)
-    }
+        console.log(search)
 
-    const onKeyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.code === "Enter") {
-            alert(`You have typed "${search}"`);
-        }
-    }
+    },[search])
+
+    useEffect(() => {
+        // Do fetch here...
+        // Triggers when "debouncedValue" changes
+        axios.get(`http://3.39.105.32:9000/netflix-clone/movie/search_movie?searchKey=${search}`)
+        .then(() => {
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }, [debouncedValue])
+        
+
+    // const onKeyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    //     if (event.code === "Enter") {
+    //         axios.get(`http://3.39.105.32:9000/netflix-clone/movie/search_movie?searchKey=${search}`)
+    //         .then(() => {
+
+    //         })
+    //     }
+    // }
 
     useEffect(() => {
         const header = document.querySelector(".header");
@@ -82,7 +102,7 @@ const Nav = React.memo(() => {
                                 value={search} 
                                 placeholder="제목을 검색해주세요." 
                                 onChange={onChangeSearch}
-                                onKeyPress={onKeyUpHandler}
+                                // onKeyPress={onKeyUpHandler}
                                 />
                         </SearchContainer>
                         <DropDown>

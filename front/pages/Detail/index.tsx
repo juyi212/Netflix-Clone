@@ -27,18 +27,12 @@ const Detail = React.memo(() => {
         return "없음";
     }
 
-    //     let CategoryName : any = [];
-    // if (movieDetail?.movie.category) {
-    //     movieCate()
-    // } 
-
-
     const onClickDismiss = () => {
         navigate(-1)
     }
-    // 스크롤 막기 해야해..
     
     useEffect(() => {
+        // home 화면 스크롤 방지 
         document.body.style.cssText = `
           position: fixed; 
           top: -${window.scrollY}px;

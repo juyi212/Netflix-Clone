@@ -10,7 +10,6 @@ import userfetcher from '@utils/userfetcher';
 
 
 const Home = React.memo(() => {
-    
     // header에 토큰을 같이 보낸다 
     const { data: userData, error, mutate: revalidateUser } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', userfetcher);
     const [pageNum, setPageNum] = useState(1);
@@ -18,12 +17,7 @@ const Home = React.memo(() => {
     let location = useLocation();
     let state = location.state as { backgroundLocation?: Location };
 
-    const onChangeDetailPageshow = useCallback((e: any) => {
-        // e.stopPropagation()
-        setShowDetailPage((prev) => !prev)
-    }, [showDetailPage])
-    
-    function handleScroll () {
+    const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight;
         const scrollTop = document.documentElement.scrollTop;
         const clientHeight = document.documentElement.clientHeight;
@@ -31,20 +25,19 @@ const Home = React.memo(() => {
             // 페이지 끝에 도달하면 추가 데이터를 받아온다
             setPageNum(pageNum + 1);
         }
-    };
-       useEffect(() => {
-        // scroll event listener 등록
-        window.addEventListener("scroll", handleScroll);
-        if (pageNum > 2) {
-            return () => {
-                // scroll event listener 해제
-                window.removeEventListener("scroll", handleScroll);
-                };
-            }
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            };
-        }, [pageNum]);
+    }
+
+    useEffect(() => {
+    // scroll event listener 등록
+    window.addEventListener("scroll", handleScroll);
+    if (pageNum > 2) {
+        // scroll event listener 해제
+        window.removeEventListener("scroll", handleScroll);
+        }
+    return () => {
+        window.removeEventListener("scroll", handleScroll);
+        };
+    }, [pageNum]);
 
 
     if (!userData) {
