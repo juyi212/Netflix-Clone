@@ -26,7 +26,7 @@ pipeline {
         stage('Docker build') {
             agent any
             steps {
-                sh 'docker build -t latest_front:latest /root/.jenkins/workspace/netflix_clone_pipeline/front'
+//                 sh 'docker build -t latest_front:latest /root/.jenkins/workspace/netflix_clone_pipeline/front'
                 sh 'docker build -t latest_back:latest /root/.jenkins/workspace/netflix_clone_pipeline/back'
             }
         }
@@ -35,15 +35,15 @@ pipeline {
             steps {
                 // 현재 동작중인 컨테이너 중 <front-image-name>의 이름을 가진
                 // 컨테이너를 stop 한다
-                sh 'docker ps -f name=latest_front -q \
-| xargs --no-run-if-empty docker container stop'
+//                 sh 'docker ps -f name=latest_front -q \
+// | xargs --no-run-if-empty docker container stop'
                 // 현재 동작중인 컨테이너 중 <back-image-name>의 이름을 가진
                 // 컨테이너를 stop 한다
                 sh 'docker ps -f name=latest_back -q \
 | xargs --no-run-if-empty docker container stop'
                 // <front-image-name>의 이름을 가진 컨테이너를 삭제한다.
-                sh 'docker container ls -a -f name=latest_front -q \
-| xargs -r docker container rm'
+//                 sh 'docker container ls -a -f name=latest_front -q \
+// | xargs -r docker container rm'
                 // <back-image-name>의 이름을 가진 컨테이너를 삭제한다.
                 sh 'docker container ls -a -f name=latest_back -q \
 | xargs -r docker container rm'
@@ -52,12 +52,12 @@ pipeline {
                 sh 'docker images -f dangling=true && \
 docker rmi $(docker images -f "dangling=true" -q)'
                 // docker container 실행
-                sh 'docker run -d --name latest_front \
-                    -p 3001:3000 \
-                    -p 85:85 \
-                    -p 443:443 \
-                    --network netflixnet \
-                    latest_front:latest'
+//                 sh 'docker run -d --name latest_front \
+//                     -p 3001:3000 \
+//                     -p 85:85 \
+//                     -p 443:443 \
+//                     --network netflixnet \
+//                     latest_front:latest'
                 sh 'docker run -d --name latest_back \
                     -p 9000:9000 \
                     --network netflixnet \
