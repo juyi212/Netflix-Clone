@@ -173,14 +173,24 @@
 		</dependency>
 		<!-- GSON -->
 		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.5</version>
+	<groupId>com.google.code.gson</groupId>
+	<artifactId>gson</artifactId>
+	<version>2.8.5</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session-jdbc</artifactId>
-			<version>2.7.0</version>
+	<groupId>org.springframework.session</groupId>
+	<artifactId>spring-session-jdbc</artifactId>
+	<version>2.7.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.11.3</version>
 		</dependency>
 	</dependencies>
 
