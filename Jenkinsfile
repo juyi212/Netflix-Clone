@@ -52,12 +52,12 @@ pipeline {
                 sh 'docker images -f dangling=true && \
 docker rmi $(docker images -f "dangling=true" -q)'
                 // docker container 실행
-                sh 'docker run -d --name latest_front \
-                    -p 3001:3000 \
-                    -p 85:85 \
-                    -p 443:443 \
-                    --network netflixnet \
-                    latest_front:latest'
+//                 sh 'docker run -d --name latest_front \
+//                     -p 3001:3000 \
+//                     -p 85:85 \
+//                     -p 443:443 \
+//                     --network netflixnet \
+//                     latest_front:latest'
                 sh 'docker run -d --name latest_back \
                     -p 9000:9000 \
                     --network netflixnet \
