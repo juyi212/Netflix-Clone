@@ -49,8 +49,8 @@ pipeline {
 | xargs -r docker container rm'
                 // docker image build 시 기존에 존재하던 이미지는
                 // dangling 상태가 되기 때문에 이미지를 일괄 삭제
-                sh 'docker images -f dangling=true && \
-docker rmi $(docker images -f "dangling=true" -q)'
+//                 sh 'docker images -f dangling=true && \
+// docker rmi $(docker images -f "dangling=true" -q)'
                 // docker container 실행
 //                 sh 'docker run -d --name latest_front \
 //                     -p 3001:3000 \
