@@ -47,38 +47,38 @@
 # CMD ["nginx", "-g", "daemon off;"]
 
 
-# FROM node:lts-alpine3.14
-# WORKDIR /front
-
-# COPY ./package.json /front/package.json
-
-# RUN npm install
-
-# COPY . /front
-
-# RUN npm run build
-
-# # CMD ["npm", "run", "build"]
-
-# CMD ["npx", "serve", "-s", "build"]
-
-# EXPOSE 3000
-
-FROM node:lts-alpine3.14 as build-stage
+FROM node:lts-alpine3.14
 WORKDIR /front
 
-COPY ./package.json ./
+COPY ./package.json /front/package.json
 
 RUN npm install
 
-COPY . .
+COPY . /front
 
-RUN npm run build
+# RUN npm run build
 
-FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage /front/dist /usr/share/nginx/html
-EXPOSE 80
+# CMD ["npm", "run", "build"]
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npx", "serve", "-s", "build"]
+
+# EXPOSE 3000
+
+# FROM node:lts-alpine3.14 as build-stage
+# WORKDIR /front
+
+# COPY ./package.json ./
+
+# RUN npm install
+
+# COPY . .
+
+# RUN npm run build
+
+# FROM nginx:stable-alpine as production-stage
+# COPY --from=build-stage /front/dist /usr/share/nginx/html
+# EXPOSE 80
+
+# CMD ["nginx", "-g", "daemon off;"]
 
 
