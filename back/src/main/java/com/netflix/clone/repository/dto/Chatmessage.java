@@ -22,7 +22,7 @@ public class Chatmessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "message_id")
-    private Integer id;
+    private Integer messageId;
     
     @Column(name = "room_id")
     private Integer roomId;
