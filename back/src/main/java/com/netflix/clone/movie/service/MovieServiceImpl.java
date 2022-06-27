@@ -1,7 +1,6 @@
 package com.netflix.clone.movie.service;
 
 import com.netflix.clone.repository.dto.Movie;
-import com.netflix.clone.repository.dto.MovieCategory;
 import com.netflix.clone.repository.mapper.MovieCategoryRepository;
 import com.netflix.clone.repository.mapper.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +61,8 @@ public class MovieServiceImpl implements MovieService{
     public Movie getMovieDetail(int movieId) throws Exception {
         Movie movie = null;
         movie = movieRepository.findById(movieId);
+        List<String> categoryList = movieCategoryRepository.findByMovieId(movie.getId());
+        movie.setCategory(categoryList);
 
         return movie;
     }
