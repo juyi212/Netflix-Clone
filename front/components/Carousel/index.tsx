@@ -39,17 +39,16 @@ interface ContentProps {
 function useCategorySWR (category? : string, genre_id? : string) {
     return useSWR(() => {
         if (category === "popular_movie") {
-            return `http://3.39.105.32:9000/netflix-clone/movie/${category}`
+            return `${process.env.REACT_APP_SERVICE_PORT}/movie/${category}`
         } else if (category === "category_movie") {
-            return `http://3.39.105.32:9000/netflix-clone/movie/category_movie?genreId=${genre_id}`
+            return `${process.env.REACT_APP_SERVICE_PORT}/movie/category_movie?genreId=${genre_id}`
         } else {
-            return `http://3.39.105.32:9000/netflix-clone/movie/country_movie?oriCountry=g`
+            return `${process.env.REACT_APP_SERVICE_PORT}/movie/country_movie?oriCountry=g`
         }
     }, fetcher2)
 }
 
 const Carousel = React.memo(({ category, genre_id, header, uId }: PropsWithChildren<ContentProps>)  => {
-    const [mouseCondition,setMouseCondition] = useState(false)
     const {data: movieData, error, mutate} = useCategorySWR(category, genre_id);
    
 
@@ -64,48 +63,10 @@ const Carousel = React.memo(({ category, genre_id, header, uId }: PropsWithChild
                             key ={index}
                             uId = {uId}
                         />
-                        // <Box>
-                        //     <Image
-                        //     key={picture.id}
-                        //     src={picture.pic}
-                        //     alt={"img" + idx}
-                        //     />
-                        //     <Detail>
-                        //         영화내용 영화내용 
-                        //     </Detail>
-                        // </Box>
                     );
                 })}
             </StyledSlider>
         </Container>
-        // <CarouselContainer>
-        //     <ArrowBox>
-        //         <FiChevronsLeft 
-        //             className='left'
-        //             onClick={clickLeftButton}
-        //         />
-        //         <FiChevronsRight 
-        //             className='right'
-        //             onClick={clickRightButton}
-        //         />
-        //     </ArrowBox>
-        //     <CarouselBox translateValue={translateValue !== 0 ? translateValue : null}>
-        //         {images.map((picture, idx) => {
-        //             return (
-        //                 <Box>
-        //                     <div className="item">
-
-        //                     <Image
-        //                     key={picture.id}
-        //                     src={picture.pic}
-        //                     alt={"dog" + idx}
-        //                     />
-        //                     </div>
-        //                 </Box>
-        //             );
-        //         })}
-        //     </CarouselBox>
-        // </CarouselContainer>
     )})
 
 export default Carousel;

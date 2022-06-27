@@ -2,13 +2,14 @@ import styled from '@emotion/styled';
 
 export const Detail = styled.div`
     width: 100%;
-    height: 100px;
     display: none;
     padding: 10px;
+    background-color: black;
 `
 
 export const Box = styled.div`
     width: 100%;
+    height: 100%;
     z-index: 1;
     transition: transform 200ms;
     background-color: black;
@@ -17,7 +18,7 @@ export const Box = styled.div`
 `
 export const Image = styled.img`
     width: 100%;
-    height: 220px;
+    height: 140%;
     object-fit: fill;
     border-radius: 12px;
 `

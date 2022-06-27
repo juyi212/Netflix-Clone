@@ -7,7 +7,7 @@ const OAuthRedirectHandler = () => {
     const navigate = useNavigate()
         useEffect(()=> {
             let code = new URL(window.location.href).searchParams.get("code");
-            axios.post('http://3.39.105.32:9000/netflix-clone/user/auth/kakao/callback', code)
+            axios.post(`${process.env.REACT_APP_SERVICE_PORT}/user/auth/kakao/callback`, code)
             .then((res) => {
                 localStorage.setItem("user", res.data["auth-token"])
                 navigate('/home')

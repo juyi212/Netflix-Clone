@@ -2,17 +2,16 @@ import React, { useState, useCallback } from 'react';
 import {Link, Navigate, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
-import Nav from '@components/Nav';
 import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
-import '../Login/style.scss'
+// import '../Login/style.scss'
 import fetcher from '@utils/userfetcher';
 import useSWR from 'swr';
-import { Body, Button, Container, Footer, FormBody, Input, LinkContainer } from '@pages/Login/styles';
+import { Body, Button, Container, Footer, Form, FormBody, Input, LinkContainer } from '@pages/Login/styles';
 
 const SignUp = () => {
     // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
-    const { data: userData, error, mutate }  = useSWR('http://3.39.105.32:9000/netflix-clone/user/info' ,fetcher );
+    const { data: userData, error, mutate }  = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info` ,fetcher );
     const navigate = useNavigate();
     const [signUpError, setSignUpError] = useState(false);
     const [signUpSuccess, setSignUpSuccess] = useState(false);
@@ -47,8 +46,7 @@ const SignUp = () => {
     const onSubmit = useCallback((e: any) => {
         e.preventDefault()
         if (email && name ) {
-            console.log("???")
-            axios.post('http://3.39.105.32:9000/netflix-clone/user/join', {
+            axios.post(`${process.env.REACT_APP_SERVICE_PORT}/user/join`, {
                 "uId": email,
                 "uName" :name,
                 "uPassword":password
@@ -69,7 +67,7 @@ const SignUp = () => {
         <Container style={{backgroundImage: `url(/assets/netflix-background.jpeg)`}}>
             <Body>
             <FormBody>
-                <div className="form">
+                <Form>
                     <h1 className="label">회원가입</h1>
                     <form onSubmit={onSubmit}>
                         <Input  type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
@@ -87,7 +85,7 @@ const SignUp = () => {
                         이미 회원이신가요?&nbsp;
                         <Link to="/login">로그인 하러가기</Link>
                     </LinkContainer>
-                </div>
+                </Form>
             </FormBody>
             </Body>
             <Footer>

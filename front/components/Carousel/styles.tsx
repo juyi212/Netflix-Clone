@@ -15,10 +15,28 @@ export const Container = styled.div`
 export const StyledSlider = styled(Slider)` 
     margin : 0 20px;
     .slick-list {
-        height: 20vw;
+        height: 19vw;
         z-index: 3;
-        @media screen and (max-width: 1500px) {
-            height: 22vw;
+        @media screen and (max-width: 1800px) {
+            height: 27vw;
+            &:not(&--open) ${Box}: hover{
+                transform: scale(1.1) !important;
+                transition: transform 0.1s;
+                z-index: 10;
+                .detail {
+                    display: block;
+                    position: absolute;
+                    top: 120%;       
+                    flex-direction: column;
+                    z-index: 10;
+                    border-bottom-left-radius: 12px;
+                    border-bottom-right-radius: 12px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 1400px) {
+            height: 35vw;
             &:not(&--open) ${Box}: hover{
                 transform: scale(1.1) !important;
                 transition: transform 0.1s;
@@ -26,11 +44,16 @@ export const StyledSlider = styled(Slider)`
                 .detail {
                     display: none;
                 }
-                & img {
-                    border-radius: 0;
-                    border-top-left-radius: 12px;
-                    border-top-right-radius: 12px;
-        
+            }
+        }
+        @media screen and (max-width: 1000px) {
+            height: 50vw;
+            &:not(&--open) ${Box}: hover{
+                transform: scale(1.1) !important;
+                transition: transform 0.1s;
+                z-index: 10;
+                .detail {
+                    display: none;
                 }
             }
         }
@@ -38,9 +61,12 @@ export const StyledSlider = styled(Slider)`
     .slick-slide {
         padding-top: 50px;
         padding-right: 20px;
+        padding-bottom: 50px;
         display: flex;
         align-items: center;
         z-index: 3;
+        height: 300px;
+        
     }
     &:not(&--open) ${Box}: hover{
         transform: scale(1.1) !important;
@@ -48,16 +74,15 @@ export const StyledSlider = styled(Slider)`
         z-index: 10;
         .detail {
             display: block;
+            position: absolute;
+            top: 120%;       
             flex-direction: column;
             z-index: 10;
-        }
-        & img {
-            border-radius: 0;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
         }
     }
+
 `
 
 export const MovieDetailContainer = styled.div`
@@ -65,22 +90,5 @@ export const MovieDetailContainer = styled.div`
     height: 250px;
     z-index: 6;
 `
-
-// export const ArrowBox = styled.div`
-//     position: absolute;
-//     top: 50%;
-//     display:flex;
-//     z-index: 5;
-//     justify-content:space-between;
-//     align-items:center;
-//     padding-left: 40px;
-//     .left, .right{
-//         font-size:2rem;
-//         cursor:pointer;
-//         &:hover{
-//         color:red;
-//         }
-//     }
-//     `;
 
 

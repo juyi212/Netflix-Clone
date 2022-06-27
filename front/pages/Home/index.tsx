@@ -5,15 +5,14 @@ import Carousel from '@components/Carousel';
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import fetcher from '@utils/userfetcher';
 import { Link, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import Detail from '@pages/Detail';
 import userfetcher from '@utils/userfetcher';
 
 
 const Home = React.memo(() => {
     // header에 토큰을 같이 보낸다 
-    const { data: userData, error, mutate: revalidateUser } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', userfetcher);
+    const { data: userData, error, mutate: revalidateUser } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher);
     const [pageNum, setPageNum] = useState(1);
-    const [showDetailPage, setShowDetailPage] = useState(false);
+    // const [showDetailPage, setShowDetailPage] = useState(false);
     let location = useLocation();
     let state = location.state as { backgroundLocation?: Location };
 

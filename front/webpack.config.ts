@@ -9,6 +9,8 @@ interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 const isDevelopment = process.env.NODE_ENV !== 'production';
+const dotenv = require("dotenv");
+dotenv.config();
 
 const config: Configuration = {
   name: 'sleact',
@@ -83,6 +85,7 @@ const config: Configuration = {
       //   files: "./src/**/*",
       // },
     }),
+    new webpack.DefinePlugin({"process.env": JSON.stringify(process.env)}),
     new webpack.EnvironmentPlugin({ NODE_ENV: isDevelopment ? 'development' : 'production' }),
   ],
   output: {

@@ -7,8 +7,7 @@ import {BsPersonCircle} from 'react-icons/bs'
 import {AiOutlineQuestionCircle, AiOutlineSearch} from 'react-icons/ai'
 import axios from 'axios';
 import { Navigate, NavLink, useNavigate } from 'react-router-dom';
-import { UserContext } from '@layouts/App';
-import debounce from '@utils/debounce';
+import { UserContext } from '@layouts/User';
 import useDebounce from '@utils/debounce';
 
 
@@ -43,17 +42,6 @@ const Nav = React.memo(() => {
 
     },[search])
 
-    useEffect(() => {
-        // Do fetch here...
-        // Triggers when "debouncedValue" changes
-        axios.get(`http://3.39.105.32:9000/netflix-clone/movie/search_movie?searchKey=${search}`)
-        .then(() => {
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }, [debouncedValue])
-        
 
     // const onKeyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
     //     if (event.code === "Enter") {
@@ -77,6 +65,7 @@ const Nav = React.memo(() => {
             });
         }
     },[])
+
         
 
     return (

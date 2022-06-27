@@ -19,7 +19,7 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
 
-    const { data: userData, error, mutate } = useSWR('http://3.39.105.32:9000/netflix-clone/user/info', userfetcher, {
+    const { data: userData, error, mutate } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher, {
         revalidateOnMount:true
     });
 
@@ -31,7 +31,7 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
         if (zzim) {
             // 찜된 상태 
             setZzim(false)
-            axios.post(`http://3.39.105.32:9000/netflix-clone/user/delete_movie_zzim?movieId=${movie.id}&userNo=${uId}`)
+            axios.post(`${process.env.REACT_APP_SERVICE_PORT}/user/delete_movie_zzim?movieId=${movie.id}&userNo=${uId}`)
             .then((res)=>{
                 console.log(res.data)
             })
@@ -41,7 +41,7 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
         } else {
             // 찜할 상태 
             setZzim(true)
-            axios.post(`http://3.39.105.32:9000/netflix-clone/user/insert_movie_zzim?movieId=${movie.id}&userNo=${uId}`)
+            axios.post(`${process.env.REACT_APP_SERVICE_PORT}/user/insert_movie_zzim?movieId=${movie.id}&userNo=${uId}`)
             .then((res)=>{
                 console.log(res.data)
             })
@@ -76,8 +76,8 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
                 <Detail className="detail">
                     <Header>
                         <HeaderFirst>
-                            <div onClick ={onChangeZzim}>{ zzim ? <AiOutlineCheckCircle size="32" /> :  <BsPlusCircle size="32"  />}</div>
-                            <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="32" /> :  <BsHandThumbsUp size="32" />}</div>
+                            <div onClick ={onChangeZzim}>{ zzim ? <AiOutlineCheckCircle size="28" /> :  <BsPlusCircle size="28"  />}</div>
+                            <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="28" /> :  <BsHandThumbsUp size="28" />}</div>
                         </HeaderFirst>
                         <Link 
                             to={`/home/${movie.id}`}
@@ -85,7 +85,7 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
                         ><AiOutlineDownCircle size="32"/></Link>
                     </Header> 
                     {movie.category && 
-                        <div style={{color: "white" }}> {CategoryName} </div>
+                        <div style={{color: "white", marginTop: "5px" }}> {CategoryName} </div>
                     }
                 </Detail>
             </Box>

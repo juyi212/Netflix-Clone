@@ -2,21 +2,19 @@ import React, {useState, useCallback, useContext} from 'react';
 import {Link, Navigate, useNavigate} from 'react-router-dom'
 import useInput from '@hooks/useInput';
 import axios from 'axios';
-import Nav from '@components/Nav';
 import {BsFacebook} from 'react-icons/bs'
 import {GrInstagram} from 'react-icons/gr'
 import KakaoLogin from '@components/KakaoLogin';
 import useSWR from 'swr';
 import fetcher from '@utils/userfetcher';
-import './style.scss'
 import { Body, Button, Container, Footer, Form, FormBody, Input, Label, LinkContainer } from './styles';
-import { UserContext } from '@layouts/App';
+import { UserContext } from '@layouts/User';
 
 
 const LogIn = React.memo(() => {
     // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
     const headerValue = localStorage.getItem("user");
-    const { data: userData, error, mutate }  = useSWR('http://3.39.105.32:9000/netflix-clone/user/info' ,fetcher, {
+    const { data: userData, error, mutate }  = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info` ,fetcher, {
         revalidateOnMount:true
     });
     const navigate = useNavigate()
@@ -28,7 +26,7 @@ const LogIn = React.memo(() => {
         e.preventDefault()
         if( email && password) {
             axios.post(
-              'http://3.39.105.32:9000/netflix-clone/user/login',
+              `${process.env.REACT_APP_SERVICE_PORT}/user/login`,
               { 
                   "uId":email, 
                   "uPassword":password 

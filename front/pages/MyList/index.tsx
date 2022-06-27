@@ -1,9 +1,10 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import axios from 'axios';
 import useSWR from 'swr';
-import { UserContext } from '@layouts/App';
+import { UserContext } from '@layouts/User';
 import userfetcher from '@utils/userfetcher';
-import { Container } from './styles';
+import { Box, Container, Image } from './styles';
+import { Link } from 'react-router-dom';
 
 const zzimData = [
     { name : "왕0"},
@@ -12,13 +13,18 @@ const zzimData = [
     { name : "왕3"},
     { name : "왕4"},
     { name : "왕5"},
+    { name : "왕5"},
+    { name : "왕5"},
+    { name : "왕5"},
+    { name : "왕5"},
+    { name : "왕5"},
 ]
 
 const MyList = React.memo(() => {
     const context = useContext(UserContext)
 
     // const { data: zzimData, error, mutate } = useSWR(
-    //     context.userData && `http://3.39.105.32:9000/netflix-clone/movie/movie_zzim?userNo=${context.userData?.user.uNo}`, userfetcher, {
+    //     context.userData && `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_zzim?userNo=${context.userData?.user.uNo}`, userfetcher, {
     //     revalidateOnMount:true
     // });
     
@@ -26,10 +32,16 @@ const MyList = React.memo(() => {
 
     return (
         <div style={{ marginTop : "150px"}}>
-            <Container style={{color: "white"}}>
+            <Container style={{color: "white", textAlign:"center"}}>
                 {zzimData.map(() => {
                     return (
-                        <div>ㅎㅎㅎ</div>
+                        <Box>
+                            <Link
+                                to={`/my-list/`} // 수정 필요 
+                                    >
+                                <Image src="/assets/banner1.jpg"/>
+                            </Link>
+                        </Box>
                     )
                 })}
             </Container>
