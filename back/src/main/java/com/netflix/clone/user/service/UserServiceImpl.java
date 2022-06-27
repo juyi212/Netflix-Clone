@@ -179,7 +179,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public int insertMovieZzim(int movieId, int userNo) throws Exception {
-		UserZzim zzim = new UserZzim(movieId, userNo);
+		UserZzim zzim = new UserZzim(userNo, movieId);
 		userZzimRepository.save(zzim);
 
 		return 1;
