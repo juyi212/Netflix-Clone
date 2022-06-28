@@ -1,8 +1,9 @@
 package com.netflix.clone.movie.service;
 
-import com.netflix.clone.repository.dto.Movie;
-
 import java.util.List;
+
+import com.netflix.clone.repository.dto.Movie;
+import com.netflix.clone.repository.dto.UserZzim;
 
 public interface MovieService {
     List<Movie> getPopularMovie() throws Exception;
@@ -20,4 +21,8 @@ public interface MovieService {
     List<Movie> getMovieZzim(String userNo) throws Exception;
 
     List<Movie> getSearchMovie(String searchKey) throws Exception;
+
+	List<UserZzim> getUserBymovieZzim(int movieId) throws Exception;
+
+	List<UserZzim> getMovieZzimeByUser(String userNo) throws Exception;
 }

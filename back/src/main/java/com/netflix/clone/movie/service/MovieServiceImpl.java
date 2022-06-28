@@ -1,14 +1,17 @@
 package com.netflix.clone.movie.service;
 
-import com.netflix.clone.repository.dto.Movie;
-import com.netflix.clone.repository.mapper.MovieCategoryRepository;
-import com.netflix.clone.repository.mapper.MovieRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.netflix.clone.repository.dto.Movie;
+import com.netflix.clone.repository.dto.UserZzim;
+import com.netflix.clone.repository.mapper.MovieCategoryRepository;
+import com.netflix.clone.repository.mapper.MovieRepository;
+import com.netflix.clone.repository.mapper.UserZzimRepository;
 
 @Service
 public class MovieServiceImpl implements MovieService{
@@ -17,6 +20,8 @@ public class MovieServiceImpl implements MovieService{
     private MovieRepository movieRepository;
     @Autowired
     private MovieCategoryRepository movieCategoryRepository;
+    @Autowired
+    private UserZzimRepository userZzimRepository;
 
     @Override
     public List<Movie> getPopularMovie() throws Exception {
@@ -111,5 +116,14 @@ public class MovieServiceImpl implements MovieService{
         return movieList;
     }
 
+	@Override
+	public List<UserZzim> getUserBymovieZzim(int movieId) throws Exception {
+		return userZzimRepository.findBymovieId(movieId);
+	}
 
+	@Override
+	public List<UserZzim> getMovieZzimeByUser(String userNo) throws Exception {
+		// TODO Auto-generated method stub
+		return userZzimRepository.findByuserNo(Integer.parseInt(userNo));
+	}
 }

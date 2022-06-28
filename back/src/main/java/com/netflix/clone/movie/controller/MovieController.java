@@ -1,16 +1,27 @@
 package com.netflix.clone.movie.controller;
 
-import com.netflix.clone.movie.service.MovieService;
-import com.netflix.clone.repository.dto.Movie;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.netflix.clone.movie.service.MovieService;
+import com.netflix.clone.repository.dto.Movie;
+import com.netflix.clone.repository.dto.UserZzim;
+
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/movie")
@@ -139,6 +150,33 @@ public class MovieController {
         }
 
         return movieList;
+    }
+    
+    /* 사용자 별 찜한 영화 조회 */
+    @ApiOperation(value = "사용자가 찜한 영화 기반 추천 Restful API", response = Movie.class)
+    @GetMapping("/recommendMovie")
+    public ResponseEntity<?> recommendMovie(@RequestParam("userNo") String userNo,  HttpServletRequest request, HttpServletResponse response) {
+    	List<UserZzim> movieList = null;
+    	List<Movie> resultLsit= null;
+    	try {
+    		movieList = movieService.getMovieZzimeByUser(userNo);
+    		if(movieList.size()==0) {
+    			return new ResponseEntity<String>("유저가 찜한 영화가 없음", HttpStatus.NO_CONTENT);
+    		}
+    		UserZzim recommendMovie=movieList.get((int)(Math.random()*movieList.size()));
+    		
+    		List<UserZzim> userList= movieService.getUserBymovieZzim(recommendMovie.getMovieId());
+    		if(userList.size()<=1) {
+    			return new ResponseEntity<String>("영화를 찜한 유저가 없음", HttpStatus.NO_CONTENT);
+    		}
+    		UserZzim movieZzim = userList.get((int)(Math.random()*userList.size()));
+    		resultLsit = movieService.getMovieZzim(String.valueOf(movieZzim.getUserNo()));
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
+    	}
+    	
+    	return new ResponseEntity<List<Movie>>(resultLsit, HttpStatus.ACCEPTED);
     }
 
     /* 영화 검색 */
