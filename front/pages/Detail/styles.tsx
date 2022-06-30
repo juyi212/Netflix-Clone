@@ -17,7 +17,7 @@ export const DetailBackground = styled.div`
 export const DetailContainer = styled.div`
   position: fixed;
   text-align: center;
-  width: 50%;
+  width: 52%;
   margin: 0 auto;
   background-color: black;
   bottom: 0;
@@ -25,8 +25,8 @@ export const DetailContainer = styled.div`
   left: 0;
   right: 0;
   z-index: 1033;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 
 `;
 
@@ -52,11 +52,11 @@ export const ImageView = styled.div`
 `
 
 export const Image = styled.img `
-  height: 600px;
+  height: 700px;
   width: 100%;  
 `
 export const MovieTitle = styled.h1`
-  margin : 0 30px;
+  margin : 30px 30px 0 30px;
 `
 
 export const MovieContainer  =styled.div`
@@ -69,7 +69,7 @@ export const MovieContent = styled.div`
     font-size: 20px;
 `
 export const MovieDetailInfo = styled.div`
-  margin-left: 20px;
+  margin-left: 30px;
   font-size: 20px;
   & div {
     margin-bottom: 10px;

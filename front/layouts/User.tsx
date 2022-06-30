@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import fetcher from '@utils/userfetcher';
 import Nav from '@components/Nav';
 import userfetcher from '@utils/userfetcher';
+import Footer from '@components/Footer';
 
 const LogIn = loadable(() => import('@pages/Login'))
 const SignUp = loadable(() => import('@pages/SignUp'))
@@ -14,6 +15,7 @@ const Home = loadable(() => import('@pages/Home'))
 const Detail = loadable(() => import('@pages/Detail'))
 const MyList = loadable(() => import('@pages/MyList'))
 const Search = loadable(() => import('@pages/Search'))
+const CategoryList = loadable(() => import('@pages/CategoryList'))
 
 export const UserContext = createContext({
     userData: { 
@@ -59,11 +61,14 @@ const User = () => {
                     } >
                         <Route path="/my-list/:id" element = {<Detail />}/>
                     </Route>
-                <Route path="/search/:word" element = {<Search />}/>
+                <Route path="/search/:word" element = {<Search />}>
+                    <Route path="/search/:word/:id" element = {<Detail />}/>
+                </Route>
                 <Route path="/home" element={<Home /> } >
                     <Route path="/home/:id" element = {<Detail />}/>
                 </Route>
                 <Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
+                <Route path="/movie-category" element = {<CategoryList />}/>             
             </Routes>
         </>
     )}

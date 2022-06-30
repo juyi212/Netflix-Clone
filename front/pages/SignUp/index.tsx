@@ -7,7 +7,8 @@ import {GrInstagram} from 'react-icons/gr'
 // import '../Login/style.scss'
 import fetcher from '@utils/userfetcher';
 import useSWR from 'swr';
-import { Body, Button, Container, Footer, Form, FormBody, Input, LinkContainer } from '@pages/Login/styles';
+import { Body, Button, Container, Form, FormBody, Input, LinkContainer } from '@pages/Login/styles';
+import Footer from '@components/Footer';
 
 const SignUp = () => {
     // 유저데이터 있을 경우, login, signup 페이지 진입 불가 코드 넣기 
@@ -88,7 +89,7 @@ const SignUp = () => {
                 </Form>
             </FormBody>
             </Body>
-            <Footer>
+            {/* <Footer>
                 <div>
                     <h4>질문이 있으신가요? </h4>
                     <div>- 문의 이메일 : dea8307@gmail.com<br/>
@@ -102,7 +103,8 @@ const SignUp = () => {
                         </div>
                     </div>
                 </div>
-            </Footer>
+            </Footer> */}
+            <Footer />
     </Container>
     )}
 

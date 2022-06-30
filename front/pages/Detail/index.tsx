@@ -1,6 +1,8 @@
-import React, { PropsWithChildren, useEffect } from 'react';
-import { Navigate, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { DetailContainer,Icons, ImageView,Image,MovieContainer, MovieContent, DetailBackground, MovieTitle, MovieDetailInfo } from './styles';
+import {AiOutlineCheckCircle, AiOutlineDownCircle} from 'react-icons/ai'
+import {BsHandThumbsUp, BsHandThumbsUpFill, BsPlusCircle} from 'react-icons/bs';
 import {TiDelete} from 'react-icons/ti'
 import useSWR from 'swr';
 import fetcher2 from '@utils/fetcher2';
@@ -10,27 +12,23 @@ import category from '@utils/category';
 const Detail = React.memo(() => {
     const navigate = useNavigate()
     const movieId = useParams().id
+    const [like, setLike] = useState(false)
+    const [zzim, setZzim] = useState(false)
     
     const { data: movieDetail, error, mutate } = useSWR(
         movieId && `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_detail?movieId=${movieId}`, fetcher2);
     
 
-        console.log(movieDetail?.movie)
-
-        const movieCate = () => {
-        if (movieDetail?.movie.category) {
-            const movieCategory = movieDetail?.movie.category;
-            const tempToArray = movieCategory.split(',')
-            const CategoryName = category(tempToArray)
-            return CategoryName;
-        }
-        return "없음";
-    }
+    console.log(movieDetail?.movie)
+    const CategoryName= category(movieDetail?.movie.category).toString();
 
     const onClickDismiss = () => {
         navigate(-1)
     }
     
+    const onChangeZzim = () => {}
+    const onChangeLike = () => {}
+
     useEffect(() => {
         // home 화면 스크롤 방지 
         document.body.style.cssText = `
@@ -63,16 +61,40 @@ const Detail = React.memo(() => {
                 </MovieTitle>
                 <MovieContainer>
                     <MovieContent>
-                        {movieDetail?.movie.overview}
+                        {movieDetail?.movie.overview === "" ? 
+                        <>
+                            줄거리 없음
+                        </>
+                        :
+                        <>
+                            {movieDetail?.movie.overview}
+                        </>
+                        }
                     </MovieContent>
                     <MovieDetailInfo>
                         <div>
-                            <span className="firstInfo">카테고리: </span>
-                            {movieCate()}
+                            <span onClick ={onChangeZzim}>
+                                { zzim ? <AiOutlineCheckCircle size="30" /> :  <BsPlusCircle size="30"  />}
+                            </span>
+                            <span onClick ={onChangeLike} style={{ marginLeft: "18px"}}>
+                                { like ? <BsHandThumbsUpFill size="30" /> :  <BsHandThumbsUp size="30" />}
+                            </span>
                         </div>
                         <div>
-                            <span className="firstInfo">국가: </span>
-                            <span>{movieDetail?.movie.originCountry}</span>
+                            <span className="firstInfo">카테고리: </span>
+                            {CategoryName}
+                        </div>
+                        <div>
+                            {movieDetail?.movie.originCountry &&
+                                <>
+                                    <span className="firstInfo">국가: </span>
+                                    <span>{movieDetail?.movie.originCountry}</span>   
+                                </>
+                            }
+                        </div>
+                        <div>
+                            <span className="firstInfo">개봉일: </span>
+                            <span>{movieDetail?.movie.releaseDate}</span>
                         </div>
                     </MovieDetailInfo>
                 </MovieContainer>

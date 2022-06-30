@@ -24,7 +24,7 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
     });
 
     const test = ["12","13","14"];
-    const CategoryName= category(test).toString();
+    const CategoryName= category(movie.category).toString();
 
 
     const onChangeZzim = useCallback(() => {
@@ -82,11 +82,11 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
                         <Link 
                             to={`/home/${movie.id}`}
                             
-                        ><AiOutlineDownCircle size="32"/></Link>
+                        ><AiOutlineDownCircle size="32" color="white"/></Link>
                     </Header> 
-                    {movie.category && 
+                    {/* {movie.category && 
                         <div style={{color: "white", marginTop: "5px" }}> {CategoryName} </div>
-                    }
+                    } */}
                 </Detail>
             </Box>
     )})

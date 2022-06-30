@@ -6,7 +6,7 @@ import gravatar from 'gravatar';
 import {BsPersonCircle} from 'react-icons/bs'
 import {AiOutlineQuestionCircle, AiOutlineSearch} from 'react-icons/ai'
 import axios from 'axios';
-import { Navigate, NavLink, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '@layouts/User';
 import useDebounce from '@utils/debounce';
 
@@ -38,19 +38,13 @@ const Nav = React.memo(() => {
 
     const onChangeSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
-        console.log(search)
-
     },[search])
 
-
-    // const onKeyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    //     if (event.code === "Enter") {
-    //         axios.get(`http://3.39.105.32:9000/netflix-clone/movie/search_movie?searchKey=${search}`)
-    //         .then(() => {
-
-    //         })
-    //     }
-    // }
+    useEffect(() => {
+        if (search) {
+            navigate(`/search/${search}`) 
+        }
+    }, [debouncedValue])
 
     useEffect(() => {
         const header = document.querySelector(".header");
@@ -71,13 +65,17 @@ const Nav = React.memo(() => {
     return (
         // <UserContext.Provider></UserContext.Provider>
         <Header className='header'>
-            <div className="logo">NETFLIX</div>
+            <div className="logo">
+                <StyledLink to={'/home'} style={{color: 'red'}}>
+                    NETFLIX    
+                </StyledLink>
+            </div>
             {/* userData 로 분기  */}
             { context.userData  && 
                 <>
                     <div className="main-nav">
                         <StyledLink to='/home'>홈</StyledLink>
-                        <StyledLink to='/new'>NEW! 요즘 대세 콘텐츠 </StyledLink>
+                        <StyledLink to='/movie-list'> 카테고리관 </StyledLink>
                         <StyledLink to='/my-list'>내가 찜한 콘텐츠</StyledLink>
                     </div>
                     <SecondaryNav>

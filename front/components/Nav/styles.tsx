@@ -12,14 +12,14 @@ export const Header = styled.div`
     display: flex; 
     padding-left: 30px;
     align-items: center;
-
     .logo {
       font-size: 40px;
       font-weight: bold;
+      color: red;
     }
     .main-nav {
       display: flex;
-      font-size: 15px;
+      font-size: 18px;
       color : white;
       padding-left: 30px;
       & a {
