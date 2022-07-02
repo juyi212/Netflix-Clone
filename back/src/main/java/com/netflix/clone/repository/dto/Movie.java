@@ -37,6 +37,9 @@ public class Movie {
     @Column(name = "poster_path", length = 500)
     private String posterPath;
 
+    @Column(name = "banner_path", length = 500)
+    private String bannerPath;
+
     @Column(name = "video_path", length = 500)
     private String videoPath;
 
@@ -54,6 +57,9 @@ public class Movie {
 
     @Transient
     private List<String> category;
+
+    @Transient
+    private String isZzim;
 
 
     public int getId() {
@@ -120,6 +126,14 @@ public class Movie {
         this.posterPath = posterPath;
     }
 
+    public String getBannerPath() {
+        return bannerPath;
+    }
+
+    public void setBannerPath(String bannerPath) {
+        this.bannerPath = bannerPath;
+    }
+
     public String getVideoPath() {
         return videoPath;
     }
@@ -166,5 +180,13 @@ public class Movie {
 
     public void setCategory(List<String> category) {
         this.category = category;
+    }
+
+    public String getIsZzim() {
+        return isZzim;
+    }
+
+    public void setIsZzim(String isZzim) {
+        this.isZzim = isZzim;
     }
 }

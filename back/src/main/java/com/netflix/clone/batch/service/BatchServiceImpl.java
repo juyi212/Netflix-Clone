@@ -327,6 +327,11 @@ public class BatchServiceImpl implements BatchService{
                             String posterPath = "https://image.tmdb.org/t/p/w1280" + detailObject.get("poster_path").getAsString();
                             movie.setPosterPath(posterPath);
                         }
+                        // 배너 URL
+                        if(!detailObject.get("backdrop_path").isJsonNull()) {
+                            String bannerPath = "https://image.tmdb.org/t/p/w1280" + detailObject.get("backdrop_path").getAsString();
+                            movie.setBannerPath(bannerPath);
+                        }
                         movie.setIsDisplay('Y');
                         movie.setVoteCount(detailObject.get("vote_count").getAsInt());
                         movie.setVoteAverage(detailObject.get("vote_average").getAsInt());
