@@ -75,13 +75,13 @@ public class MovieController {
     /* 영화 ID 별 조회 */
     @ApiOperation(value = "영화 ID 별 조회 Restful API", response = Movie.class)
     @GetMapping("/movie_detail")
-    public ResponseEntity<?> getMovieDetail(@RequestParam("movieId") String movieId) {
+    public ResponseEntity<?> getMovieDetail(@RequestParam("movieId") String movieId, @RequestParam("userNo") String userNo) {
         HttpStatus status = null;
         Map<String, Object> resultMap = new HashMap<>();
         Movie movie = null;
 
         try {
-            movie = movieService.getMovieDetail(Integer.parseInt(movieId));
+            movie = movieService.getMovieDetail(Integer.parseInt(movieId), userNo);
             if(movie == null) {
                 resultMap.put("errMessage", "영화 정보가 존재하지 않습니다.");
                 resultMap.put("status", "error");

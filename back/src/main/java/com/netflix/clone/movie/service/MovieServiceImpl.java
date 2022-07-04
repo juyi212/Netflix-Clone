@@ -63,11 +63,20 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public Movie getMovieDetail(int movieId) throws Exception {
+    public Movie getMovieDetail(int movieId, String userNo) throws Exception {
         Movie movie = null;
         movie = movieRepository.findById(movieId);
+
         List<String> categoryList = movieCategoryRepository.findByMovieId(movie.getId());
         movie.setCategory(categoryList);
+
+        UserZzim userZzim = null;
+        userZzim = userZzimRepository.findByUserNoAndZzim(movieId, Integer.parseInt(userNo));
+        if(userZzim != null) {
+            movie.setIsZzim("Y");
+        }else {
+          movie.setIsZzim("N");
+        }
 
         return movie;
     }

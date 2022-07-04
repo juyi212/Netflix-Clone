@@ -1,6 +1,7 @@
 package com.netflix.clone.repository.mapper;
 
 import com.netflix.clone.repository.dto.Movie;
+import com.netflix.clone.repository.dto.UserZzim;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,4 +25,5 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query(value = "select distinct m.* from movie m where m.origin_title like concat('%', :searchKey, '%') or m.title like concat('%', :searchKey, '%')", nativeQuery = true)
     List<Movie> findBySearchKey(@Param(value = "searchKey") String searchKey);
+
 }
