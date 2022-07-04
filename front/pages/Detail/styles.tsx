@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const DetailBackground = styled.div`
     display: flex;
-    overflow: hidden;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -16,6 +15,7 @@ export const DetailBackground = styled.div`
 
 export const DetailContainer = styled.div`
   position: fixed;
+  overflowY: auto;
   text-align: center;
   width: 52%;
   margin: 0 auto;
@@ -43,7 +43,7 @@ export const ImageView = styled.div`
       position: absolute;
       display: flex;
       width: 100%; 
-      height: 100%;   
+      height: 50%;   
       top: 0;
       // background: linear-gradient(to top, black, black 20%, transparent);
       background-repeat: no-repeat;
@@ -52,7 +52,7 @@ export const ImageView = styled.div`
 `
 
 export const Image = styled.img `
-  height: 700px;
+  height: 500px;
   width: 100%;  
 `
 export const MovieTitle = styled.h1`

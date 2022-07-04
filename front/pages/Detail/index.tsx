@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DetailContainer,Icons, ImageView,Image,MovieContainer, MovieContent, DetailBackground, MovieTitle, MovieDetailInfo } from './styles';
 import {AiOutlineCheckCircle, AiOutlineDownCircle} from 'react-icons/ai'
 import {BsHandThumbsUp, BsHandThumbsUpFill, BsPlusCircle} from 'react-icons/bs';
@@ -7,38 +7,75 @@ import {TiDelete} from 'react-icons/ti'
 import useSWR from 'swr';
 import fetcher2 from '@utils/fetcher2';
 import category from '@utils/category';
-
+import axios from 'axios';
+import userfetcher from '@utils/userfetcher';
 
 const Detail = React.memo(() => {
     const navigate = useNavigate()
     const movieId = useParams().id
+    
+    const { data: userData, error : userError, mutate: revalidateUser } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher);
+
+    const { data: movieDetail, error, mutate } = useSWR(
+        movieId && `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_detail?movieId=${movieId}&userNo=${userData?.user.uNo}`, fetcher2);
+    
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
-    
-    const { data: movieDetail, error, mutate } = useSWR(
-        movieId && `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_detail?movieId=${movieId}`, fetcher2);
-    
 
-    console.log(movieDetail?.movie)
     const CategoryName= category(movieDetail?.movie.category).toString();
 
     const onClickDismiss = () => {
         navigate(-1)
     }
     
-    const onChangeZzim = () => {}
+    const onChangeZzim = () => {
+        if (zzim) {
+            setZzim(false)
+            axios.delete(`${process.env.REACT_APP_SERVICE_PORT}/user/delete_movie_zzim?movieId=${movieId}&userNo=${userData.user.uNo}`)
+            .then((res) => {
+                console.log(res.data)
+                mutate()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }else {
+            setZzim(true)
+            axios.post(`${process.env.REACT_APP_SERVICE_PORT}/user/insert_movie_zzim?movieId=${movieId}&userNo=${userData.user.uNo}`)
+            .then((res) => {
+                console.log(res.data)
+                mutate()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }        
+    }
     const onChangeLike = () => {}
 
     useEffect(() => {
-        // home 화면 스크롤 방지 
+        if (movieDetail?.movie.isZzim === "Y") {
+            setZzim(true)
+        } else if (movieDetail?.movie.isZzim === "N") {
+            setZzim(false)
+        }
+    }, [movieDetail?.movie.isZzim, zzim])
+
+    useEffect(() => {
+        // home 화면 스크롤 방지
+        // const detail = document.getElementById("detailBody")
+        // detail?.setAttribute('style', 
+        //     'position: fixed;, overflow-y: auto')
+        
         document.body.style.cssText = `
           position: fixed; 
           top: -${window.scrollY}px;
           overflow-y: scroll;
           width: 99%;`
+
         return () => {
           const scrollY = document.body.style.top;
-          document.body.style.cssText = '';
+          document.body.style.cssText = ``;
           window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
         };
       }, []);
@@ -47,8 +84,7 @@ const Detail = React.memo(() => {
       
 
     return (
-        <DetailBackground>
-            
+        <DetailBackground id="detailBody">
             <DetailContainer>
                 <Icons>
                     <TiDelete size="50" onClick={onClickDismiss} color="white"/>
@@ -74,7 +110,8 @@ const Detail = React.memo(() => {
                     <MovieDetailInfo>
                         <div>
                             <span onClick ={onChangeZzim}>
-                                { zzim ? <AiOutlineCheckCircle size="30" /> :  <BsPlusCircle size="30"  />}
+                                { zzim
+                                    ? <AiOutlineCheckCircle size="30" color="red" /> :  <BsPlusCircle size="30"  />}
                             </span>
                             <span onClick ={onChangeLike} style={{ marginLeft: "18px"}}>
                                 { like ? <BsHandThumbsUpFill size="30" /> :  <BsHandThumbsUp size="30" />}

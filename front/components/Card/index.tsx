@@ -19,11 +19,10 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
 
-    const { data: userData, error, mutate } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher, {
-        revalidateOnMount:true
-    });
+    // const { data: userData, error, mutate } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher, {
+    //     revalidateOnMount:true
+    // });
 
-    const test = ["12","13","14"];
     const CategoryName= category(movie.category).toString();
 
 
@@ -67,6 +66,9 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
             <Box>
                 <Link
                     to={`/home/${movie.id}`}
+                    state = {{
+                        uId
+                    }}
                 >
                 <Image
                     alt="d"
@@ -76,12 +78,15 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
                 <Detail className="detail">
                     <Header>
                         <HeaderFirst>
-                            <div onClick ={onChangeZzim}>{ zzim ? <AiOutlineCheckCircle size="28" /> :  <BsPlusCircle size="28"  />}</div>
-                            <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="28" /> :  <BsHandThumbsUp size="28" />}</div>
+                            {/* <div></div> */}
+                            {/* <div onClick ={onChangeZzim}>{ zzim ? <AiOutlineCheckCircle size="28" /> :  <BsPlusCircle size="28"  />}</div> */}
+                            {/* <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="28" /> :  <BsHandThumbsUp size="28" />}</div> */}
                         </HeaderFirst>
                         <Link 
                             to={`/home/${movie.id}`}
-                            
+                            state = {{
+                                uId
+                            }}
                         ><AiOutlineDownCircle size="32" color="white"/></Link>
                     </Header> 
                     {/* {movie.category && 

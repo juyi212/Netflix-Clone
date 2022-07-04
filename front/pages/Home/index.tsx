@@ -49,14 +49,14 @@ const Home = React.memo(() => {
             {pageNum > 0 && 
                 <>
                     {/* <Carousel category={"popular_movie"} genre_id={undefined} onChangeDetailPageshow = {onChangeDetailPageshow}/> */}
-                    <Carousel header = {"지금 뜨고 컨텐츠 "} category={"popular_movie"} genre_id={"878"} uId ={userData?.user.uNo} />
-                    <Carousel header = {"나만의 판타지를 소개할게"} category={"category_movie"} genre_id={"14"} uId ={userData?.user.uNo}/>
+                    <Carousel header = {"지금 뜨고 컨텐츠 "} category={"popular_movie"} genre_id={"878"}  />
+                    <Carousel header = {"나만의 판타지를 소개할게"} category={"category_movie"} genre_id={"14"} />
                 </>
             }
             {pageNum > 1 && 
             <>
-                <Carousel header = {"SF 모여라"} category={"category_movie"} genre_id={"878"} uId ={userData?.user.uNo}/>
-                <Carousel header = {"힐링의 음악 컨텐츠"} category={"category_movie"} genre_id={"18"} uId ={userData?.user.uNo}/>
+                <Carousel header = {"SF 모여라"} category={"category_movie"} genre_id={"878"} />
+                <Carousel header = {"힐링의 음악 컨텐츠"} category={"category_movie"} genre_id={"18"}/>
             </>}
             {/* {pageNum > 2 && <>
                 <Carousel category={"popular_movie"} genre_id={undefined}/>

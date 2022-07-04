@@ -30,7 +30,7 @@ const settings = {
 interface ContentProps {
     category: string;
     genre_id? : string;
-    uId? : string;
+    // uId? : string;
     header : string;
   }
   
@@ -48,7 +48,7 @@ function useCategorySWR (category? : string, genre_id? : string) {
     }, fetcher2)
 }
 
-const Carousel = React.memo(({ category, genre_id, header, uId }: PropsWithChildren<ContentProps>)  => {
+const Carousel = React.memo(({ category, genre_id, header }: PropsWithChildren<ContentProps>)  => {
     const {data: movieData, error, mutate} = useCategorySWR(category, genre_id);
    
 
@@ -61,7 +61,7 @@ const Carousel = React.memo(({ category, genre_id, header, uId }: PropsWithChild
                         <Card 
                             movie = {movie}
                             key ={index}
-                            uId = {uId}
+                            // uId = {uId}
                         />
                     );
                 })}
