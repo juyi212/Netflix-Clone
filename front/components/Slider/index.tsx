@@ -5,25 +5,22 @@ import {FiChevronsRight} from 'react-icons/fi'
 
 interface Props {
     translateValue: number;
-    images: { pic: string; id: number }[];
+    bannerData: any;
 }
 
 const Slider: React.FC<Props> = ({
     translateValue, 
-    images, 
-    // moveRight, 
-    // moveLeft
-}) => {
-
+    bannerData, 
+    }) => {
+    
     return (
         <SliderContainer>
             <ImageBox translateValue={translateValue !== 0 ? translateValue : null}>
-            {images.map((picture, idx) => {
+            {bannerData?.map((banner: any, id: number) => {
                 return (
                     <Image
-                    key={picture.id}
-                    src={picture.pic}
-                    
+                    key={id}
+                    src={banner.bannerPath}
                     />
                 );
                 })}

@@ -24,7 +24,7 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
     // });
 
     const CategoryName= category(movie.category).toString();
-
+    // console.log(movie)
 
     const onChangeZzim = useCallback(() => {
         if (zzim) {
@@ -78,9 +78,8 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
                 <Detail className="detail">
                     <Header>
                         <HeaderFirst>
-                            {/* <div></div> */}
-                            {/* <div onClick ={onChangeZzim}>{ zzim ? <AiOutlineCheckCircle size="28" /> :  <BsPlusCircle size="28"  />}</div> */}
-                            {/* <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="28" /> :  <BsHandThumbsUp size="28" />}</div> */}
+                            <div onClick ={onChangeZzim}>{ zzim ? <AiOutlineCheckCircle size="28" /> :  <BsPlusCircle size="28"  />}</div>
+                            <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="28" /> :  <BsHandThumbsUp size="28" />}</div>
                         </HeaderFirst>
                         <Link 
                             to={`/home/${movie.id}`}
