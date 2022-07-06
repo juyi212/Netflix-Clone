@@ -1,6 +1,6 @@
 import category from '@utils/category';
 import React, { useCallback, useContext, useEffect } from 'react';
-import { Category, Container } from './styles';
+import { Category, Container, StyledCategory } from './styles';
 
 
 const categoryList = [
@@ -23,22 +23,31 @@ const categoryList = [
     {id: "10770", name: "TV 영화"},
 ]
 
+const settings = {
+    slide: 'div',
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 10,
+    slidesToScroll: 5,
+    initialSlide: 0,
+}
 
 const CategoryList = React.memo(() => {
 
     return (
         <Container>
             <h1> 장르 </h1>
-            <div style={{ color: 'white'}}>
+            <StyledCategory {...settings}>
                 {categoryList.map((category: any) => {
                     return (
                         <Category>{category.name}</Category>
                     )
                 })}
-            </div>          
-            <div>
+            </StyledCategory>          
+            {/* <div>
                 <span>국가 리스트들 나열</span>
-            </div>
+            </div> */}
             <div>
                 기본 데이터들 보여주기 
             </div>

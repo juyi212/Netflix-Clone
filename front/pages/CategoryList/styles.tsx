@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 export const Container = styled.div`
@@ -7,11 +9,23 @@ export const Container = styled.div`
 
 `
 
-export const Category = styled.span`
-    background-color: rgb(46, 46, 46);
+export const StyledCategory = styled(Slider)`
+    .slick-list {
+        height: 5%;
+        margin-bottom: 30px;
+    }
+`
+
+
+export const Category = styled.div`
+    display: flex;
+    text-align: center;
     padding: 0.917rem 2.917rem 1rem;
-    min-height: 3.677rem;
+    border-radius: 999px;
+    background-color: rgb(33, 33, 33);
+    color: rgb(255, 220, 62);
     font-size: 1.25rem;
-    border-radius: 55px;
     line-height: 1.4;
+    white-space: nowrap;
+    box-sizing: border-box;
 `
