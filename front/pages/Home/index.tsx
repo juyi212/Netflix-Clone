@@ -1,9 +1,8 @@
 import Banner from '@components/Banner';
 import useSWR from 'swr';
-import Nav from '@components/Nav';
 import Carousel from '@components/Carousel';
 import React, { createContext, useCallback, useEffect, useState } from 'react';
-import fetcher from '@utils/userfetcher';
+
 import { Link, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import userfetcher from '@utils/userfetcher';
 
@@ -58,11 +57,10 @@ const Home = React.memo(() => {
                 <Carousel header = {"SF 모여라"} category={"category_movie"} genre_id={"878"} />
                 <Carousel header = {"힐링의 음악 컨텐츠"} category={"category_movie"} genre_id={"18"}/>
             </>}
-            {/* {pageNum > 2 && <>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
-                <Carousel category={"popular_movie"} genre_id={undefined}/>
-            </>} */}
+            {pageNum > 2 && 
+            <>
+                <Carousel header = {"빠질 수 없는 아메리카"} category={"_"} genre_id={"18"} country = {"미국"} />
+            </>}
             
         </div>
     )})

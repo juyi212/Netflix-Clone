@@ -28,29 +28,30 @@ const settings = {
 ]
 }
 interface ContentProps {
-    category: string;
+    category?: string;
     genre_id? : string;
-    // uId? : string;
-    header : string;
+    country? : string;
+    header: string;
   }
   
 
 
-function useCategorySWR (category? : string, genre_id? : string) {
+function useCategorySWR (category? : string, genre_id? : string, country?: string) {
     return useSWR(() => {
         if (category === "popular_movie") {
             return `${process.env.REACT_APP_SERVICE_PORT}/movie/${category}`
         } else if (category === "category_movie") {
             return `${process.env.REACT_APP_SERVICE_PORT}/movie/category_movie?genreId=${genre_id}`
         } else {
-            return `${process.env.REACT_APP_SERVICE_PORT}/movie/country_movie?oriCountry=g`
+            return `${process.env.REACT_APP_SERVICE_PORT}/movie/country_movie?oriCountry=${country}`
         }
     }, fetcher2)
 }
 
-const Carousel = React.memo(({ category, genre_id, header }: PropsWithChildren<ContentProps>)  => {
-    const {data: movieData, error, mutate} = useCategorySWR(category, genre_id);
-   
+const Carousel = React.memo(({ category, genre_id, country, header }: PropsWithChildren<ContentProps>)  => {
+    const {data: movieData, error, mutate} = useCategorySWR(category, genre_id, country);
+    console.log(movieData)   
+    console.log(country) 
 
     return (
         <Container>

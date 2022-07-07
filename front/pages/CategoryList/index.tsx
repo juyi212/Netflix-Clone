@@ -1,5 +1,6 @@
 import category from '@utils/category';
 import React, { useCallback, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Category, Container, StyledCategory } from './styles';
 
 
@@ -26,7 +27,7 @@ const categoryList = [
 const settings = {
     slide: 'div',
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 10,
     slidesToScroll: 5,
@@ -34,6 +35,10 @@ const settings = {
 }
 
 const CategoryList = React.memo(() => {
+    const navigate = useNavigate()
+    const onClickCategory = (categoryName: string) => {
+        navigate(`/list/genre/${categoryName}`) 
+    }
 
     return (
         <Container>
@@ -41,15 +46,16 @@ const CategoryList = React.memo(() => {
             <StyledCategory {...settings}>
                 {categoryList.map((category: any) => {
                     return (
-                        <Category>{category.name}</Category>
+                        <Category onClick={(e) => {onClickCategory(category.name)}}>{category.name}</Category>
                     )
                 })}
             </StyledCategory>          
-            {/* <div>
-                <span>국가 리스트들 나열</span>
-            </div> */}
+
             <div>
-                기본 데이터들 보여주기 
+                찜한 데이터 보여주기 
+            </div>
+            <div>
+                인기 순위 프로그램 
             </div>
         </Container>
     )})

@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const StyledCategory = styled(Slider)`
     .slick-list {
-        height: 5%;
+        height: 6.5%;
         margin-bottom: 30px;
     }
 `
@@ -20,7 +20,7 @@ export const StyledCategory = styled(Slider)`
 export const Category = styled.div`
     display: flex;
     text-align: center;
-    padding: 0.917rem 2.917rem 1rem;
+    padding: 0.917rem 2rem 1rem;
     border-radius: 999px;
     background-color: rgb(33, 33, 33);
     color: rgb(255, 220, 62);

@@ -1,18 +1,21 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Location } from "history";
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { Box, Container, Image, NoData } from '@pages/MyList/styles';
+import { Link, Outlet, useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { Box, Container, Image, NoData } from '@components/MovieList/styles';
 import axios from 'axios';
 
 
 const Search = React.memo(() => {
-    const word = useParams().word
-    console.log(word)
+    // const word = useParams().word
+    // console.log(word)
+    const [searchInput] = useSearchParams()
+    let search = searchInput.get("input")
+    console.log(location.pathname)
     const [mySearch, setMySearch] = useState([])
     
     useEffect(() => {
-        if(word) {
-            axios.get(`http://3.39.105.32:9000/netflix-clone/movie/search_movie?searchKey=${word}`)
+        if(search) {
+            axios.get(`http://3.39.105.32:9000/netflix-clone/movie/search_movie?searchKey=${search}`)
                 .then((res) => {
                     setMySearch(res.data)
                 })
@@ -20,7 +23,7 @@ const Search = React.memo(() => {
                 console.log(err)
             })
         }
-    },[word])
+    },[search])
 
     return (
         <div style={{ marginTop : "150px"}}>

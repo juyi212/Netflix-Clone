@@ -59,16 +59,17 @@ const User = () => {
                         <MyList />
                     </UserContext.Provider>
                     } >
-                        <Route path="/my-list/:id" element = {<Detail />}/>
-                    </Route>
-                <Route path="/search/:word" element = {<Search />}>
-                    <Route path="/search/:word/:id" element = {<Detail />}/>
+                    <Route path="/my-list/:id" element = {<Detail />}/>
+                </Route>
+                <Route path="/search" element = {<Search />}>
+                    <Route path="/search/:id" element = {<Detail />}/>
                 </Route>
                 <Route path="/home" element={<Home /> } >
                     <Route path="/home/:id" element = {<Detail />}/>
                 </Route>
                 <Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
-                <Route path="/movie-category" element = {<CategoryList />}/>             
+                <Route path="/movie-category" element = {<CategoryList />}/>
+
             </Routes>
         </>
     )}

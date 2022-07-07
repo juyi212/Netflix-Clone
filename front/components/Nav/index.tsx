@@ -29,6 +29,7 @@ const Nav = React.memo(() => {
                 // 로그아웃을 하고 로그인페이지로 넘어가면 userData가 확인되어 login 페이지로 이동하지 않는다.. 어떻게 해결해야할까 > null로 해결! 
                 context.mutateUsers(null)
                 navigate('/login')
+                
             })
             .catch((error) => {
                 console.log(error)
@@ -42,7 +43,10 @@ const Nav = React.memo(() => {
 
     useEffect(() => {
         if (search) {
-            navigate(`/search/${search}`) 
+            navigate({
+                pathname: '/search',
+                search: `?input=${search}`,
+            }) 
         }
     }, [debouncedValue])
 
