@@ -19,16 +19,24 @@ const CategoryList = [
     {id: "0752", name: "전쟁"},
     {id: "10770", name: "TV 영화"},
 ]
-const category = (categoryNum? : string[]) => {
-    let categoryName: any = [];
-    categoryNum?.map((num) => {
+const category = (categoryNum? : string[] | string | null) => {
+    if (typeof categoryNum === 'string') {
         CategoryList.map((category) => {
-            if (num === category.id) {
-                categoryName.push(category.name)
+            if (categoryNum === category.id) {
+                return category.name
             }
-        }) 
-    })
-    return categoryName;
+        })
+    } else if (typeof categoryNum === 'object'){
+        let categoryName: any = [];
+        categoryNum?.map((num) => {
+            CategoryList.map((category) => {
+                if (num === category.id) {
+                    categoryName.push(category.name)
+                }
+            }) 
+        })
+        return categoryName;
+    }
 }
 export default category;
 

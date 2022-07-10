@@ -15,6 +15,7 @@ const Home = loadable(() => import('@pages/Home'))
 const Detail = loadable(() => import('@pages/Detail'))
 const MyList = loadable(() => import('@pages/MyList'))
 const Search = loadable(() => import('@pages/Search'))
+const CategoryDepartment = loadable(() => import('@pages/CategoryDepartment'))
 const CategoryList = loadable(() => import('@pages/CategoryList'))
 
 export const UserContext = createContext({
@@ -68,8 +69,9 @@ const User = () => {
                     <Route path="/home/:id" element = {<Detail />}/>
                 </Route>
                 <Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
-                <Route path="/movie-category" element = {<CategoryList />}/>
-
+                <Route path="/movie-category" element = {<CategoryDepartment />}/>
+                <Route path="/movie" element = {<CategoryList />}/>
+                
             </Routes>
         </>
     )}

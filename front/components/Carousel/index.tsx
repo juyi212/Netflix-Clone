@@ -50,8 +50,8 @@ function useCategorySWR (category? : string, genre_id? : string, country?: strin
 
 const Carousel = React.memo(({ category, genre_id, country, header }: PropsWithChildren<ContentProps>)  => {
     const {data: movieData, error, mutate} = useCategorySWR(category, genre_id, country);
-    console.log(movieData)   
-    console.log(country) 
+    // console.log(movieData)   
+    // console.log(country) 
 
     return (
         <Container>

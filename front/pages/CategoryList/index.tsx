@@ -1,63 +1,60 @@
+
+import { Container } from '@components/MovieList/styles';
+import { Box, NoData,Image } from '@pages/Search/styles';
 import category from '@utils/category';
-import React, { useCallback, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Category, Container, StyledCategory } from './styles';
+import fetcher2 from '@utils/fetcher2';
+import React from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import useSWR from 'swr';
 
 
-const categoryList = [
-    {id: "12", name: "모험"},
-    {id: "14", name: "판타지"},
-    {id: "16", name: "애니메이션"},
-    {id: "18", name: "드라마"},
-    {id: "27", name: "공포"},
-    {id: "35", name: "역사"},
-    {id: "37", name: "서부"},
-    {id: "53", name: "스릴러"},
-    {id: "80", name: "범죄"},
-    {id: "99", name: "다큐멘터리"},
-    {id: "878", name: "SF"},
-    {id: "9648", name: "미스터리"},
-    {id: "10402", name: "음악"},
-    {id: "10749", name: "로맨스"},
-    {id: "10751", name: "가족"},
-    {id: "0752", name: "전쟁"},
-    {id: "10770", name: "TV 영화"},
-]
 
-const settings = {
-    slide: 'div',
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 10,
-    slidesToScroll: 5,
-    initialSlide: 0,
-}
+
 
 const CategoryList = React.memo(() => {
-    const navigate = useNavigate()
-    const onClickCategory = (categoryName: string) => {
-        navigate(`/list/genre/${categoryName}`) 
-    }
+    const genre = useLocation()
+    const params = new URLSearchParams(genre.search);
+    const keyword = params.get("genre")
+
+    console.log(keyword)
+
+    const { data: categoryMovieData, error, mutate }  = useSWR(
+        `${process.env.REACT_APP_SERVICE_PORT}/movie/category_movie?genreId=${keyword}`,
+        fetcher2, 
+        {
+            revalidateOnMount:true
+        });
+    // 이름 유지를 어떻게 해야할깡 
+    console.log(categoryMovieData)
+    const categoryName = category(keyword)
 
     return (
-        <Container>
-            <h1> 장르 </h1>
-            <StyledCategory {...settings}>
-                {categoryList.map((category: any) => {
+        <div style={{ marginTop : "150px"}}>
+            <h1> {categoryName}관에 오신 것을 환영합니다 ! </h1>
+
+            <Container style={{color: "white", textAlign:"center"}}>
+            {categoryMovieData?.length !== 0 ? 
+                <>
+                {categoryMovieData?.map((data: any) => {
                     return (
-                        <Category onClick={(e) => {onClickCategory(category.name)}}>{category.name}</Category>
+                        <Box>
+                            <Link
+                                to={`/my-list/${data.id}`} // 수정 필요 
+                                >
+                                <Image src={data.posterPath}/>
+                            </Link>
+                        </Box>
                     )
                 })}
-            </StyledCategory>          
-
-            <div>
-                찜한 데이터 보여주기 
-            </div>
-            <div>
-                인기 순위 프로그램 
-            </div>
-        </Container>
+                </> :
+                <>
+                    <NoData>
+                        <div>찜한 목록이 없습니다.</div>
+                    </NoData>
+                </>
+            }
+            </Container>
+        </div>
     )})
 
 export default CategoryList;

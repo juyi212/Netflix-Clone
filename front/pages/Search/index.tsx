@@ -1,13 +1,11 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Location } from "history";
-import { Link, Outlet, useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Box, Container, Image, NoData } from '@components/MovieList/styles';
 import axios from 'axios';
 
 
 const Search = React.memo(() => {
-    // const word = useParams().word
-    // console.log(word)
     const [searchInput] = useSearchParams()
     let search = searchInput.get("input")
     console.log(location.pathname)
