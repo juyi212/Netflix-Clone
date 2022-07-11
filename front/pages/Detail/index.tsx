@@ -9,20 +9,37 @@ import fetcher2 from '@utils/fetcher2';
 import category from '@utils/category';
 import axios from 'axios';
 import userfetcher from '@utils/userfetcher';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 const Detail = React.memo(() => {
     const navigate = useNavigate()
-    const movieId = useParams().id
-    
-    const { data: userData, error : userError, mutate: revalidateUser } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher);
+    const [movieId, setMovieId] = useState("")
+    const param = useParams()
+    const location = useLocation()
 
+    useEffect(() => {
+        if(param.id) {
+            const movieid = param.id
+            setMovieId(movieid)
+        }else {
+            const params = new URLSearchParams(location.search);
+            const movieid = params.get("movieId") || "";
+            setMovieId(movieid)
+        }
+    }, [])
+
+    // const params = new URLSearchParams(location.search);
+    // const movieId = params.get("movieId") || "";
+
+    const { data: userData, error : userError, mutate: revalidateUser } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher);
+    
     const { data: movieDetail, error, mutate } = useSWR(
         movieId && `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_detail?movieId=${movieId}&userNo=${userData?.user.uNo}`, fetcher2);
-    
-    const [like, setLike] = useState(false)
-    const [zzim, setZzim] = useState(false)
-
-    const CategoryName= category(movieDetail?.movie.category).toString();
+        const [like, setLike] = useState(false)
+        const [zzim, setZzim] = useState(false)
+        
+        console.log(movieDetail?.movie.category)
+    const CategoryName= category(movieDetail?.movie.category);
 
     const onClickDismiss = () => {
         navigate(-1)
@@ -119,7 +136,11 @@ const Detail = React.memo(() => {
                         </div>
                         <div>
                             <span className="firstInfo">카테고리: </span>
-                            {CategoryName}
+                            {CategoryName?.map((category: string) => {
+                                return (
+                                    <span style={{marginRight: "7px"}}>{category}</span>
+                                )
+                            })}
                         </div>
                         <div>
                             {movieDetail?.movie.originCountry &&

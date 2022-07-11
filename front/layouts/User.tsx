@@ -69,9 +69,11 @@ const User = () => {
                     <Route path="/home/:id" element = {<Detail />}/>
                 </Route>
                 <Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
-                <Route path="/movie-category" element = {<CategoryDepartment />}/>
-                <Route path="/movie" element = {<CategoryList />}/>
+                <Route path="/movie" element = {<CategoryDepartment />}/>
                 
+                <Route path="/movie/genre/:genreId" element = {<CategoryList />} />
+                {/* <Route path="/movie/genre/:genreId/:movieId" element = {<Detail />} />    */}
+
             </Routes>
         </>
     )}

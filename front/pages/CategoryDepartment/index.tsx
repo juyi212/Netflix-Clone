@@ -37,14 +37,15 @@ const settings = {
 const CategoryDepartment = React.memo(() => {
     const navigate = useNavigate()
     const onClickCategory = (categoryNum: string, categoryName: string) => {
-        console.log(categoryName)
-        navigate(
-            {
-                pathname: '/movie',
-                search: `?genre=${categoryNum}`,
-            },
-            { state: categoryName }
-            ) 
+        navigate(`genre/${categoryNum}`) 
+        // navigate(
+        //     {
+        //         pathname: '/movie',
+        //         search: `?genre=${categoryNum}`,
+
+        //     },
+        //     { state: categoryName }
+        //     ) 
     }
 
     return (

@@ -79,7 +79,7 @@ const Nav = React.memo(() => {
                 <>
                     <div className="main-nav">
                         <StyledLink to='/home'>홈</StyledLink>
-                        <StyledLink to='/movie-category'> 카테고리관 </StyledLink>
+                        <StyledLink to='/movie'> 카테고리관 </StyledLink>
                         <StyledLink to='/my-list'>내가 찜한 콘텐츠</StyledLink>
                     </div>
                     <SecondaryNav>

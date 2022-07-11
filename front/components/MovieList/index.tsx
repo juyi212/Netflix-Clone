@@ -6,20 +6,20 @@ import { Box, Container, Image, NoData } from './styles';
 import { Link, Outlet } from 'react-router-dom';
 
 interface ContentProps {
-    from: string;
+    from?: string;
     movieData: Array<string>;
 }
 
 const MovieList = React.memo(({from, movieData}: PropsWithChildren<ContentProps>) => {
     const [goToPage, setGoToPage] = useState("")
     
+
     useEffect(() => {
-        if (from ==="zzim") {
-            setGoToPage("/my-list")
-        } else {
-            setGoToPage("")
+        if (from) {
+            setGoToPage(from)
         }
-    },[])
+        console.log(goToPage)
+    },[from])
 
     return (
             <Container style={{color: "white", textAlign:"center"}}>
@@ -29,8 +29,10 @@ const MovieList = React.memo(({from, movieData}: PropsWithChildren<ContentProps>
                     return (
                         <Box>
                             <Link
-                                to={`/my-list/${data.id}`} // 수정 필요 
-                                >
+                                to ={{ pathname: `${goToPage}`,
+                                        search: `movieId=${data.id}`
+                            }}
+                            >
                                 <Image src={data.posterPath}/>
                             </Link>
                         </Box>
