@@ -21,11 +21,14 @@ const CategoryList = [
 ]
 const category = (categoryNum? : string[] | string | null) => {
     if (typeof categoryNum === 'string') {
+        let categoryName: string = "";
         CategoryList.map((category) => {
             if (categoryNum === category.id) {
-                return category.name
+                categoryName = category.name;
             }
         })
+        return categoryName; 
+        
     } else if (typeof categoryNum === 'object'){
         let categoryName: any = [];
         categoryNum?.map((num) => {

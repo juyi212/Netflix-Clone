@@ -15,6 +15,11 @@ interface ContentProps {
     uId? : string;
 }
 
+function getParametersForUnsplash ( width:number, height:number, quality:number, format:string ){
+    return `?w=${width}&h=${height}&q=${quality}&fm=${format}&fit=crop`;
+  }
+  
+
 const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
@@ -72,7 +77,10 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
                 >
                 <Image
                     alt="d"
-                    src={movie.posterPath}
+                    src={
+                        movie.posterPath
+                        // + getParametersForUnsplash(200,200,70,"jpeg")
+                    }
                     />
                 </Link>
                 <Detail className="detail">

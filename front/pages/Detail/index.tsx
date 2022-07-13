@@ -5,11 +5,10 @@ import {AiOutlineCheckCircle, AiOutlineDownCircle} from 'react-icons/ai'
 import {BsHandThumbsUp, BsHandThumbsUpFill, BsPlusCircle} from 'react-icons/bs';
 import {TiDelete} from 'react-icons/ti'
 import useSWR from 'swr';
-import fetcher2 from '@utils/fetcher2';
+import fetcher from '@utils/fetcher';
 import category from '@utils/category';
 import axios from 'axios';
 import userfetcher from '@utils/userfetcher';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 const Detail = React.memo(() => {
     const navigate = useNavigate()
@@ -34,7 +33,7 @@ const Detail = React.memo(() => {
     const { data: userData, error : userError, mutate: revalidateUser } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher);
     
     const { data: movieDetail, error, mutate } = useSWR(
-        movieId && `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_detail?movieId=${movieId}&userNo=${userData?.user.uNo}`, fetcher2);
+        movieId && `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_detail?movieId=${movieId}&userNo=${userData?.user.uNo}`, fetcher);
         const [like, setLike] = useState(false)
         const [zzim, setZzim] = useState(false)
         

@@ -1,12 +1,9 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react';
-import banner1 from "@assets/banner1.jpg"
-import banner2 from "@assets/banner2.jpg"
-import banner3 from "@assets/banner3.jpg"
 import Card from '@components/Card';
 import { Container, StyledSlider, MovieDetailContainer } from './styles';
 import useSWR from 'swr';
-import fetcher2 from '@utils/fetcher2';
-import axios from 'axios';
+import fetcher from '@utils/fetcher';
+
 
 
 const settings = {
@@ -45,7 +42,7 @@ function useCategorySWR (category? : string, genre_id? : string, country?: strin
         } else {
             return `${process.env.REACT_APP_SERVICE_PORT}/movie/country_movie?oriCountry=${country}`
         }
-    }, fetcher2)
+    }, fetcher)
 }
 
 const Carousel = React.memo(({ category, genre_id, country, header }: PropsWithChildren<ContentProps>)  => {

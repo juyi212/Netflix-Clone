@@ -52,7 +52,7 @@ export const ImageView = styled.div`
 `
 
 export const Image = styled.img `
-  height: 500px;
+  height: 600px;
   width: 100%;  
 `
 export const MovieTitle = styled.h1`

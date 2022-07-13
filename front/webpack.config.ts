@@ -11,6 +11,7 @@ interface Configuration extends WebpackConfiguration {
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const dotenv = require("dotenv");
 dotenv.config();
+console.log(dotenv)
 
 const config: Configuration = {
   name: 'sleact',

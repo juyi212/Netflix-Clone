@@ -1,15 +1,11 @@
 import React, { useEffect, useState,useCallback } from 'react';
-import banner1 from '@assets/banner1.jpg'
-import banner2 from '@assets/banner2.jpg'
-import banner3 from '@assets/banner3.jpg'
 import Slider from '@components/Slider'
-import { SetStateAction } from 'react';
 import useSWR from 'swr';
-import fetcher2 from '@utils/fetcher2';
+import fetcher from '@utils/fetcher';
 
 const Banner = () => {
 
-    const { data: bannerData, error, mutate } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/movie/popular_movie`, fetcher2);
+    const { data: bannerData, error, mutate } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/movie/popular_movie`, fetcher);
 
   
     const [translateValue, setTranslateValue] = useState<number>(0)
