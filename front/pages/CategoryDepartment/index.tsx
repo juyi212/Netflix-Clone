@@ -1,6 +1,8 @@
+import Carousel from '@components/Carousel';
+import Detail from '@pages/Detail';
 import category from '@utils/category';
-import React, { useCallback, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Category, Container, StyledCategory } from './styles';
 
 
@@ -36,6 +38,9 @@ const settings = {
 
 const CategoryDepartment = React.memo(() => {
     const navigate = useNavigate()
+    const genre = useLocation()
+    const [pageNum, setPageNum] = useState(1);
+    
     const onClickCategory = (categoryNum: string, categoryName: string) => {
         navigate(`genre/${categoryNum}`) 
         // navigate(
@@ -48,9 +53,32 @@ const CategoryDepartment = React.memo(() => {
         //     ) 
     }
 
+    const handleScroll = () => {
+        const scrollHeight = document.documentElement.scrollHeight;
+        const scrollTop = document.documentElement.scrollTop;
+        const clientHeight = document.documentElement.clientHeight;
+        if (scrollTop + clientHeight >= scrollHeight &&  pageNum < 3) {
+            // 페이지 끝에 도달하면 추가 데이터를 받아온다
+            setPageNum(pageNum + 1);
+        }
+    }
+
+    useEffect(() => {
+        // scroll event listener 등록
+        window.addEventListener("scroll", handleScroll);
+        if (pageNum > 2) {
+            // scroll event listener 해제
+            window.removeEventListener("scroll", handleScroll);
+            }
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            };
+        }, [pageNum]);
+
     return (
         <Container>
             <h1> 장르 </h1>
+            <Outlet />
             <StyledCategory {...settings}>
                 {categoryList.map((category: any) => {
                     return (
@@ -58,13 +86,25 @@ const CategoryDepartment = React.memo(() => {
                     )
                 })}
             </StyledCategory>          
-
-            <div>
-                찜한 데이터 보여주기 
-            </div>
-            <div>
-                인기 순위 프로그램 
-            </div>
+            <div>              
+            {pageNum > 0 && 
+                <>
+                    <Carousel from = {"/movie"} header = {"인기 순위"} category={"popular_movie"} genre_id={""}  />
+                    <Carousel from = {"/movie"} header = {"SF 모여라"} category={"category_movie"} genre_id={"878"} />
+                </>
+            }
+            {pageNum > 1 && 
+            <>
+                <Carousel from = {"/movie"} header = {"달달한 로맨스"} category={"category_movie"} genre_id={"10749"} />
+                <Carousel from = {"/movie"} header = {"힐링의 음악 컨텐츠"} category={"category_movie"} genre_id={"18"}/>
+            </>}
+            {/* {pageNum > 2 && 
+            <>
+                
+            
+            </>} */}
+            
+        </div>
         </Container>
     )})
 

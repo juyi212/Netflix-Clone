@@ -65,11 +65,12 @@ export const MovieContainer  =styled.div`
     text-align: left;
 `
 export const MovieContent = styled.div`
-    width: 60%;
+    width: 140%;
     font-size: 20px;
 `
 export const MovieDetailInfo = styled.div`
   margin-left: 30px;
+  width: 80%;
   font-size: 20px;
   & div {
     margin-bottom: 10px;

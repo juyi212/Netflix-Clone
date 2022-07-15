@@ -7,7 +7,7 @@ import {GrInstagram} from 'react-icons/gr'
 // import '../Login/style.scss'
 import fetcher from '@utils/userfetcher';
 import useSWR from 'swr';
-import { Body, Button, Container, Form, FormBody, Input, LinkContainer } from '@pages/Login/styles';
+import { Body, Button, Container, Form, FormBody, Input, LinkContainer, Error } from '@pages/Login/styles';
 import Footer from '@components/Footer';
 
 const SignUp = () => {
@@ -72,14 +72,12 @@ const SignUp = () => {
                     <h1 className="label">회원가입</h1>
                     <form onSubmit={onSubmit}>
                         <Input  type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
-                        { emailMessage && <div className="error">{emailMessage}</div>}
+                        { emailMessage && <Error>{emailMessage}</Error>}
                         <Input type="text" value={name} onChange = {onChangeName} placeholder='닉네임'/>
                         <Input type="password" value={password} onChange= {onChangePassword} placeholder='비밀번호'/>
                         <Input type="password" value= {passwordCheck} onChange= {onChangePasswordCheck} placeholder='비밀번호 확인'/>
-                        { mismatchError && <div className="error">비밀번호가 일치하지 않습니다.</div> }
-                        {/* { !nickname && <Error>닉네임을 입력해주세요.</Error> } */}
+                        { mismatchError && <Error>비밀번호가 일치하지 않습니다.</Error> }
                         { signUpError && <div className="error">이미 가입된 이메일입니다.</div>}
-                        {/* {signUpSuccess && <Success>회원가입되었습니다! 로그인해주세요.</Success>} */}
                         <Button type="submit"> 회원가입 </Button>
                     </form>
                     <LinkContainer>

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DetailContainer,Icons, ImageView,Image,MovieContainer, MovieContent, DetailBackground, MovieTitle, MovieDetailInfo } from './styles';
 import {AiOutlineCheckCircle, AiOutlineDownCircle} from 'react-icons/ai'
@@ -9,8 +9,11 @@ import fetcher from '@utils/fetcher';
 import category from '@utils/category';
 import axios from 'axios';
 import userfetcher from '@utils/userfetcher';
+import { UserContext } from '@layouts/User';
 
 const Detail = React.memo(() => {
+    //userinfo 없애기 re-rendering 심한거 같음 
+    const context = useContext(UserContext)
     const navigate = useNavigate()
     const [movieId, setMovieId] = useState("")
     const param = useParams()
@@ -26,14 +29,9 @@ const Detail = React.memo(() => {
             setMovieId(movieid)
         }
     }, [])
-
-    // const params = new URLSearchParams(location.search);
-    // const movieId = params.get("movieId") || "";
-
-    const { data: userData, error : userError, mutate: revalidateUser } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher);
     
     const { data: movieDetail, error, mutate } = useSWR(
-        movieId && `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_detail?movieId=${movieId}&userNo=${userData?.user.uNo}`, fetcher);
+        movieId && `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_detail?movieId=${movieId}&userNo=${context.userData?.user.uNo}`, fetcher);
         const [like, setLike] = useState(false)
         const [zzim, setZzim] = useState(false)
         
@@ -47,7 +45,7 @@ const Detail = React.memo(() => {
     const onChangeZzim = () => {
         if (zzim) {
             setZzim(false)
-            axios.delete(`${process.env.REACT_APP_SERVICE_PORT}/user/delete_movie_zzim?movieId=${movieId}&userNo=${userData.user.uNo}`)
+            axios.delete(`${process.env.REACT_APP_SERVICE_PORT}/user/delete_movie_zzim?movieId=${movieId}&userNo=${context.userData?.user.uNo}`)
             .then((res) => {
                 console.log(res.data)
                 mutate()
@@ -57,7 +55,7 @@ const Detail = React.memo(() => {
             })
         }else {
             setZzim(true)
-            axios.post(`${process.env.REACT_APP_SERVICE_PORT}/user/insert_movie_zzim?movieId=${movieId}&userNo=${userData.user.uNo}`)
+            axios.post(`${process.env.REACT_APP_SERVICE_PORT}/user/insert_movie_zzim?movieId=${movieId}&userNo=${context.userData?.user.uNo}`)
             .then((res) => {
                 console.log(res.data)
                 mutate()

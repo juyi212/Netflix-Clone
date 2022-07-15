@@ -4,32 +4,22 @@ import {AiFillHeart, AiOutlineHeart, AiOutlineCheckCircle, AiOutlineDownCircle} 
 import {BsHandThumbsUp, BsHandThumbsUpFill, BsPlusCircle} from 'react-icons/bs';
 import axios from 'axios';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import useSWR from 'swr';
-import userfetcher from '@utils/userfetcher';
-import category from '@utils/category';
-// import { MovieType } from '@components/Carousel';
 
 
 interface ContentProps {
+    from? : string,
     movie : any,
     uId? : string;
 }
 
-function getParametersForUnsplash ( width:number, height:number, quality:number, format:string ){
-    return `?w=${width}&h=${height}&q=${quality}&fm=${format}&fit=crop`;
-  }
+// function getParametersForUnsplash ( width:number, height:number, quality:number, format:string ){
+//     return `?w=${width}&h=${height}&q=${quality}&fm=${format}&fit=crop`;
+//   }
   
 
-const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
+const Card= React.memo(({ from, movie, uId }: PropsWithChildren<ContentProps>) => {
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
-
-    // const { data: userData, error, mutate } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher, {
-    //     revalidateOnMount:true
-    // });
-
-    const CategoryName= category(movie.category).toString();
-    // console.log(movie)
 
     const onChangeZzim = useCallback(() => {
         if (zzim) {
@@ -63,14 +53,11 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
         }
     }, [like])
     
-    // const onClickGoToDetail = () => {
-    //     navigate(`/home/${movie.id}`)
-    // }
     
     return (
             <Box>
                 <Link
-                    to={`/home/${movie.id}`}
+                    to={`${from}/${movie.id}`}
                     state = {{
                         uId
                     }}
@@ -90,7 +77,7 @@ const Card= React.memo(({ movie, uId }: PropsWithChildren<ContentProps>) => {
                             <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="28" /> :  <BsHandThumbsUp size="28" />}</div>
                         </HeaderFirst>
                         <Link 
-                            to={`/home/${movie.id}`}
+                            to={`/${from}/${movie.id}`}
                             state = {{
                                 uId
                             }}

@@ -25,6 +25,7 @@ const settings = {
 ]
 }
 interface ContentProps {
+    from ? : string ;
     category?: string;
     genre_id? : string;
     country? : string;
@@ -45,11 +46,9 @@ function useCategorySWR (category? : string, genre_id? : string, country?: strin
     }, fetcher)
 }
 
-const Carousel = React.memo(({ category, genre_id, country, header }: PropsWithChildren<ContentProps>)  => {
+const Carousel = React.memo(({ from, category, genre_id, country, header }: PropsWithChildren<ContentProps>)  => {
     const {data: movieData, error, mutate} = useCategorySWR(category, genre_id, country);
-    // console.log(movieData)   
-    // console.log(country) 
-
+    
     return (
         <Container>
             <h1> {header} </h1>
@@ -57,6 +56,7 @@ const Carousel = React.memo(({ category, genre_id, country, header }: PropsWithC
                 {movieData?.map((movie: Object, index: string) => {
                     return (
                         <Card 
+                            from = {from}
                             movie = {movie}
                             key ={index}
                             // uId = {uId}

@@ -8,8 +8,8 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes >
-                {/* <Route path="/cs-center" element={<CSCenter />}></Route> */}
                 <Route path="/*" element={<User />}></Route>
+                {/* 유저 정보 필요 or 필요없음 */}
             </Routes>
         </BrowserRouter>
     )}

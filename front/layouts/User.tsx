@@ -2,12 +2,10 @@ import React, { createContext, useEffect } from 'react';
 import loadable from '@loadable/component'
 import OAuthRedirectHandler from '@components/KakaoLogin/OAuthRedirectHandler';
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { createBrowserHistory } from 'history';
 import useSWR from 'swr';
-import fetcher from '@utils/userfetcher';
 import Nav from '@components/Nav';
 import userfetcher from '@utils/userfetcher';
-import Footer from '@components/Footer';
+
 
 const LogIn = loadable(() => import('@pages/Login'))
 const SignUp = loadable(() => import('@pages/SignUp'))
@@ -45,21 +43,12 @@ const User = () => {
     return (
         <>
             <UserContext.Provider value={value}>
-                <Nav></Nav>
-            </UserContext.Provider>
+            <Nav />
             <Routes >
                 <Route path="/" element={<Navigate replace to="/login" />} ></Route>
-                <Route path="/login" element={
-                    <UserContext.Provider value={value}>
-                        <LogIn />
-                    </UserContext.Provider>
-                } ></Route>
+                <Route path="/login" element={<LogIn />} ></Route>
                 <Route path="/signup" element={<SignUp />} ></Route>
-                <Route path="/my-list" element={   
-                    <UserContext.Provider value={value}>
-                        <MyList />
-                    </UserContext.Provider>
-                    } >
+                <Route path="/my-list" element={ <MyList />} >
                     <Route path="/my-list/:id" element = {<Detail />}/>
                 </Route>
                 <Route path="/search" element = {<Search />}>
@@ -69,13 +58,50 @@ const User = () => {
                     <Route path="/home/:id" element = {<Detail />}/>
                 </Route>
                 <Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
-                <Route path="/movie" element = {<CategoryDepartment />}/>
+                <Route path="/movie" element = {<CategoryDepartment />}>
+                    <Route path="/movie/:id" element = {<Detail />}/>
+                </Route>
                 
                 <Route path="/movie/genre/:genreId" element = {<CategoryList />} />
-                {/* <Route path="/movie/genre/:genreId/:movieId" element = {<Detail />} />    */}
 
             </Routes>
+            </UserContext.Provider>
         </>
     )}
 
 export default User; 
+
+
+{/* <UserContext.Provider value={value}>
+<Nav></Nav>
+</UserContext.Provider>
+<Routes >
+<Route path="/" element={<Navigate replace to="/login" />} ></Route>
+<Route path="/login" element={
+    <UserContext.Provider value={value}>
+        <LogIn />
+    </UserContext.Provider>
+} ></Route>
+
+<Route path="/signup" element={<SignUp />} ></Route>
+<Route path="/my-list" element={   
+    <UserContext.Provider value={value}>
+        <MyList />
+    </UserContext.Provider>
+    } >
+    <Route path="/my-list/:id" element = {<Detail />}/>
+</Route>
+<Route path="/search" element = {<Search />}>
+    <Route path="/search/:id" element = {<Detail />}/>
+</Route>
+<Route path="/home" element={<Home /> } >
+    <Route path="/home/:id" element = {<Detail />}/>
+</Route>
+<Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
+<Route path="/movie" element = {<CategoryDepartment />}>
+    <Route path="/movie/:id" element = {<Detail />}/>
+</Route>
+
+<Route path="/movie/genre/:genreId" element = {<CategoryList />} />
+
+</Routes> */}
