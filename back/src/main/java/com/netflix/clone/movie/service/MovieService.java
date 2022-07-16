@@ -6,11 +6,11 @@ import com.netflix.clone.repository.dto.Movie;
 import com.netflix.clone.repository.dto.UserZzim;
 
 public interface MovieService {
-    List<Movie> getPopularMovie() throws Exception;
+    List<Movie> getPopularMovie(String userNo) throws Exception;
 
-    List<Movie> getCategoryMovie(String genreId) throws Exception;
+    List<Movie> getCategoryMovie(String genreId, String userNo) throws Exception;
 
-    List<Movie> getCountryMovie(String oriCountry) throws Exception;
+    List<Movie> getCountryMovie(String oriCountry, String userNo) throws Exception;
 
     Movie getMovieDetail(int movieId, String userNo) throws Exception;
 

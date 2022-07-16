@@ -33,10 +33,10 @@ public class MovieController {
     /* 인기 영화 정보(10개) 조회*/
     @ApiOperation(value = "인기 영화 정보(10개) 조회 Restful API", response = Movie.class)
     @GetMapping("/popular_movie")
-    public List<Movie> getPopularMovie() {
+    public List<Movie> getPopularMovie(@RequestParam("userNo") String userNo) {
         List<Movie> movieList = null;
         try {
-            movieList = movieService.getPopularMovie();
+            movieList = movieService.getPopularMovie(userNo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,10 +47,10 @@ public class MovieController {
     /* 카테고리 별 영화 정보(20개) 조회*/
     @ApiOperation(value = "카테고리 별 영화 정보(20개) 조회 Restful API", response = Movie.class)
     @GetMapping("/category_movie")
-    public List<Movie> getCategoryMovie(@RequestParam("genreId") String genreId) {
+    public List<Movie> getCategoryMovie(@RequestParam("genreId") String genreId, @RequestParam("userNo") String userNo) {
         List<Movie> movieList = null;
         try {
-            movieList = movieService.getCategoryMovie(genreId);
+            movieList = movieService.getCategoryMovie(genreId, userNo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,10 +61,10 @@ public class MovieController {
     /* 국가 별 영화 정보(20개) 조회*/
     @ApiOperation(value = "국가 별 영화 정보(20개) 조회 Restful API", response = Movie.class)
     @GetMapping("/country_movie")
-    public List<Movie> getCountryMovie(@RequestParam("oriCountry") String oriCountry) {
+    public List<Movie> getCountryMovie(@RequestParam("oriCountry") String oriCountry, @RequestParam("userNo") String userNo) {
         List<Movie> movieList = null;
         try {
-            movieList = movieService.getCountryMovie(oriCountry);
+            movieList = movieService.getCountryMovie(oriCountry, userNo);
         } catch (Exception e) {
             e.printStackTrace();
         }

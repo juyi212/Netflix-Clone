@@ -24,39 +24,63 @@ public class MovieServiceImpl implements MovieService{
     private UserZzimRepository userZzimRepository;
 
     @Override
-    public List<Movie> getPopularMovie() throws Exception {
+    public List<Movie> getPopularMovie(String userNo) throws Exception {
         List<Movie> movieList = new ArrayList<>();
         movieRepository.findTop10ByOrderByPopularityDesc().forEach(e -> movieList.add(e));
 
         for(int i=0; i<movieList.size(); i++) {
             List<String> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
             movieList.get(i).setCategory(categoryList);
+
+            UserZzim userZzim = null;
+            userZzim = userZzimRepository.findByUserNoAndZzim(movieList.get(i).getId(), Integer.parseInt(userNo));
+            if(userZzim != null) {
+                movieList.get(i).setIsZzim("Y");
+            }else {
+                movieList.get(i).setIsZzim("N");
+            }
         }
 
         return movieList;
     }
 
     @Override
-    public List<Movie> getCategoryMovie(String genre) throws Exception {
+    public List<Movie> getCategoryMovie(String genre, String userNo) throws Exception {
         List<Movie> movieList = new ArrayList<>();
         movieRepository.findTop20ByCategory(genre).forEach(e -> movieList.add(e));
 
         for(int i=0; i<movieList.size(); i++) {
             List<String> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
             movieList.get(i).setCategory(categoryList);
+
+            UserZzim userZzim = null;
+            userZzim = userZzimRepository.findByUserNoAndZzim(movieList.get(i).getId(), Integer.parseInt(userNo));
+            if(userZzim != null) {
+                movieList.get(i).setIsZzim("Y");
+            }else {
+                movieList.get(i).setIsZzim("N");
+            }
         }
 
         return movieList;
     }
 
     @Override
-    public List<Movie> getCountryMovie(String oriCountry) throws Exception {
+    public List<Movie> getCountryMovie(String oriCountry, String userNo) throws Exception {
         List<Movie> movieList = new ArrayList<>();
         movieRepository.findTop20ByOriginCountry(oriCountry).forEach(e -> movieList.add(e));
 
         for(int i=0; i<movieList.size(); i++) {
             List<String> categoryList = movieCategoryRepository.findByMovieId(movieList.get(i).getId());
             movieList.get(i).setCategory(categoryList);
+
+            UserZzim userZzim = null;
+            userZzim = userZzimRepository.findByUserNoAndZzim(movieList.get(i).getId(), Integer.parseInt(userNo));
+            if(userZzim != null) {
+                movieList.get(i).setIsZzim("Y");
+            }else {
+                movieList.get(i).setIsZzim("N");
+            }
         }
 
         return movieList;
