@@ -17,6 +17,18 @@
 
 ### 세부기획 
 
+#### DB Table
+- category
+![스크린샷 2022-07-16 오후 5.43.12.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/94c8ad27-88d9-4816-bc2c-5767716ca392/스크린샷_2022-07-16_오후_5.43.12.png)
+- movie
+![스크린샷 2022-07-16 오후 5.44.09.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5836a83d-af1c-4578-b521-6a6a48b1e641/스크린샷_2022-07-16_오후_5.44.09.png)
+- movie_category
+![스크린샷 2022-07-16 오후 5.44.23.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/291f882d-516c-4942-b38d-ec6af7bd0c80/스크린샷_2022-07-16_오후_5.44.23.png)
+- user
+![스크린샷 2022-07-16 오후 5.44.37.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3ddc5464-a103-4172-8e99-90d727d7cf3f/스크린샷_2022-07-16_오후_5.44.37.png)
+- user_zzim
+![스크린샷 2022-07-16 오후 5.44.46.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1ac6728-a0ed-442e-bf48-a6a3b9b7e89b/스크린샷_2022-07-16_오후_5.44.46.png)
+
 ### 팀원 소개 및 소감 
 - **이주이** : 오랜만에 하는 사이드 프로젝트였습니다. Frontend 입장에서 Backend 분들과 함께 프로젝트를 진행하니 감회가 새로웠고, 혼자만 하면서 고민했던 부분들을 같이 해결해나가는 과정들이 성장에 많은 도움이 되었습니다. 앞으로도 다양한 기술들을 함께 도입해보고 고민하면서 성장하는 팀원들이 되었으면 좋겠어요 ! : ) 아자아자 아자자 화이팅 
 - **조희은** : 첫 취업을 하고나서 진행한 첫 사이드 프로젝트였습니다. 혼자가 아니라 다른분들과 함께 프로젝트를 진행하며 도중에 멈추지 않고 개발 실력을 성장시킬 수 있는 원동력이 되어준 경험이었던것 같습니다. 앞으로도 계속해서 사이드 프로젝트를 진행하고 싶다는 목표의 계기가 되었습니다. 우리 모두 개발자 인생 백년해로 함께 해요 ^^ 못도망가요~^^ 
