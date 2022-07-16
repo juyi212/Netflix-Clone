@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public User selectUser(User user) throws Exception {
-		return userRepository.findByuNo(Integer.parseInt(user.getuId()));
+		return userRepository.findByuId(user.getuId());
 	}
 
 	@Override
