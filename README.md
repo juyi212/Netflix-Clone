@@ -19,15 +19,15 @@
 
 #### DB Table
 - category
-![스크린샷 2022-07-16 오후 5.43.12.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/94c8ad27-88d9-4816-bc2c-5767716ca392/스크린샷_2022-07-16_오후_5.43.12.png)
+<img width="410" alt="스크린샷 2022-07-16 오후 5 43 12" src="https://user-images.githubusercontent.com/53864655/179347853-ab6c641f-8a4b-430f-affa-77459971d1af.png">
 - movie
-![스크린샷 2022-07-16 오후 5.44.09.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5836a83d-af1c-4578-b521-6a6a48b1e641/스크린샷_2022-07-16_오후_5.44.09.png)
+<img width="488" alt="스크린샷 2022-07-16 오후 5 44 09" src="https://user-images.githubusercontent.com/53864655/179347856-84c1d8fc-e675-4e0f-bcf9-204c03c83e4b.png">
 - movie_category
-![스크린샷 2022-07-16 오후 5.44.23.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/291f882d-516c-4942-b38d-ec6af7bd0c80/스크린샷_2022-07-16_오후_5.44.23.png)
+<img width="610" alt="스크린샷 2022-07-16 오후 5 44 23" src="https://user-images.githubusercontent.com/53864655/179347861-f4192bf1-f056-43ff-a8b6-cd3bb403b5aa.png">
 - user
-![스크린샷 2022-07-16 오후 5.44.37.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3ddc5464-a103-4172-8e99-90d727d7cf3f/스크린샷_2022-07-16_오후_5.44.37.png)
+<img width="500" alt="스크린샷 2022-07-16 오후 5 44 37" src="https://user-images.githubusercontent.com/53864655/179347865-9107e997-5184-4cab-b3f5-887a16ad9ac4.png">
 - user_zzim
-![스크린샷 2022-07-16 오후 5.44.46.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1ac6728-a0ed-442e-bf48-a6a3b9b7e89b/스크린샷_2022-07-16_오후_5.44.46.png)
+<img width="500" alt="스크린샷 2022-07-16 오후 5 44 46" src="https://user-images.githubusercontent.com/53864655/179347867-26ee5341-2fa8-49f8-876c-793291f0f12a.png">
 
 ### 팀원 소개 및 소감 
 - **이주이** : 오랜만에 하는 사이드 프로젝트였습니다. Frontend 입장에서 Backend 분들과 함께 프로젝트를 진행하니 감회가 새로웠고, 혼자만 하면서 고민했던 부분들을 같이 해결해나가는 과정들이 성장에 많은 도움이 되었습니다. 앞으로도 다양한 기술들을 함께 도입해보고 고민하면서 성장하는 팀원들이 되었으면 좋겠어요 ! : ) 아자아자 아자자 화이팅 
