@@ -188,7 +188,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	@Transactional
 	public int deleteMovieZzim(int movieId, int userNo) throws Exception {
-		UserZzim zzim = new UserZzim(movieId, userNo);
+		UserZzim zzim = new UserZzim(userNo, movieId);
 		userZzimRepository.delete(zzim);
 
 		return 1;
