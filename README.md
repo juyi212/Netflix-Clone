@@ -20,5 +20,9 @@
 ### 팀원 소개 및 소감 
 
 
-### What I learned 
+### What I learned (이주이)
+- SWR 라이브러리를 사용하면서 기존에 쓰던 Redux 상태관리와 비교하며 쓸 수 있었음. 
+- SWR 의 장점인 실시간 데이터 캐싱, 중복된 요청 방지 등..을 경험할 수 있었음. 
+- 적절하게 컴포넌트들을 분리하여 Custom Hooks(useInput, userFetcher 등..)을 만들었고 재 사용성을 높일 수 있었음. 
+- debounce
 
