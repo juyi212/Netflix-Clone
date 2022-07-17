@@ -14,8 +14,14 @@
 <br>
 
 ### :open_hands: 페이지 소개 
+시연 영상 :  https://youtu.be/-JR0Ban3bhg
 
-### 세부기획 
+<img width="550" alt="스크린샷 2022-07-16 오후 5 43 12" src="https://user-images.githubusercontent.com/57897408/179403274-8ebca0ac-4ad0-4b57-a95c-7193f89db73f.png">
+
+
+
+
+### :thought_balloon: 세부 기획 
 
 #### DB Table
 - category
