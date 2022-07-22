@@ -1,6 +1,4 @@
-import userfetcher from '@utils/userfetcher';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import useSWR from 'swr';
 import { Header, SecondaryNav, StyledLink,DropDown, DropDownContents, SearchContainer, SearchInput } from './styles';
 import gravatar from 'gravatar';
 import {BsPersonCircle} from 'react-icons/bs'
@@ -11,11 +9,10 @@ import { UserContext } from '@layouts/User';
 import useDebounce from '@utils/debounce';
 
 
-// export const UserContext = createContext({})
-
 const Nav = React.memo(() => {
     const navigate = useNavigate()
     const context = useContext(UserContext)
+    
     const [search, setSearch] = useState<string>('')
     const debouncedValue = useDebounce(search, 500)
 
@@ -27,7 +24,7 @@ const Nav = React.memo(() => {
             .then((res) => {
                 localStorage.removeItem('user')
                 // 로그아웃을 하고 로그인페이지로 넘어가면 userData가 확인되어 login 페이지로 이동하지 않는다.. 어떻게 해결해야할까 > null로 해결! 
-                context.mutateUsers(null)
+                context.mutateUsers(undefined)
                 navigate('/login')
                 
             })

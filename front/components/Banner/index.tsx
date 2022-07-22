@@ -1,13 +1,14 @@
-import React, { useEffect, useState,useCallback } from 'react';
+import React, { useEffect, useState,useCallback, useContext } from 'react';
 import Slider from '@components/Slider'
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
+import { UserContext } from '@layouts/User';
 
 const Banner = () => {
+    const context = useContext(UserContext)
+    const userNo = context?.userData.user.uNo
+    const { data: bannerData, error, mutate } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/movie/popular_movie?userNo=${userNo}`, fetcher);
 
-    const { data: bannerData, error, mutate } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/movie/popular_movie`, fetcher);
-
-  
     const [translateValue, setTranslateValue] = useState<number>(0)
 
     const moveRight = useCallback(() => {
@@ -18,13 +19,6 @@ const Banner = () => {
         });
     },[translateValue])
     
-    //   const moveLeft = useCallback(() => {
-    //     if (translateValue !== 0) {
-    //         setTranslateValue((prev) => prev - 100);
-    //       } else {
-    //         setTranslateValue(100 * (images.length - 1));
-    //       }
-    //   } ,[translateValue])
     
       useEffect(() => {
         const imageInterval = setInterval(() => {

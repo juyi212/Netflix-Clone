@@ -8,13 +8,9 @@ import userfetcher from '@utils/userfetcher';
 
 
 const Home = React.memo(() => {
-    // header에 토큰을 같이 보낸다 
-    const here = useLocation()
     const { data: userData, error, mutate: revalidateUser } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher);
     const [pageNum, setPageNum] = useState(1);
-    // const [showDetailPage, setShowDetailPage] = useState(false);
-    let location = useLocation();
-    let state = location.state as { backgroundLocation?: Location };
+    
 
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight;

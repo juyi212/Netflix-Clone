@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback, useState } from 'react';
+import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import {Header, Image, Box, Detail, HeaderFirst} from './styles'
 import {AiFillHeart, AiOutlineHeart, AiOutlineCheckCircle, AiOutlineDownCircle} from 'react-icons/ai'
 import {BsHandThumbsUp, BsHandThumbsUpFill, BsPlusCircle} from 'react-icons/bs';
@@ -10,14 +10,11 @@ interface ContentProps {
     from? : string,
     movie : any,
     uId? : string;
+    mutate : () => void;
 }
 
-// function getParametersForUnsplash ( width:number, height:number, quality:number, format:string ){
-//     return `?w=${width}&h=${height}&q=${quality}&fm=${format}&fit=crop`;
-//   }
-  
 
-const Card= React.memo(({ from, movie, uId }: PropsWithChildren<ContentProps>) => {
+const Card= React.memo(({ from, movie, uId, mutate }: PropsWithChildren<ContentProps>) => {
     const [like, setLike] = useState(false)
     const [zzim, setZzim] = useState(false)
 
@@ -25,9 +22,10 @@ const Card= React.memo(({ from, movie, uId }: PropsWithChildren<ContentProps>) =
         if (zzim) {
             // 찜된 상태 
             setZzim(false)
-            axios.post(`${process.env.REACT_APP_SERVICE_PORT}/user/delete_movie_zzim?movieId=${movie.id}&userNo=${uId}`)
+            axios.delete(`${process.env.REACT_APP_SERVICE_PORT}/user/delete_movie_zzim?movieId=${movie.id}&userNo=${uId}`)
             .then((res)=>{
                 console.log(res.data)
+                mutate()
             })
             .catch((err) => {
                 console.log(err)
@@ -38,6 +36,7 @@ const Card= React.memo(({ from, movie, uId }: PropsWithChildren<ContentProps>) =
             axios.post(`${process.env.REACT_APP_SERVICE_PORT}/user/insert_movie_zzim?movieId=${movie.id}&userNo=${uId}`)
             .then((res)=>{
                 console.log(res.data)
+                mutate()
             })
             .catch((err) => {
                 console.log(err)
@@ -52,6 +51,15 @@ const Card= React.memo(({ from, movie, uId }: PropsWithChildren<ContentProps>) =
             setLike(true)
         }
     }, [like])
+
+
+    useEffect(() => {
+        if (movie?.isZzim === "Y") {
+            setZzim(true)
+        } else if (movie?.isZzim === "N") {
+            setZzim(false)
+        }
+    }, [movie.isZzim, zzim])
     
     
     return (
@@ -73,11 +81,11 @@ const Card= React.memo(({ from, movie, uId }: PropsWithChildren<ContentProps>) =
                 <Detail className="detail">
                     <Header>
                         <HeaderFirst>
-                            <div onClick ={onChangeZzim}>{ zzim ? <AiOutlineCheckCircle size="28" /> :  <BsPlusCircle size="28"  />}</div>
+                            <div onClick ={onChangeZzim}>{ zzim ? <AiOutlineCheckCircle size="28" color="red" /> :  <BsPlusCircle size="28"  />}</div>
                             <div onClick ={onChangeLike}>{ like ? <BsHandThumbsUpFill size="28" /> :  <BsHandThumbsUp size="28" />}</div>
                         </HeaderFirst>
                         <Link 
-                            to={`/${from}/${movie.id}`}
+                            to={`${from}/${movie.id}`}
                             state = {{
                                 uId
                             }}

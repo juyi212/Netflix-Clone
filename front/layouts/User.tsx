@@ -33,7 +33,7 @@ const User = () => {
         revalidateOnFocus: true,
     });
     
-    const value = React.useMemo(() => ({ userData, error,mutateUsers }), [
+    const value = React.useMemo(() => ({ userData, error, mutateUsers }), [
         userData,
         error,
         mutateUsers,
@@ -70,38 +70,3 @@ const User = () => {
     )}
 
 export default User; 
-
-
-{/* <UserContext.Provider value={value}>
-<Nav></Nav>
-</UserContext.Provider>
-<Routes >
-<Route path="/" element={<Navigate replace to="/login" />} ></Route>
-<Route path="/login" element={
-    <UserContext.Provider value={value}>
-        <LogIn />
-    </UserContext.Provider>
-} ></Route>
-
-<Route path="/signup" element={<SignUp />} ></Route>
-<Route path="/my-list" element={   
-    <UserContext.Provider value={value}>
-        <MyList />
-    </UserContext.Provider>
-    } >
-    <Route path="/my-list/:id" element = {<Detail />}/>
-</Route>
-<Route path="/search" element = {<Search />}>
-    <Route path="/search/:id" element = {<Detail />}/>
-</Route>
-<Route path="/home" element={<Home /> } >
-    <Route path="/home/:id" element = {<Detail />}/>
-</Route>
-<Route path="/user/kakao" element = {<OAuthRedirectHandler />}/>             
-<Route path="/movie" element = {<CategoryDepartment />}>
-    <Route path="/movie/:id" element = {<Detail />}/>
-</Route>
-
-<Route path="/movie/genre/:genreId" element = {<CategoryList />} />
-
-</Routes> */}

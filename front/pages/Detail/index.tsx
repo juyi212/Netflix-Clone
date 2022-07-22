@@ -35,7 +35,6 @@ const Detail = React.memo(() => {
         const [like, setLike] = useState(false)
         const [zzim, setZzim] = useState(false)
         
-        console.log(movieDetail?.movie.category)
     const CategoryName= category(movieDetail?.movie.category);
 
     const onClickDismiss = () => {
@@ -48,6 +47,7 @@ const Detail = React.memo(() => {
             axios.delete(`${process.env.REACT_APP_SERVICE_PORT}/user/delete_movie_zzim?movieId=${movieId}&userNo=${context.userData?.user.uNo}`)
             .then((res) => {
                 console.log(res.data)
+                console.log(zzim)
                 mutate()
             })
             .catch((err) => {
@@ -133,7 +133,7 @@ const Detail = React.memo(() => {
                         </div>
                         <div>
                             <span className="firstInfo">카테고리: </span>
-                            {CategoryName?.map((category: string) => {
+                            {CategoryName?.map((category: string, id: number) => {
                                 return (
                                     <span style={{marginRight: "7px"}}>{category}</span>
                                 )

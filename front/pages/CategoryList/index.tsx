@@ -1,9 +1,10 @@
 
 import MovieList from '@components/MovieList';
+import { UserContext } from '@layouts/User';
 import Detail from '@pages/Detail';
 import category from '@utils/category';
 import fetcher from '@utils/fetcher';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 
@@ -17,11 +18,12 @@ const CategoryList = React.memo(() => {
     const params = new URLSearchParams(genre.search);
     const movieId = params.get("movieId") || "";
     const categoryName = category(keyword.genreId)
-    
+    const context = useContext(UserContext)
+    const userNo = context?.userData.user.uNo
 
 
     const { data: categoryMovieData, error, mutate }  = useSWR(
-        `${process.env.REACT_APP_SERVICE_PORT}/movie/category_movie?genreId=${keyword.genreId}`,
+        `${process.env.REACT_APP_SERVICE_PORT}/movie/category_movie?genreId=${keyword.genreId}&userNo=${userNo}`,
         fetcher, 
         {
             revalidateOnMount:true
