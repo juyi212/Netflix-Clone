@@ -1,5 +1,6 @@
 # Netflix-Clone
-> 넷플릭스 클론 코딩으로, React와 SpringBoot 프레임워크 등.. 사용하여 제작하였습니다.
+> 넷플릭스 클론 코딩으로, React와 SpringBoot 프레임워크 등.. 사용하여 제작하였습니다. <br>
+URL : http://3.39.105.32:3000/
 <br>
 제작 기간 : 5월~7월 
 <br>
