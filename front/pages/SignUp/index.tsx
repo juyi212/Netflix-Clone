@@ -24,7 +24,7 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
 
-    const onChangeEmail = useCallback((e: any) => {
+    const onChangeEmail = (e: any) => {
         const emailRegex =  /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
         setEmail(e.target.value)
         if (!emailRegex.test(e.target.value)) {
@@ -32,7 +32,7 @@ const SignUp = () => {
         } else {
             setEmailMessage('')
         }
-    }, [])
+    }
     
     const onChangePassword = useCallback((e: any) => {
         setPassword(e.target.value)

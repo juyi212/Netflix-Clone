@@ -60,9 +60,9 @@ const LogIn = React.memo(() => {
                     <Form>
                         <Label>로그인</Label>
                         <form onSubmit = {onSubmit}>
-                            <Input className="inputform" type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
-                            <Input className="inputform" type="password" value ={password} onChange = {onChangePassword} placeholder='비밀번호'/>
-                            <Button className="buttonform" type="submit"> 로그인 </Button>
+                            <Input type="email" value={email} onChange = {onChangeEmail} placeholder='이메일 주소'/>
+                            <Input type="password" value ={password} onChange = {onChangePassword} placeholder='비밀번호'/>
+                            <Button type="submit"> 로그인 </Button>
                         </form>
                         <KakaoLogin />
                         <LinkContainer>
