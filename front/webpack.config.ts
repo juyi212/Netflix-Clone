@@ -9,9 +9,9 @@ interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 const isDevelopment = process.env.NODE_ENV !== 'production';
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 dotenv.config();
-console.log(dotenv)
+console.log(dotenv);
 
 const config: Configuration = {
   name: 'sleact',
@@ -39,7 +39,7 @@ const config: Configuration = {
         test: /\.tsx?$/,
         loader: 'babel-loader',
         options: {
-          plugins: ["@babel/plugin-transform-runtime"],
+          plugins: ['@babel/plugin-transform-runtime'],
           presets: [
             [
               '@babel/preset-env',
@@ -54,11 +54,10 @@ const config: Configuration = {
           env: {
             development: {
               plugins: [['@emotion', { sourceMap: true }], require.resolve('react-refresh/babel')],
-              
             },
             production: {
-              plugins: ['@emotion']
-            }
+              plugins: ['@emotion'],
+            },
           },
         },
       },
@@ -75,18 +74,13 @@ const config: Configuration = {
         test: /\.(scss|css)$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
-      
     ],
   },
-  plugins: 
-  [
+  plugins: [
     new ForkTsCheckerWebpackPlugin({
       async: false,
-      // eslint: {
-      //   files: "./src/**/*",
-      // },
     }),
-    new webpack.DefinePlugin({"process.env": JSON.stringify(process.env)}),
+    new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) }),
     new webpack.EnvironmentPlugin({ NODE_ENV: isDevelopment ? 'development' : 'production' }),
   ],
   output: {

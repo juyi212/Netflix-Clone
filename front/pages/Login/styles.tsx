@@ -5,33 +5,32 @@ export const Container = styled.div`
   overflow: hidden;
   background-image: url(../../../assets/netflix-background.jpeg);
   min-height: 100vh;
-  background-color: rgba(0,0,0,.6);
+  background-color: rgba(0, 0, 0, 0.6);
   background-size: cover;
   z-index: -1;
-`
+`;
 
-export const Body = styled.div `
-    margin: 0 auto -236px;
-    background-color: transparent;
-    max-width: 450px;
-    &:before {
-        content: "";
-        height: 200px;
-        display: block;
-    }
-`
+export const Body = styled.div`
+  margin: 0 auto -236px;
+  background-color: transparent;
+  max-width: 450px;
+  &:before {
+    content: '';
+    height: 200px;
+    display: block;
+  }
+`;
 
 export const FormBody = styled.div`
-    margin: 0 auto -236px;
-    border-radius: 4px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    max-width: 450px;
-    padding: 20px 0 30px;
-
-`
+  margin: 0 auto -236px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 450px;
+  padding: 20px 0 30px;
+`;
 
 export const Label = styled.h1`
   text-align: center;
@@ -43,40 +42,40 @@ export const Label = styled.h1`
   letter-spacing: -0.75px;
 `;
 
-export const Form = styled.div `
-    background-color: rgba(0,0,0,.75);
-    padding: 20px 68px;
-    min-height: 660px;
-`
-export const Input = styled.input `
-    width: 100%;
-    height: 48px;
-    border: none; 
-    font-size: 16px;
-    margin : 18px 0 0 0;
-    padding: 0 10px;
-    border-radius: 4px;
-    &:focus {
-        --saf-0: rgba(var(--sk_highlight, 18, 100, 163), 1);
-        box-shadow: 0 0 0 1px var(--saf-0), 0 0 0 5px rgba(29, 155, 209, 0.3);
-    }
-`
-export const Button = styled.button `
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    background: #e50914;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: 700;
-    margin: 24px 0 12px;
-    width: 100%;
-    height: 50px;
-    text-align: center;
-    outline: none;
-    cursor: pointer;
-    border: none;
-`
+export const Form = styled.div`
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 20px 68px;
+  min-height: 660px;
+`;
+export const Input = styled.input`
+  width: 100%;
+  height: 48px;
+  border: none;
+  font-size: 16px;
+  margin: 18px 0 0 0;
+  padding: 0 10px;
+  border-radius: 4px;
+  &:focus {
+    --saf-0: rgba(var(--sk_highlight, 18, 100, 163), 1);
+    box-shadow: 0 0 0 1px var(--saf-0), 0 0 0 5px rgba(29, 155, 209, 0.3);
+  }
+`;
+export const Button = styled.button`
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  background: #e50914;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 24px 0 12px;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  border: none;
+`;
 export const LinkContainer = styled.p`
   font-size: 15px;
   color: #616061;
@@ -95,8 +94,7 @@ export const LinkContainer = styled.p`
 
 export const Error = styled.div`
   color: #e01e5a;
-  margin-top : 5px;
+  margin-top: 5px;
   font-weight: bold;
   font-size: 15px;
 `;
-
