@@ -3,8 +3,8 @@ import useSWR from 'swr';
 import { UserContext } from '@layouts/User';
 import userfetcher from '@utils/userfetcher';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import MovieList from '@components/MovieList';
-import Detail from '@pages/Detail';
+import MovieList from '@components/movie-list';
+import Detail from '@pages/detail';
 
 const MyList = React.memo(() => {
   const context = useContext(UserContext);

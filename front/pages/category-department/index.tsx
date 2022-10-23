@@ -1,5 +1,5 @@
-import Carousel from '@components/Carousel';
-import Detail from '@pages/Detail';
+import Carousel from '@components/carousel';
+import Detail from '@pages/detail';
 import category from '@utils/category';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';

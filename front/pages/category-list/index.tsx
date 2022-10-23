@@ -1,6 +1,6 @@
-import MovieList from '@components/MovieList';
+import MovieList from '@components/movie-list';
 import { UserContext } from '@layouts/User';
-import Detail from '@pages/Detail';
+import Detail from '@pages/detail';
 import category from '@utils/category';
 import fetcher from '@utils/fetcher';
 import React, { useContext } from 'react';

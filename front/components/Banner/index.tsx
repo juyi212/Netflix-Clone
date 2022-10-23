@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react';
-import Slider from '@components/Slider';
+import Slider from '@components/slider';
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
 import { UserContext } from '@layouts/User';

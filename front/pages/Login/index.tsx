@@ -2,12 +2,12 @@ import React, { useState, useCallback, useContext } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import useInput from '@hooks/useInput';
 import axios from 'axios';
-import KakaoLogin from '@components/KakaoLogin';
+import KakaoLogin from '@components/kakao-login';
 import useSWR from 'swr';
 import fetcher from '@utils/userfetcher';
 import { Body, Button, Container, Form, FormBody, Input, Label, LinkContainer } from './styles';
 import { UserContext } from '@layouts/User';
-import Footer from '@components/Footer';
+import Footer from '@components/footer';
 
 const LogIn = React.memo(() => {
   const headerValue = localStorage.getItem('user');

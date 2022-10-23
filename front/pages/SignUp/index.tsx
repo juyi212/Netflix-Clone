@@ -4,8 +4,8 @@ import useInput from '@hooks/useInput';
 import axios from 'axios';
 import fetcher from '@utils/userfetcher';
 import useSWR from 'swr';
-import { Body, Button, Container, Form, FormBody, Input, LinkContainer, Error } from '@pages/Login/styles';
-import Footer from '@components/Footer';
+import { Body, Button, Container, Form, FormBody, Input, LinkContainer, Error } from '@pages/login/styles';
+import Footer from '@components/footer';
 
 const SignUp = () => {
   const { data: userData, error, mutate } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, fetcher);

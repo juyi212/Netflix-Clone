@@ -1,19 +1,19 @@
 import React, { createContext, useEffect } from 'react';
 import loadable from '@loadable/component';
-import OAuthRedirectHandler from '@components/KakaoLogin/OAuthRedirectHandler';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import OAuthRedirectHandler from '@components/kakao-login/OAuthRedirectHandler';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import useSWR from 'swr';
-import Nav from '@components/Nav';
+import Nav from '@components/nav';
 import userfetcher from '@utils/userfetcher';
 
-const LogIn = loadable(() => import('@pages/Login'));
-const SignUp = loadable(() => import('@pages/SignUp'));
-const Home = loadable(() => import('@pages/Home'));
-const Detail = loadable(() => import('@pages/Detail'));
-const MyList = loadable(() => import('@pages/MyList'));
-const Search = loadable(() => import('@pages/Search'));
-const CategoryDepartment = loadable(() => import('@pages/CategoryDepartment'));
-const CategoryList = loadable(() => import('@pages/CategoryList'));
+const LogIn = loadable(() => import('@pages/login'));
+const SignUp = loadable(() => import('@pages/signup'));
+const Home = loadable(() => import('@pages/home'));
+const Detail = loadable(() => import('@pages/detail'));
+const MyList = loadable(() => import('@pages/mylist'));
+const Search = loadable(() => import('@pages/search'));
+const CategoryDepartment = loadable(() => import('@pages/category-department'));
+const CategoryList = loadable(() => import('@pages/category-list'));
 
 export const UserContext = createContext({
   userData: {

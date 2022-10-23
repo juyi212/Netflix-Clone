@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useContext, useEffect, useState } from 'react';
-import Card from '@components/Card';
+import Card from '@components/card';
 import { Container, StyledSlider, MovieDetailContainer } from './styles';
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';

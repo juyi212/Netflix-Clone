@@ -18,7 +18,6 @@ import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
 import category from '@utils/category';
 import axios from 'axios';
-import userfetcher from '@utils/userfetcher';
 import { UserContext } from '@layouts/User';
 
 const Detail = React.memo(() => {

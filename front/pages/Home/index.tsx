@@ -1,6 +1,6 @@
-import Banner from '@components/Banner';
+import Banner from '@components/banner';
 import useSWR from 'swr';
-import Carousel from '@components/Carousel';
+import Carousel from '@components/carousel';
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 
 import { Link, Navigate, Outlet } from 'react-router-dom';

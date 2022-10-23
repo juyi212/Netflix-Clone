@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Box, Detail } from '@components/Card/styles';
+import { Box } from '@components/card/styles';
 
 export const Container = styled.div`
   padding: 0 15px;
