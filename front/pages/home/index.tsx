@@ -1,17 +1,17 @@
 import Banner from '@components/banner';
 import useSWR from 'swr';
 import Carousel from '@components/carousel';
-import React, { createContext, useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import userfetcher from '@utils/userfetcher';
 
 const Home = React.memo(() => {
-  const {
-    data: userData,
-    error,
-    mutate: revalidateUser,
-  } = useSWR(`${process.env.REACT_APP_SERVICE_PORT}/user/info`, userfetcher);
+  const { data: userData, mutate: revalidateUser } = useSWR(
+    `${process.env.REACT_APP_SERVICE_PORT}/user/info`,
+    userfetcher,
+    { refreshInterval: 5000 },
+  );
   const [pageNum, setPageNum] = useState(1);
 
   const handleScroll = () => {

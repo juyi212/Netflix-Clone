@@ -46,6 +46,7 @@ const Detail = React.memo(() => {
     movieId &&
       `${process.env.REACT_APP_SERVICE_PORT}/movie/movie_detail?movieId=${movieId}&userNo=${context.userData?.user.uNo}`,
     fetcher,
+    { refreshInterval: 5000 },
   );
   const [like, setLike] = useState(false);
   const [zzim, setZzim] = useState(false);
