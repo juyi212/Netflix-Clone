@@ -1,13 +1,10 @@
-import axios from 'axios';
-import { FC } from 'react';
-
 declare global {
   interface Window {
     Kakao: any;
   }
 }
 
-const kakaoUserInfo = async (access_token?: string): Promise<[]> => {
+const kakaoUserInfo = async () => {
   let data = await window.Kakao.API.request({
     url: '/v2/user/me',
   });
